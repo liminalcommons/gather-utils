@@ -13,8 +13,8 @@ from gather_manager.api.client import GatherClient
 
 class Release0Tester:
     def __init__(self):
-        self.api_key = os.getenv("GATHER_API_KEY", "***REMOVED***")
-        self.raw_space_id = os.getenv("GATHER_SPACE_ID", "***REMOVED***\\Liminal Commons")
+        self.api_key = os.getenv("GATHER_API_KEY", "9HoXr7Xr4OpIA8o7")
+        self.raw_space_id = os.getenv("GATHER_SPACE_ID", "ELoGghDX4v3HEwI0\\Liminal Commons")
         if '\\' in self.raw_space_id:
             self.space_id, self.space_name = self.raw_space_id.split('\\')
         else:

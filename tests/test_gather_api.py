@@ -10,8 +10,8 @@ load_dotenv()
 
 from gather_manager.api.client import GatherClient
 
-API_KEY = "***REMOVED***"
-SPACE_ID = "***REMOVED***"
+API_KEY = "9HoXr7Xr4OpIA8o7"
+SPACE_ID = "ELoGghDX4v3HEwI0"
 SPACE_NAME = "Liminal Commons"
 # For code, use backslash between SPACE_ID and SPACE_NAME
 code_space_id = f"{SPACE_ID}\\{SPACE_NAME}"

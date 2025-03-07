@@ -12,10 +12,10 @@ from gather_manager.api.client import GatherClient
 
 def download_maps():
     # Get config values from environment variables
-    API_KEY = os.getenv("GATHER_API_KEY", "***REMOVED***")
-    # The space ID in .env might be formatted as "***REMOVED***\\Liminal Commons" 
+    API_KEY = os.getenv("GATHER_API_KEY", "9HoXr7Xr4OpIA8o7")
+    # The space ID in .env might be formatted as "ELoGghDX4v3HEwI0\\Liminal Commons" 
     # Remove quotes if present
-    raw_space_id = os.getenv("GATHER_SPACE_ID", "***REMOVED***\\Liminal Commons")
+    raw_space_id = os.getenv("GATHER_SPACE_ID", "ELoGghDX4v3HEwI0\\Liminal Commons")
     SPACE_ID, SPACE_NAME = raw_space_id.split('\\') if '\\' in raw_space_id else (raw_space_id, "Liminal Commons")
 
     print(f"Using API_KEY: {API_KEY}")

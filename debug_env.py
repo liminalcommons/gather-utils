@@ -31,4 +31,4 @@ print(f"GATHER_SPACE_ID: {os.environ.get('GATHER_SPACE_ID', 'not set')}")
 # Print the actual values we're trying to use
 print("\nActual values we want to use:")
 print(f"GATHER_API_KEY: EbhxeTleNa0QvOrW")
-print(f"GATHER_SPACE_ID: ***REMOVED***") 
+print(f"GATHER_SPACE_ID: ELoGghDX4v3HEwI0") 

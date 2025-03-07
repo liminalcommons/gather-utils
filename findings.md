@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Our Gather Manager application is designed to interact with the Gather.town API to retrieve space details and map data. Recently, we have encountered persistent HTTP 500 errors with a "Not Found" response when attempting to fetch space and map details—even though our API key (***REMOVED***) is newly generated and our space URL (https://app.gather.town/app/***REMOVED***/Liminal%20Commons) is accessible via the Gather app.
+Our Gather Manager application is designed to interact with the Gather.town API to retrieve space details and map data. Recently, we have encountered persistent HTTP 500 errors with a "Not Found" response when attempting to fetch space and map details—even though our API key (9HoXr7Xr4OpIA8o7) is newly generated and our space URL (https://app.gather.town/app/ELoGghDX4v3HEwI0/Liminal%20Commons) is accessible via the Gather app.
 
 This document summarizes our testing and research, and outlines several points that require your review and input in order to resolve these issues.
 
@@ -21,18 +21,18 @@ This document summarizes our testing and research, and outlines several points t
 
 - **Formatting Requirements:**  
   - The space identifier should use a backslash (`\`) instead of a forward slash (`/`).  
-  - For example, instead of `***REMOVED***/Liminal Commons`, our code uses `***REMOVED***\\Liminal Commons`.  
+  - For example, instead of `ELoGghDX4v3HEwI0/Liminal Commons`, our code uses `ELoGghDX4v3HEwI0\\Liminal Commons`.  
   - When embedding this value in a URL, both the backslash and spaces must be URL-encoded (e.g., `%5C` for `\` and `%20` for spaces).
 - **Action Item:**  
   - Could you review the expected format for the space ID in API calls?  
-  - Please advise whether we should use the literal backslash-separated string (i.e., `***REMOVED***\\Liminal Commons`) or if a URL-encoded version (i.e., `***REMOVED***%5CLiminal%20Commons`) is required.
+  - Please advise whether we should use the literal backslash-separated string (i.e., `ELoGghDX4v3HEwI0\\Liminal Commons`) or if a URL-encoded version (i.e., `ELoGghDX4v3HEwI0%5CLiminal%20Commons`) is required.
 
 ### 3. API Endpoint Structure
 
 - **Endpoint Testing:**  
   - We have tried multiple endpoint formats:
-    - `https://api.gather.town/v2/spaces/***REMOVED***`
-    - `https://api.gather.town/v2/spaces/***REMOVED***/maps?useV2Map=true`
+    - `https://api.gather.town/v2/spaces/ELoGghDX4v3HEwI0`
+    - `https://api.gather.town/v2/spaces/ELoGghDX4v3HEwI0/maps?useV2Map=true`
     - Other variations combining space ID and space name.
   - All these attempts result in a 500 error with a "Not Found" message.
 - **Action Item:**  
@@ -58,8 +58,8 @@ Below is the test script we use to perform API requests with our client implemen
 
 from gather_manager.api.client import GatherClient
 
-API_KEY = "***REMOVED***"
-SPACE_ID = "***REMOVED***"
+API_KEY = "9HoXr7Xr4OpIA8o7"
+SPACE_ID = "ELoGghDX4v3HEwI0"
 SPACE_NAME = "Liminal Commons"
 
 # For code, use backslash between SPACE_ID and SPACE_NAME
@@ -92,11 +92,11 @@ except Exception as e:
 To move forward, we kindly request the following from the development team:
 
 1. **Account Permissions:**  
-   - Verify that the account associated with the API key (***REMOVED***) is properly set up with Admin or Builder permissions on the Liminal Commons space.
+   - Verify that the account associated with the API key (9HoXr7Xr4OpIA8o7) is properly set up with Admin or Builder permissions on the Liminal Commons space.
 
 2. **Space ID Format:**  
    - Confirm the exact format that the API expects for the space ID.  
-   - Should we provide it as a plain string with a literal backslash (i.e., `***REMOVED***\\Liminal Commons`) or as a URL-encoded string?
+   - Should we provide it as a plain string with a literal backslash (i.e., `ELoGghDX4v3HEwI0\\Liminal Commons`) or as a URL-encoded string?
 
 3. **Endpoint Verification:**  
    - Confirm that we are using the correct API endpoints based on the latest documentation.  
