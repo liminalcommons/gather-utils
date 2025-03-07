@@ -7,7 +7,7 @@ import requests
 from pydantic import BaseModel
 from urllib.parse import quote
 
-from gather_manager.models.space import Space, Map, MapData, Object
+from gather_manager.models.space import Space, Map, MapData, Object, Portal
 from gather_manager.utils.exceptions import GatherApiError
 
 logger = logging.getLogger(__name__)
@@ -156,6 +156,19 @@ class GatherClient:
         """
         objects = self.get_map_objects(space_id, map_id)
         return [obj for obj in objects if obj.type == "portal"]
+    
+    def get_portal_objects(self, space_id: str, map_id: str) -> List[Portal]:
+        """Get all portal objects from a map as Portal instances.
+        
+        Args:
+            space_id: ID of the space
+            map_id: ID of the map
+            
+        Returns:
+            List of Portal instances
+        """
+        portal_objects = self.get_portals(space_id, map_id)
+        return [Portal.from_object(obj) for obj in portal_objects]
     
     def update_map_background(self, space_id: str, map_id: str, background: str) -> 'MapData':
         """Update the background for a given room map.

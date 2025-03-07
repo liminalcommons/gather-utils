@@ -194,3 +194,5 @@ Thumbs.db
 # Project specific
 maps/
 data/
+
+.env.example

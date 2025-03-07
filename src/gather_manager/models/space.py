@@ -1,7 +1,7 @@
 """Data models for Gather.town spaces, maps, and objects."""
 
-from typing import List, Optional, Dict, Any, Union
-from pydantic import BaseModel, Field
+from typing import List, Optional, Dict, Any, Union, ClassVar
+from pydantic import BaseModel, Field, field_validator, model_validator
 
 
 class Position(BaseModel):
@@ -33,6 +33,32 @@ class Object(BaseModel):
         extra = "allow"
 
 
+class Portal(Object):
+    """Portal object that connects different maps."""
+    type: str = "portal"
+    targetMap: str  # Required for portals
+    targetX: int    # Required for portals
+    targetY: int    # Required for portals
+    
+    @field_validator('type')
+    @classmethod
+    def validate_type(cls, v):
+        """Validate that the type is 'portal'."""
+        if v != "portal":
+            raise ValueError("Portal type must be 'portal'")
+        return v
+    
+    @classmethod
+    def from_object(cls, obj: Object) -> 'Portal':
+        """Convert a generic Object to a Portal if it has the required fields."""
+        if obj.type != "portal":
+            raise ValueError("Cannot convert non-portal object to Portal")
+        
+        # Convert to dict and create a Portal instance
+        obj_dict = obj.model_dump()
+        return cls(**obj_dict)
+
+
 class Map(BaseModel):
     """Map information."""
     id: str
@@ -49,6 +75,28 @@ class MapData(BaseModel):
     name: Optional[str] = None
     objects: List[Object] = Field(default_factory=list)
     # Add other map properties as discovered
+    
+    @model_validator(mode='before')
+    @classmethod
+    def convert_objects(cls, data: Dict[str, Any]) -> Dict[str, Any]:
+        """Convert objects from different formats to a list of objects."""
+        if not isinstance(data, dict):
+            return data
+            
+        # Handle case where objects is a dictionary with IDs as keys
+        if 'objects' in data and isinstance(data['objects'], dict):
+            objects_dict = data['objects']
+            objects_list = []
+            
+            for obj_id, obj_data in objects_dict.items():
+                # Add the ID to the object data if not present
+                if 'id' not in obj_data and obj_id:
+                    obj_data['id'] = obj_id
+                objects_list.append(obj_data)
+                
+            data['objects'] = objects_list
+            
+        return data
     
     class Config:
         extra = "allow"
