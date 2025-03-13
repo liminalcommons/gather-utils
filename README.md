@@ -1,4 +1,4 @@
-# Gather.town API Explorer
+# Portal Explorer for Gather.town
 
 A tool for exploring and analyzing Gather.town spaces, with a focus on understanding portal structures and connections between maps.
 
@@ -7,32 +7,46 @@ A tool for exploring and analyzing Gather.town spaces, with a focus on understan
 - List all maps in a Gather.town space
 - Analyze portal objects across maps
 - Extract detailed portal properties and connections
-- Generate JSON reports for further analysis
+- Generate connection graphs between maps
+- Export data in various formats (JSON, CSV, tables)
+
+## Documentation
+
+Comprehensive documentation is available in the `docs` directory:
+
+- [User Guide](docs/user_guide/index.md): Comprehensive guide for end users
+- [API Reference](docs/api/index.md): Technical documentation for developers
+- [CLI Reference](docs/cli/index.md): Detailed command-line interface documentation
+- [Tutorials](docs/tutorials/getting_started.md): Step-by-step guides for common tasks
 
 ## Installation
 
 ### Prerequisites
 
-- Python 3.9+
-- Poetry (for dependency management)
+- Python 3.8+
+- pip (for package installation)
 
 ### Setup
 
-1. Clone this repository:
+1. Install the package using pip:
    ```bash
-   git clone <repository-url>
-   cd gather-manager
+   pip install portal-explorer
    ```
 
-2. Install dependencies with Poetry:
+2. Configure your Gather.town API credentials:
+
+   **Option 1: Environment Variables**
    ```bash
-   poetry install
+   export GATHER_API_KEY=your_api_key_here
+   export GATHER_SPACE_ID=your_space_id_here
    ```
 
-3. Create a `.env` file with your Gather.town API credentials:
-   ```
-   GATHER_API_KEY=your_api_key_here
-   GATHER_SPACE_ID=your_space_id_here
+   **Option 2: Configuration File**
+   Create a file at `~/.portal-explorer/config.ini`:
+   ```ini
+   [gather]
+   api_key = your_api_key
+   space_id = your_space_id
    ```
 
 ## Usage
@@ -41,53 +55,75 @@ A tool for exploring and analyzing Gather.town spaces, with a focus on understan
 
 List all maps in a space:
 ```bash
-poetry run gather-manager list-maps
-```
-
-Explore portals in all maps:
-```bash
-poetry run gather-manager explore
+gather-explorer list-maps
 ```
 
 Explore portals in a specific map:
 ```bash
-poetry run gather-manager explore --map-id=your_map_id
+gather-explorer explore --map-id <map_id>
+```
+
+Explore portals across all maps:
+```bash
+gather-explorer explore --all-maps
+```
+
+Analyze connections between maps:
+```bash
+gather-explorer connections
+```
+
+Save results to a file:
+```bash
+gather-explorer explore --all-maps --format json --output portals.json
 ```
 
 ### Python API
 
 ```python
-from gather_manager.api.client import GatherClient
-from gather_manager.services.explorer import PortalExplorer
+from portal_explorer.client import GatherClient
+from portal_explorer.service import PortalExplorer
 
 # Initialize client
-client = GatherClient(api_key="your_api_key")
+client = GatherClient(api_key="your_api_key", space_id="your_space_id")
 
 # List maps
-maps = client.get_maps("your_space_id")
+maps = client.get_maps()
 
-# Analyze portals
+# Analyze portals in a specific map
 explorer = PortalExplorer(client=client)
-portals = explorer.analyze_map_portals("your_space_id", "your_map_id")
+portals = explorer.analyze_map_portals("your_map_id")
+
+# Analyze portals across all maps
+all_portals = explorer.analyze_all_maps()
+
+# Analyze connections between maps
+connections = explorer.analyze_connections()
+
+# Save results to a file
+explorer.save_results(all_portals, "portals.json", format="json")
 ```
 
 ## Project Structure
 
 ```
-gather-manager/
+portal-explorer/
 ├── src/
-│   └── gather_manager/       # Main package
-│       ├── api/              # API interaction layer
-│       ├── models/           # Data models/schemas
-│       ├── services/         # Business logic
-│       ├── cli/              # Command-line interface
-│       └── utils/            # Utility functions
+│   └── portal_explorer/      # Main package
+│       ├── client.py         # API client
+│       ├── models.py         # Data models
+│       ├── service.py        # Portal explorer service
+│       ├── cli.py            # Command-line interface
+│       └── utils.py          # Utility functions
 ├── tests/                    # Test suite
 ├── docs/                     # Documentation
-├── examples/                 # Example usage
+│   ├── user_guide/           # User guide
+│   ├── api/                  # API reference
+│   ├── cli/                  # CLI reference
+│   └── tutorials/            # Tutorials
+├── examples/                 # Example scripts
 ├── features/                 # BDD tests
 │   ├── steps/                # Step definitions
-│   ├── generated/            # Generated scenarios
 │   └── README.md             # BDD documentation
 ├── tools/                    # Development tools
 │   ├── bdd_coverage_report.py  # Generate BDD coverage reports
@@ -102,7 +138,7 @@ gather-manager/
 
 Run the unit tests with pytest:
 ```bash
-poetry run pytest
+pytest
 ```
 
 ### BDD Tests
@@ -120,6 +156,10 @@ python tools/bdd_coverage_report.py
 ```
 
 For more information about the BDD framework, see the [BDD README](features/README.md).
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## License
 
