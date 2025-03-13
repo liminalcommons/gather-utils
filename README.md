@@ -85,8 +85,41 @@ gather-manager/
 ├── tests/                    # Test suite
 ├── docs/                     # Documentation
 ├── examples/                 # Example usage
+├── features/                 # BDD tests
+│   ├── steps/                # Step definitions
+│   ├── generated/            # Generated scenarios
+│   └── README.md             # BDD documentation
+├── tools/                    # Development tools
+│   ├── bdd_coverage_report.py  # Generate BDD coverage reports
+│   ├── run_bdd_tests.py        # Run BDD tests
+│   └── bdd_scenario_generator.py  # Generate BDD scenarios
 └── pyproject.toml           # Project dependencies and metadata
 ```
+
+## Testing
+
+### Unit Tests
+
+Run the unit tests with pytest:
+```bash
+poetry run pytest
+```
+
+### BDD Tests
+
+This project uses Behavior-Driven Development (BDD) for testing. The BDD tests are written using the [Behave](https://behave.readthedocs.io/) framework and follow the Gherkin syntax.
+
+Run the BDD tests:
+```bash
+python tools/run_bdd_tests.py
+```
+
+Generate a BDD coverage report:
+```bash
+python tools/bdd_coverage_report.py
+```
+
+For more information about the BDD framework, see the [BDD README](features/README.md).
 
 ## License
 

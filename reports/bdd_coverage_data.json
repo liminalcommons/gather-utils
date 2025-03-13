@@ -1,0 +1,359 @@
+{
+  "summary": {
+    "total_requirements": 25,
+    "covered_requirements": 25,
+    "coverage_percent": 100.0
+  },
+  "requirements": [
+    {
+      "id": "REQ-1.1",
+      "milestone": "Portal Functionality",
+      "task_id": "1.1",
+      "name": "Enhance Object Model",
+      "covered": true,
+      "scenarios": [
+        {
+          "name": "Enhanced Object Model for Portals",
+          "feature": "Portal Functionality",
+          "file": "/Users/victorpiper/code/gather-utils-1/features/milestone1_portal_functionality.feature"
+        }
+      ]
+    },
+    {
+      "id": "REQ-1.2",
+      "milestone": "Portal Functionality",
+      "task_id": "1.2",
+      "name": "Implement Portal Extraction",
+      "covered": true,
+      "scenarios": [
+        {
+          "name": "Extract Portals from a Map",
+          "feature": "Portal Functionality",
+          "file": "/Users/victorpiper/code/gather-utils-1/features/milestone1_portal_functionality.feature"
+        }
+      ]
+    },
+    {
+      "id": "REQ-1.3",
+      "milestone": "Portal Functionality",
+      "task_id": "1.3",
+      "name": "Create Portal Testing Script",
+      "covered": true,
+      "scenarios": [
+        {
+          "name": "Test Portal Extraction with Real Map Data",
+          "feature": "Portal Functionality",
+          "file": "/Users/victorpiper/code/gather-utils-1/features/milestone1_portal_functionality.feature"
+        }
+      ]
+    },
+    {
+      "id": "REQ-1.4",
+      "milestone": "Portal Functionality",
+      "task_id": "1.4",
+      "name": "Unit Tests for Portal Functionality",
+      "covered": true,
+      "scenarios": [
+        {
+          "name": "Unit Tests for Portal Functionality",
+          "feature": "Portal Functionality",
+          "file": "/Users/victorpiper/code/gather-utils-1/features/milestone1_portal_functionality.feature"
+        }
+      ]
+    },
+    {
+      "id": "REQ-2.1",
+      "milestone": "Portal Explorer Service",
+      "task_id": "2.1",
+      "name": "Create PortalExplorer Class",
+      "covered": true,
+      "scenarios": [
+        {
+          "name": "Create PortalExplorer Class",
+          "feature": "Portal Explorer Service",
+          "file": "/Users/victorpiper/code/gather-utils-1/features/milestone2_portal_explorer_service.feature"
+        }
+      ]
+    },
+    {
+      "id": "REQ-2.2",
+      "milestone": "Portal Explorer Service",
+      "task_id": "2.2",
+      "name": "Implement Map Portal Analysis",
+      "covered": true,
+      "scenarios": [
+        {
+          "name": "Analyze Portals in a Single Map",
+          "feature": "Portal Explorer Service",
+          "file": "/Users/victorpiper/code/gather-utils-1/features/milestone2_portal_explorer_service.feature"
+        }
+      ]
+    },
+    {
+      "id": "REQ-2.3",
+      "milestone": "Portal Explorer Service",
+      "task_id": "2.3",
+      "name": "Implement Multi-Map Analysis",
+      "covered": true,
+      "scenarios": [
+        {
+          "name": "Analyze Portals Across Multiple Maps",
+          "feature": "Portal Explorer Service",
+          "file": "/Users/victorpiper/code/gather-utils-1/features/milestone2_portal_explorer_service.feature"
+        }
+      ]
+    },
+    {
+      "id": "REQ-2.4",
+      "milestone": "Portal Explorer Service",
+      "task_id": "2.4",
+      "name": "Implement Connection Analysis",
+      "covered": true,
+      "scenarios": [
+        {
+          "name": "Analyze Portal Connections Between Maps",
+          "feature": "Portal Explorer Service",
+          "file": "/Users/victorpiper/code/gather-utils-1/features/milestone2_portal_explorer_service.feature"
+        }
+      ]
+    },
+    {
+      "id": "REQ-2.5",
+      "milestone": "Portal Explorer Service",
+      "task_id": "2.5",
+      "name": "Add Result Output Generation",
+      "covered": true,
+      "scenarios": [
+        {
+          "name": "Generate Structured Output for Analysis Results",
+          "feature": "Portal Explorer Service",
+          "file": "/Users/victorpiper/code/gather-utils-1/features/milestone2_portal_explorer_service.feature"
+        }
+      ]
+    },
+    {
+      "id": "REQ-3.1",
+      "milestone": "Command Line Interface",
+      "task_id": "3.1",
+      "name": "Set Up CLI Framework",
+      "covered": true,
+      "scenarios": [
+        {
+          "name": "Set Up CLI Framework",
+          "feature": "Command Line Interface",
+          "file": "/Users/victorpiper/code/gather-utils-1/features/milestone3_command_line_interface.feature"
+        }
+      ]
+    },
+    {
+      "id": "REQ-3.2",
+      "milestone": "Command Line Interface",
+      "task_id": "3.2",
+      "name": "Implement Map Listing Command",
+      "covered": true,
+      "scenarios": [
+        {
+          "name": "List Maps in a Space",
+          "feature": "Command Line Interface",
+          "file": "/Users/victorpiper/code/gather-utils-1/features/milestone3_command_line_interface.feature"
+        }
+      ]
+    },
+    {
+      "id": "REQ-3.3",
+      "milestone": "Command Line Interface",
+      "task_id": "3.3",
+      "name": "Implement Portal Exploration Command",
+      "covered": true,
+      "scenarios": [
+        {
+          "name": "Explore Portals in a Single Map",
+          "feature": "Command Line Interface",
+          "file": "/Users/victorpiper/code/gather-utils-1/features/milestone3_command_line_interface.feature"
+        }
+      ]
+    },
+    {
+      "id": "REQ-3.4",
+      "milestone": "Command Line Interface",
+      "task_id": "3.4",
+      "name": "Add Rich Output Formatting",
+      "covered": true,
+      "scenarios": [
+        {
+          "name": "Rich Output Formatting",
+          "feature": "Command Line Interface",
+          "file": "/Users/victorpiper/code/gather-utils-1/features/milestone3_command_line_interface.feature"
+        }
+      ]
+    },
+    {
+      "id": "REQ-3.5",
+      "milestone": "Command Line Interface",
+      "task_id": "3.5",
+      "name": "Implement Error Handling",
+      "covered": true,
+      "scenarios": [
+        {
+          "name": "Handle API Errors Gracefully",
+          "feature": "Command Line Interface",
+          "file": "/Users/victorpiper/code/gather-utils-1/features/milestone3_command_line_interface.feature"
+        }
+      ]
+    },
+    {
+      "id": "REQ-3.6",
+      "milestone": "Command Line Interface",
+      "task_id": "3.6",
+      "name": "Register CLI Entry Point",
+      "covered": true,
+      "scenarios": [
+        {
+          "name": "CLI Entry Point Registration",
+          "feature": "Command Line Interface",
+          "file": "/Users/victorpiper/code/gather-utils-1/features/milestone3_command_line_interface.feature"
+        }
+      ]
+    },
+    {
+      "id": "REQ-4.1",
+      "milestone": "Testing & Quality Assurance",
+      "task_id": "4.1",
+      "name": "Create Model Tests",
+      "covered": true,
+      "scenarios": [
+        {
+          "name": "Create Model Tests",
+          "feature": "Testing & Quality Assurance",
+          "file": "/Users/victorpiper/code/gather-utils-1/features/milestone4_testing_quality_assurance.feature"
+        }
+      ]
+    },
+    {
+      "id": "REQ-4.2",
+      "milestone": "Testing & Quality Assurance",
+      "task_id": "4.2",
+      "name": "Enhance API Client Tests",
+      "covered": true,
+      "scenarios": [
+        {
+          "name": "Enhance API Client Tests",
+          "feature": "Testing & Quality Assurance",
+          "file": "/Users/victorpiper/code/gather-utils-1/features/milestone4_testing_quality_assurance.feature"
+        }
+      ]
+    },
+    {
+      "id": "REQ-4.3",
+      "milestone": "Testing & Quality Assurance",
+      "task_id": "4.3",
+      "name": "Create Explorer Service Tests",
+      "covered": true,
+      "scenarios": [
+        {
+          "name": "Create Explorer Service Tests",
+          "feature": "Testing & Quality Assurance",
+          "file": "/Users/victorpiper/code/gather-utils-1/features/milestone4_testing_quality_assurance.feature"
+        }
+      ]
+    },
+    {
+      "id": "REQ-4.4",
+      "milestone": "Testing & Quality Assurance",
+      "task_id": "4.4",
+      "name": "Implement CLI Tests",
+      "covered": true,
+      "scenarios": [
+        {
+          "name": "Implement CLI Tests",
+          "feature": "Testing & Quality Assurance",
+          "file": "/Users/victorpiper/code/gather-utils-1/features/milestone4_testing_quality_assurance.feature"
+        }
+      ]
+    },
+    {
+      "id": "REQ-4.5",
+      "milestone": "Testing & Quality Assurance",
+      "task_id": "4.5",
+      "name": "Create Integration Tests",
+      "covered": true,
+      "scenarios": [
+        {
+          "name": "Create Integration Tests",
+          "feature": "Testing & Quality Assurance",
+          "file": "/Users/victorpiper/code/gather-utils-1/features/milestone4_testing_quality_assurance.feature"
+        }
+      ]
+    },
+    {
+      "id": "REQ-5.1",
+      "milestone": "Documentation & Examples",
+      "task_id": "5.1",
+      "name": "Update README",
+      "covered": true,
+      "scenarios": [
+        {
+          "name": "Update README",
+          "feature": "Documentation & Examples",
+          "file": "/Users/victorpiper/code/gather-utils-1/features/milestone5_documentation_examples.feature"
+        }
+      ]
+    },
+    {
+      "id": "REQ-5.2",
+      "milestone": "Documentation & Examples",
+      "task_id": "5.2",
+      "name": "Create Example Scripts",
+      "covered": true,
+      "scenarios": [
+        {
+          "name": "Create Example Scripts",
+          "feature": "Documentation & Examples",
+          "file": "/Users/victorpiper/code/gather-utils-1/features/milestone5_documentation_examples.feature"
+        }
+      ]
+    },
+    {
+      "id": "REQ-5.3",
+      "milestone": "Documentation & Examples",
+      "task_id": "5.3",
+      "name": "Document CLI Usage",
+      "covered": true,
+      "scenarios": [
+        {
+          "name": "Document CLI Usage",
+          "feature": "Documentation & Examples",
+          "file": "/Users/victorpiper/code/gather-utils-1/features/milestone5_documentation_examples.feature"
+        }
+      ]
+    },
+    {
+      "id": "REQ-5.4",
+      "milestone": "Documentation & Examples",
+      "task_id": "5.4",
+      "name": "Add Code Documentation",
+      "covered": true,
+      "scenarios": [
+        {
+          "name": "Add Code Documentation",
+          "feature": "Documentation & Examples",
+          "file": "/Users/victorpiper/code/gather-utils-1/features/milestone5_documentation_examples.feature"
+        }
+      ]
+    },
+    {
+      "id": "REQ-5.5",
+      "milestone": "Documentation & Examples",
+      "task_id": "5.5",
+      "name": "Create User Guide",
+      "covered": true,
+      "scenarios": [
+        {
+          "name": "Create User Guide",
+          "feature": "Documentation & Examples",
+          "file": "/Users/victorpiper/code/gather-utils-1/features/milestone5_documentation_examples.feature"
+        }
+      ]
+    }
+  ]
+}
