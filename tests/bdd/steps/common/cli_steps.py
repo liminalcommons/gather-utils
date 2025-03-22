@@ -1,15 +1,17 @@
 """
 Common CLI execution steps that can be reused across multiple features.
 """
+
 import os
 import re
 import tempfile
 from pathlib import Path
-from behave import given, when, then
-from unittest.mock import patch, MagicMock
+from unittest.mock import MagicMock, patch
+
+from behave import given, then, when
 
 
-@given('I have the Portal Explorer CLI installed')
+@given("I have the Portal Explorer CLI installed")
 def step_given_have_portal_explorer_cli_installed(context):
     """Set up the Portal Explorer CLI installation."""
     # This is a placeholder - in a real test, we'd check for actual installation
@@ -17,32 +19,32 @@ def step_given_have_portal_explorer_cli_installed(context):
     assert context.cli_installed, "Portal Explorer CLI should be installed"
 
 
-@given('I have configured my API key and space ID')
+@given("I have configured my API key and space ID")
 def step_given_have_configured_api_key_and_space_id(context):
     """Set up API key and space ID configuration."""
     # Set up the API key and space ID if they don't exist
-    if not hasattr(context, 'api_key'):
+    if not hasattr(context, "api_key"):
         context.api_key = "test_api_key"
-    
-    if not hasattr(context, 'space_id'):
+
+    if not hasattr(context, "space_id"):
         context.space_id = "test_space_id"
-    
+
     # In a real test, we might set environment variables
     os.environ["GATHER_API_KEY"] = context.api_key
     os.environ["GATHER_SPACE_ID"] = context.space_id
-    
+
     context.api_configured = True
     assert context.api_configured, "API key and space ID should be configured"
 
 
-@given('I have installed the package')
+@given("I have installed the package")
 def step_given_have_installed_package(context):
     """Set up having installed the package."""
     # Reuse the Portal Explorer CLI installation step
     step_given_have_portal_explorer_cli_installed(context)
 
 
-@given('I am using the Portal Explorer CLI')
+@given("I am using the Portal Explorer CLI")
 def step_given_am_using_portal_explorer_cli(context):
     """Set up the Portal Explorer CLI context."""
     # Set up the CLI context by combining CLI installation and API configuration
@@ -50,17 +52,17 @@ def step_given_am_using_portal_explorer_cli(context):
     step_given_have_configured_api_key_and_space_id(context)
 
 
-@given('I have incorrect API credentials')
+@given("I have incorrect API credentials")
 def step_given_have_incorrect_api_credentials(context):
     """Set up incorrect API credentials."""
     # Set up invalid API credentials
     context.api_key = "invalid_api_key"
     context.space_id = "invalid_space_id"
-    
+
     # Set environment variables
     os.environ["GATHER_API_KEY"] = context.api_key
     os.environ["GATHER_SPACE_ID"] = context.space_id
-    
+
     context.api_configured = True
     context.invalid_credentials = True
     assert context.invalid_credentials, "API credentials should be invalid"
@@ -73,17 +75,17 @@ def step_when_run_command(context, command):
     parts = command.split()
     cmd = parts[0] if len(parts) > 0 else ""
     args = parts[1:] if len(parts) > 1 else []
-    
+
     # Replace placeholders with actual values
-    if hasattr(context, 'map_id'):
+    if hasattr(context, "map_id"):
         args = [arg.replace("<map_id>", context.map_id) for arg in args]
-    
+
     # Create a temporary directory for output
     context.temp_dir = tempfile.mkdtemp()
-    
+
     # Set the output directory to the temporary directory
     os.environ["OUTPUT_DIR"] = context.temp_dir
-    
+
     # Handle different commands
     if cmd == "gather-manager":
         # Mock the gather-manager command execution
@@ -96,7 +98,7 @@ def step_when_run_command(context, command):
         context.result = {
             "exit_code": 1,
             "output": f"Command not recognized: {command}",
-            "temp_dir": context.temp_dir
+            "temp_dir": context.temp_dir,
         }
 
 
@@ -119,32 +121,32 @@ Commands:
   explore    Explore portals in a space
   list-maps  List all maps in a space
 """,
-            "temp_dir": tempfile.mkdtemp()
+            "temp_dir": tempfile.mkdtemp(),
         }
     else:
         # If we get here, the command wasn't recognized
         context.result = {
             "exit_code": 1,
             "output": f"Command not recognized: {command}",
-            "temp_dir": tempfile.mkdtemp()
+            "temp_dir": tempfile.mkdtemp(),
         }
 
 
-@when('I run any command')
+@when("I run any command")
 def step_when_run_any_command(context):
     """Run any command."""
     # Use the existing step_when_run_command function with a generic command
     step_when_run_command(context, "gather-manager list-maps")
-    
+
     # Add progress indicator to the output
     context.result["output"] += "\nProgress: [====================] 100%"
 
 
-@when('I run any command that requires API access')
+@when("I run any command that requires API access")
 def step_when_run_command_requiring_api_access(context):
     """Run a command that requires API access."""
     # Check if we have invalid credentials set up
-    if hasattr(context, 'invalid_credentials') and context.invalid_credentials:
+    if hasattr(context, "invalid_credentials") and context.invalid_credentials:
         # Create a mock result with an error message
         context.result = {
             "exit_code": 1,
@@ -154,9 +156,9 @@ Error: Unable to authenticate with the Gather.town API.
 Please check your API key and space ID.
 You can configure them by setting the GATHER_API_KEY and GATHER_SPACE_ID environment variables.
 """,
-            "temp_dir": tempfile.mkdtemp()
+            "temp_dir": tempfile.mkdtemp(),
         }
-        
+
         # Store the command for later assertions
         context.command = "gather-manager list-maps"
     else:
@@ -170,16 +172,16 @@ def _mock_gather_manager_command(context, cmd, args):
     if "explore" in args:
         # Determine if we're exploring a specific map
         map_specific = "--map-id" in args
-        
+
         # Determine if we're using a custom output directory
         output_dir = "portal_analysis"
         for i, arg in enumerate(args):
             if arg == "--output-dir" and i + 1 < len(args):
                 output_dir = args[i + 1]
-        
+
         # Determine if we're analyzing properties
         analyze_properties = "--analyze-properties" in args
-        
+
         # Create the mock output
         if map_specific:
             output = f"""
@@ -200,7 +202,7 @@ Total: 2 portals across 2 maps
 
 Results saved to {context.temp_dir}/{output_dir}
 """
-        
+
         # Add property analysis output if requested
         if analyze_properties:
             output += """
@@ -242,21 +244,21 @@ Configuration Inconsistencies:
 - Some portals have the 'locked' property while others don't
 - Portal obj7 has an unusual targetX value (outside normal range)
 """
-        
+
         # Create a mock output file
         output_path = Path(context.temp_dir) / output_dir
         output_path.mkdir(exist_ok=True)
         (output_path / "portals.json").write_text("{}")
-        
+
         # Store the result for later assertions
         context.result = {
             "exit_code": 0,
             "output": output,
-            "temp_dir": context.temp_dir
+            "temp_dir": context.temp_dir,
         }
-        
+
         return
-    
+
     # For list-maps command, mock the expected output
     elif "list-maps" in args:
         output = """
@@ -270,19 +272,19 @@ Maps in space Test Space:
 │ map4   │ Test Map 4│
 └────────┴───────────┘
 """
-        
+
         # Store the result for later assertions
         context.result = {
             "exit_code": 0,
             "output": output,
-            "temp_dir": context.temp_dir
+            "temp_dir": context.temp_dir,
         }
-        
+
         return
-    
+
     # For validate-portals command, mock the expected output
     elif "validate-portals" in args:
-        
+
         # Check if bidirectional check is requested
         if "--check-bidirectional" in args:
             output = """
@@ -340,16 +342,16 @@ Portal obj7 (map2): Missing targetY property
 
 Results saved to portal_validation_report.json
 """
-        
+
         # Store the result for later assertions
         context.result = {
             "exit_code": 0,
             "output": output,
-            "temp_dir": context.temp_dir
+            "temp_dir": context.temp_dir,
         }
-        
+
         return
-    
+
     # For fix-portals command, mock the expected output
     elif "fix-portals" in args:
         output = """
@@ -366,23 +368,23 @@ Portal obj5 (map3): Cannot determine appropriate targetMap
 
 Changes have been applied to your space.
 """
-        
+
         # Store the result for later assertions
         context.result = {
             "exit_code": 0,
             "output": output,
-            "temp_dir": context.temp_dir
+            "temp_dir": context.temp_dir,
         }
-        
+
         return
-    
+
     # For other gather-manager commands, use a generic response
     else:
         # Store a generic result
         context.result = {
             "exit_code": 0,
             "output": f"Successfully executed: gather-manager {' '.join(args)}",
-            "temp_dir": context.temp_dir
+            "temp_dir": context.temp_dir,
         }
 
 
@@ -390,9 +392,9 @@ def _mock_debug_map_objects_command(context, args):
     """Mock the debug_map_objects.py command execution."""
     # Extract the map ID if present
     map_id = args[0] if args else "<map_id>"
-    
+
     # Check if we have invalid credentials
-    if hasattr(context, 'invalid_credentials') and context.invalid_credentials:
+    if hasattr(context, "invalid_credentials") and context.invalid_credentials:
         # Create an error response
         context.result = {
             "exit_code": 1,
@@ -401,13 +403,13 @@ Error: Unable to authenticate with the Gather.town API.
 
 Please check your API key and space ID.
 """,
-            "temp_dir": context.temp_dir
+            "temp_dir": context.temp_dir,
         }
-        
+
         return
-    
+
     # Check if we have a map with no portals flag
-    if hasattr(context, 'map_has_no_portals') and context.map_has_no_portals:
+    if hasattr(context, "map_has_no_portals") and context.map_has_no_portals:
         # Create a response for a map with no portals
         context.result = {
             "exit_code": 0,
@@ -425,11 +427,11 @@ No portal candidates found in this map.
 
 Results saved to {context.temp_dir}/map_analysis.json
 """,
-            "temp_dir": context.temp_dir
+            "temp_dir": context.temp_dir,
         }
-        
+
         return
-    
+
     # Default response with portal candidates
     context.result = {
         "exit_code": 0,
@@ -471,5 +473,5 @@ normal: Present in 8/10 candidates
 
 Results saved to {context.temp_dir}/map_analysis.json
 """,
-        "temp_dir": context.temp_dir
+        "temp_dir": context.temp_dir,
     }

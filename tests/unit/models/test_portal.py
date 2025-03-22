@@ -1,6 +1,21 @@
 """
 Unit tests for the Portal model.
+
+Test Metadata:
+- Created: 2024-03-21
+- Last Updated: 2024-03-21
+- Status: Active
+- Owner: Development Team
+- Purpose: Validate the Portal model functionality and data validation
+- Lifecycle:
+  - Created: To ensure Portal model works correctly
+  - Active: Currently used to validate Portal model behavior
+  - Obsolescence Conditions:
+    1. When the Portal model is significantly redesigned
+    2. When the portal system is removed or replaced
+- Last Validated: 2024-03-21
 """
+
 import pytest
 from pydantic import ValidationError
 
@@ -15,7 +30,7 @@ class TestPortalModel:
         """Test that a Portal can be created from valid data."""
         # Create a Portal from the sample data
         portal = Portal.model_validate(sample_portal_data)
-        
+
         # Verify the Portal has the expected attributes
         assert portal.id == "portal1"
         assert portal.type == 4
@@ -33,13 +48,9 @@ class TestPortalModel:
             "id": "portal1",
             "type": 4,
             # Missing x and y coordinates
-            "properties": {
-                "targetMap": "map2",
-                "targetX": 10,
-                "targetY": 20
-            }
+            "properties": {"targetMap": "map2", "targetX": 10, "targetY": 20},
         }
-        
+
         # Verify that a validation error is raised
         with pytest.raises(ValidationError):
             Portal.model_validate(invalid_data)
@@ -47,10 +58,10 @@ class TestPortalModel:
     def test_portal_is_valid(self, sample_portal_data):
         """Test the is_valid method of the Portal model."""
         portal = Portal.model_validate(sample_portal_data)
-        
+
         # A portal with all required properties should be valid
         assert portal.is_valid() is True
-        
+
         # Modify the portal to make it invalid
         portal.properties.target_map = None
         assert portal.is_valid() is False
@@ -58,10 +69,10 @@ class TestPortalModel:
     def test_portal_get_destination(self, sample_portal_data):
         """Test the get_destination method of the Portal model."""
         portal = Portal.model_validate(sample_portal_data)
-        
+
         # Get the destination of the portal
         destination = portal.get_destination()
-        
+
         # Verify the destination has the expected values
         assert destination["map_id"] == "map2"
         assert destination["x"] == 10
@@ -70,10 +81,10 @@ class TestPortalModel:
     def test_portal_to_dict(self, sample_portal_data):
         """Test the to_dict method of the Portal model."""
         portal = Portal.model_validate(sample_portal_data)
-        
+
         # Convert the portal to a dictionary
         portal_dict = portal.to_dict()
-        
+
         # Verify the dictionary has the expected keys and values
         assert portal_dict["id"] == "portal1"
         assert portal_dict["type"] == 4
@@ -82,4 +93,4 @@ class TestPortalModel:
         assert portal_dict["target_map"] == "map2"
         assert portal_dict["target_x"] == 10
         assert portal_dict["target_y"] == 20
-        assert portal_dict["is_valid"] is True 
+        assert portal_dict["is_valid"] is True

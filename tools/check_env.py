@@ -1,3 +1,20 @@
+"""
+Tool: Check Env
+Created: 2025-03-21
+Author: Development Team
+Status: Active
+Purpose: Validate system configuration and dependencies
+Dependencies: dotenv
+Lifecycle:
+    - Created: To automate common development tasks
+    - Active: Currently used in development workflows
+    - Obsolescence Conditions:
+        1. When project requirements change significantly
+        2. When replaced by more comprehensive tooling
+Last Validated: 2025-03-21
+
+"""
+
 #!/usr/bin/env python3
 """
 Simple script to check how environment variables are being loaded from the .env file.
@@ -5,6 +22,7 @@ Simple script to check how environment variables are being loaded from the .env 
 
 import os
 import sys
+
 from dotenv import load_dotenv
 
 # Print Python version for debugging
@@ -32,15 +50,15 @@ if SPACE_ID and (SPACE_ID.startswith('"') and SPACE_ID.endswith('"')):
     print(f"SPACE_ID after removing quotes: {SPACE_ID}")
 
 # Check for double backslashes and replace with single
-if SPACE_ID and '\\\\' in SPACE_ID:
+if SPACE_ID and "\\\\" in SPACE_ID:
     print("\nSPACE_ID has double backslashes, replacing with single...")
-    SPACE_ID = SPACE_ID.replace('\\\\', '\\')
+    SPACE_ID = SPACE_ID.replace("\\\\", "\\")
     print(f"SPACE_ID after replacing double backslashes: {SPACE_ID}")
 
 # Print the actual content of the .env file
 print("\nActual content of .env file:")
 try:
-    with open('.env', 'r') as f:
+    with open(".env", "r") as f:
         print(f.read())
 except Exception as e:
     print(f"Error reading .env file: {str(e)}")
@@ -48,13 +66,13 @@ except Exception as e:
 # Try to manually read and parse the .env file
 print("\nManually parsing .env file:")
 try:
-    with open('.env', 'r') as f:
+    with open(".env", "r") as f:
         for line in f:
             line = line.strip()
-            if not line or line.startswith('#'):
+            if not line or line.startswith("#"):
                 continue
-            if '=' in line:
-                key, value = line.split('=', 1)
+            if "=" in line:
+                key, value = line.split("=", 1)
                 print(f"{key}: {value}")
 except Exception as e:
-    print(f"Error parsing .env file: {str(e)}") 
+    print(f"Error parsing .env file: {str(e)}")

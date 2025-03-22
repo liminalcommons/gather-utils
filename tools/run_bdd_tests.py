@@ -1,3 +1,20 @@
+"""
+Tool: Run Bdd Tests
+Created: 2025-03-21
+Author: Development Team
+Status: Active
+Purpose: Supports BDD testing and development workflows
+Dependencies: subprocess
+Lifecycle:
+    - Created: To support BDD testing and development workflows
+    - Active: Currently used in development workflows
+    - Obsolescence Conditions:
+        1. When BDD testing approach changes significantly
+        2. When replaced by more comprehensive tooling
+Last Validated: 2025-03-21
+
+"""
+
 #!/usr/bin/env python3
 """
 BDD Test Runner
@@ -20,62 +37,67 @@ from pathlib import Path
 def run_behave(tags=None):
     """Run behave tests with optional tags filter."""
     # Use the behave.ini configuration file (Behave automatically looks for this file)
-    cmd = ['behave']
-    
+    cmd = ["behave"]
+
     if tags:
-        cmd.extend(['--tags', tags])
-    
+        cmd.extend(["--tags", tags])
+
     # Run the tests
     print(f"Running BDD tests: {' '.join(cmd)}")
     result = subprocess.run(cmd, capture_output=True, text=True)
-    
+
     # Print the output
     print(result.stdout)
     if result.stderr:
         print(f"Errors: {result.stderr}", file=sys.stderr)
-    
+
     return result.returncode == 0
 
 
 def generate_coverage_report():
     """Generate the BDD coverage report."""
-    cmd = ['python', 'tools/bdd_coverage_report.py']
-    
+    cmd = ["python", "tools/bdd_coverage_report.py"]
+
     print(f"Generating BDD coverage report: {' '.join(cmd)}")
     result = subprocess.run(cmd, capture_output=True, text=True)
-    
+
     # Print the output
     print(result.stdout)
     if result.stderr:
         print(f"Errors: {result.stderr}", file=sys.stderr)
-    
+
     return result.returncode == 0
 
 
 def main():
     """Main function to run BDD tests and generate the coverage report."""
-    parser = argparse.ArgumentParser(description='Run BDD tests and generate coverage report')
-    parser.add_argument('--tags', help='Run only scenarios with the given tag (e.g., --tags=REQ-1.1)')
+    parser = argparse.ArgumentParser(
+        description="Run BDD tests and generate coverage report"
+    )
+    parser.add_argument(
+        "--tags",
+        help="Run only scenarios with the given tag (e.g., --tags=REQ-1.1)",
+    )
     args = parser.parse_args()
-    
+
     # Create reports directory
-    os.makedirs('reports', exist_ok=True)
-    os.makedirs('reports/junit', exist_ok=True)
-    
+    os.makedirs("reports", exist_ok=True)
+    os.makedirs("reports/junit", exist_ok=True)
+
     # Run the tests
     tests_passed = run_behave(args.tags)
-    
+
     # Generate the coverage report
     report_generated = generate_coverage_report()
-    
+
     # Print summary
     print("\nSummary:")
     print(f"BDD Tests: {'PASSED' if tests_passed else 'FAILED'}")
     print(f"Coverage Report: {'GENERATED' if report_generated else 'FAILED'}")
-    
+
     # Return appropriate exit code
     return 0 if tests_passed and report_generated else 1
 
 
-if __name__ == '__main__':
-    sys.exit(main()) 
+if __name__ == "__main__":
+    sys.exit(main())

@@ -142,4 +142,4 @@ api_url = https://gather.town/api
 
 ---
 
-This CLI reference was generated for Portal Explorer version 1.0.0. For the latest documentation, please visit the [project repository](https://github.com/liminalcommons/gather-utils). 
+This CLI reference was generated for Portal Explorer version 1.0.0. For the latest documentation, please visit the [project repository](https://github.com/liminalcommons/gather-utils).

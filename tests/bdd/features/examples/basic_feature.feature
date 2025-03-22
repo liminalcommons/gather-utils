@@ -40,4 +40,4 @@ Feature: Basic CLI Command Execution
     When I run the command "gather-manager info --space-id {space_id}"
     Then the command should fail
     And the error message should mention "network connectivity"
-    And a detailed error log should be created 
+    And a detailed error log should be created

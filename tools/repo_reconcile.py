@@ -1,3 +1,20 @@
+"""
+Tool: Repo Reconcile
+Created: 2025-03-21
+Author: Development Team
+Status: Active
+Purpose: Tool for repo reconcile
+Dependencies: shutil, subprocess
+Lifecycle:
+    - Created: To automate common development tasks
+    - Active: Currently used in development workflows
+    - Obsolescence Conditions:
+        1. When project requirements change significantly
+        2. When replaced by more comprehensive tooling
+Last Validated: 2025-03-21
+
+"""
+
 #!/usr/bin/env python
 """
 Repository reconciliation script.
@@ -9,17 +26,19 @@ This script reorganizes the repository according to the reconciliation plan:
 4. Automation and maintenance setup
 """
 import os
-import sys
 import shutil
 import subprocess
-from pathlib import Path
+import sys
 from datetime import datetime
+from pathlib import Path
+
 
 def create_directory(path):
     """Create directory if it doesn't exist."""
     if not os.path.exists(path):
         os.makedirs(path)
         print(f"Created directory: {path}")
+
 
 def move_file(src, dest):
     """Move a file from src to dest."""
@@ -28,128 +47,142 @@ def move_file(src, dest):
         dest_dir = os.path.dirname(dest)
         if not os.path.exists(dest_dir):
             os.makedirs(dest_dir)
-        
+
         # Move the file
         shutil.move(src, dest)
         print(f"Moved: {src} -> {dest}")
     else:
         print(f"Warning: Source file does not exist: {src}")
 
+
 def organize_documentation():
     """Organize documentation files."""
     print("\n=== Organizing Documentation ===")
-    
+
     # Create archive directory
     create_directory("docs/archive")
-    
+
     # Add timestamp to archived files
     timestamp = datetime.now().strftime("%Y%m%d")
-    
+
     # List of files to archive
     files_to_archive = [
         ("FINAL_SUMMARY.md", f"docs/archive/{timestamp}_FINAL_SUMMARY.md"),
-        ("REORGANIZATION_SUMMARY.md", f"docs/archive/{timestamp}_REORGANIZATION_SUMMARY.md"),
-        ("REORGANIZATION_PLAN.md", f"docs/archive/{timestamp}_REORGANIZATION_PLAN.md"),
-        ("TASK_COMPLETION_SUMMARY.md", f"docs/archive/{timestamp}_TASK_COMPLETION_SUMMARY.md")
+        (
+            "REORGANIZATION_SUMMARY.md",
+            f"docs/archive/{timestamp}_REORGANIZATION_SUMMARY.md",
+        ),
+        (
+            "REORGANIZATION_PLAN.md",
+            f"docs/archive/{timestamp}_REORGANIZATION_PLAN.md",
+        ),
+        (
+            "TASK_COMPLETION_SUMMARY.md",
+            f"docs/archive/{timestamp}_TASK_COMPLETION_SUMMARY.md",
+        ),
     ]
-    
+
     # Move files to archive
     for src, dest in files_to_archive:
         move_file(src, dest)
-    
+
     # Create ARCHIVE.md to explain the archive
     with open("docs/archive/ARCHIVE.md", "w") as f:
-        f.write(f"""# Documentation Archive
+        f.write(
+            f"""# Documentation Archive
 
 This directory contains archived documentation that is no longer actively maintained.
 These documents represent completed phases of the project or superseded plans.
 
 ## Archive Contents
 
-""")
-        
+"""
+        )
+
         # List archived files
         for src, dest in files_to_archive:
             if os.path.exists(dest):
                 basename = os.path.basename(dest)
                 f.write(f"- {basename} (archived on {timestamp})\n")
-    
+
     print("Created docs/archive/ARCHIVE.md")
+
 
 def consolidate_testing_structure():
     """Consolidate testing structure."""
     print("\n=== Consolidating Testing Structure ===")
-    
+
     # Create BDD tests directory
     create_directory("tests/bdd/features")
     create_directory("tests/bdd/steps")
-    
+
     # Move BDD tests to the new location
     feature_files = Path("features").glob("*.feature")
     for feature_file in feature_files:
         dest = f"tests/bdd/features/{feature_file.name}"
         move_file(str(feature_file), dest)
-    
+
     # Move step definitions
     step_files = Path("features/steps").glob("*.py")
     for step_file in step_files:
         dest = f"tests/bdd/steps/{step_file.name}"
         move_file(str(step_file), dest)
-    
+
     # Move environment.py
     move_file("features/environment.py", "tests/bdd/environment.py")
-    
+
     # Move TDD tests
     tdd_feature_files = Path("tdd_tests/features").glob("*.feature")
     for feature_file in tdd_feature_files:
         dest = f"tests/bdd/features/{feature_file.name}"
         move_file(str(feature_file), dest)
-    
+
     tdd_step_files = Path("tdd_tests/features/steps").glob("*.py")
     for step_file in tdd_step_files:
         dest = f"tests/unit/{step_file.name}"
         move_file(str(step_file), dest)
-    
+
     # Update pytest.ini
     with open("pytest.ini", "a") as f:
         f.write("\n# Updated by repo_reconcile.py\n")
         f.write("testpaths = tests\n")
         f.write("bdd_features_dir = tests/bdd/features\n")
         f.write("bdd_steps_dir = tests/bdd/steps\n")
-    
+
     print("Updated pytest.ini")
+
 
 def organize_code():
     """Organize code and cleanup."""
     print("\n=== Organizing Code ===")
-    
+
     # Create analysis directory
     create_directory("data/analysis")
-    
+
     # Move analysis data
     if os.path.exists("my_analysis"):
         for item in os.listdir("my_analysis"):
             src = os.path.join("my_analysis", item)
             dest = os.path.join("data/analysis", item)
             move_file(src, dest)
-    
+
     # Clean up temporary files
     print("Cleaning up temporary files...")
     for root, dirs, files in os.walk("."):
         # Skip .git directory
         if ".git" in dirs:
             dirs.remove(".git")
-        
+
         # Skip .venv directory
         if ".venv" in dirs:
             dirs.remove(".venv")
-        
+
         # Remove __pycache__ directories
         if "__pycache__" in dirs:
             pycache_path = os.path.join(root, "__pycache__")
             shutil.rmtree(pycache_path)
             print(f"Removed: {pycache_path}")
-        
+
         # Remove .pyc files
         for file in files:
             if file.endswith(".pyc"):
@@ -157,10 +190,11 @@ def organize_code():
                 os.remove(pyc_path)
                 print(f"Removed: {pyc_path}")
 
+
 def setup_automation():
     """Setup automation and maintenance tools."""
     print("\n=== Setting Up Automation ===")
-    
+
     # Create health check script
     health_check_script = """#!/usr/bin/env python
 \"\"\"
@@ -190,7 +224,7 @@ def check_test_coverage():
         capture_output=True,
         text=True
     )
-    
+
     # Parse coverage output
     # Implementation details...
 
@@ -203,12 +237,12 @@ def check_code_quality():
         capture_output=True,
         text=True
     )
-    
+
     if result.returncode != 0:
         print("Code quality issues found:")
         print(result.stdout)
         return False
-    
+
     return True
 
 def check_for_redundancy():
@@ -222,14 +256,14 @@ if __name__ == "__main__":
     check_code_quality()
     check_for_redundancy()
 """
-    
+
     with open("tools/repo_health_check.py", "w") as f:
         f.write(health_check_script)
-    
+
     # Make it executable
     os.chmod("tools/repo_health_check.py", 0o755)
     print("Created tools/repo_health_check.py")
-    
+
     # Create maintenance guidelines
     maintenance_guidelines = """# Repository Maintenance Guidelines
 
@@ -299,20 +333,21 @@ This document outlines guidelines for maintaining the repository in a clean and 
    - Comprehensive repository review
    - Update maintenance guidelines as needed
 """
-    
+
     with open("docs/project/MAINTENANCE_GUIDELINES.md", "w") as f:
         f.write(maintenance_guidelines)
-    
+
     print("Created docs/project/MAINTENANCE_GUIDELINES.md")
+
 
 def update_readme():
     """Update README.md with current project structure."""
     print("\n=== Updating README.md ===")
-    
+
     # Read current README
     with open("README.md", "r") as f:
         readme_content = f.read()
-    
+
     # Add repository structure section
     repo_structure = """
 ## Repository Structure
@@ -337,32 +372,41 @@ def update_readme():
 - `examples/` - Example code and usage
 - `data/` - Data files and analysis results
 """
-    
+
     # Check if structure section already exists
     if "## Repository Structure" not in readme_content:
         # Add it after the first section
         sections = readme_content.split("\n## ")
-        new_content = sections[0] + repo_structure + "\n## " + "\n## ".join(sections[1:])
-        
+        new_content = (
+            sections[0] + repo_structure + "\n## " + "\n## ".join(sections[1:])
+        )
+
         # Write updated README
         with open("README.md", "w") as f:
             f.write(new_content)
-        
+
         print("Updated README.md with repository structure")
     else:
         print("README.md already has repository structure section")
 
-def manage_release_plan(milestone=None, create_bdd_scenarios=False, verify_acceptance_criteria=False):
+
+def manage_release_plan(
+    milestone=None,
+    create_bdd_scenarios=False,
+    verify_acceptance_criteria=False,
+):
     """
     Manage the release plan and acceptance criteria.
-    
+
     Args:
         milestone: The milestone to manage (Documentation, Structure, Automation, Agent)
         create_bdd_scenarios: Whether to create BDD scenarios for the milestone
         verify_acceptance_criteria: Whether to verify acceptance criteria compliance for the milestone
     """
-    print(f"\n=== Managing Release Plan for Milestone: {milestone or 'All'} ===")
-    
+    print(
+        f"\n=== Managing Release Plan for Milestone: {milestone or 'All'} ==="
+    )
+
     # Define release milestones and their requirements
     milestones = {
         "Documentation": [
@@ -384,33 +428,34 @@ def manage_release_plan(milestone=None, create_bdd_scenarios=False, verify_accep
             "REQ-AGENT-1: File structure conventions",
             "REQ-AGENT-2: Agent-specific documentation",
             "REQ-AGENT-3: Repository structure validation",
-        ]
+        ],
     }
-    
+
     # Filter by milestone if specified
     if milestone and milestone in milestones:
         selected_milestones = {milestone: milestones[milestone]}
     else:
         selected_milestones = milestones
-    
+
     # Create BDD scenarios
     if create_bdd_scenarios:
         create_bdd_scenarios_for_milestone(selected_milestones)
-    
+
     # Verify acceptance criteria compliance
     if verify_acceptance_criteria:
         verify_milestone_acceptance_criteria(selected_milestones)
-    
+
     return selected_milestones
+
 
 def create_bdd_scenarios_for_milestone(milestones):
     """Create BDD scenarios for milestone requirements."""
     print("\n=== Creating BDD Scenarios ===")
-    
+
     # Create directory if it doesn't exist
     bdd_dir = "features"
     create_directory(bdd_dir)
-    
+
     for milestone, requirements in milestones.items():
         feature_content = f"""Feature: {milestone} Requirements
   As a project stakeholder
@@ -418,7 +463,7 @@ def create_bdd_scenarios_for_milestone(milestones):
   So that the development system is more maintainable and evolvable
 
 """
-        
+
         for req in requirements:
             req_id, req_desc = req.split(": ", 1)
             scenario = f"""  @{req_id} @{milestone}
@@ -430,31 +475,34 @@ def create_bdd_scenarios_for_milestone(milestones):
 
 """
             feature_content += scenario
-        
+
         # Write feature file
-        feature_file = os.path.join(bdd_dir, f"{milestone.lower()}_requirements.feature")
+        feature_file = os.path.join(
+            bdd_dir, f"{milestone.lower()}_requirements.feature"
+        )
         with open(feature_file, "w") as f:
             f.write(feature_content)
-        
+
         print(f"Created BDD feature file: {feature_file}")
+
 
 def verify_milestone_acceptance_criteria(milestones):
     """Verify compliance with milestone acceptance criteria."""
     print("\n=== Verifying Acceptance Criteria Compliance ===")
-    
+
     # Run BDD tests with milestone tags
     for milestone, requirements in milestones.items():
         req_ids = [req.split(": ")[0] for req in requirements]
         tags = ",".join(req_ids)
-        
+
         print(f"\nVerifying acceptance criteria for {milestone}:")
         try:
             result = subprocess.run(
                 ["python", "tools/run_bdd_tests.py", f"--tags={tags}"],
                 capture_output=True,
-                text=True
+                text=True,
             )
-            
+
             if result.returncode == 0:
                 print(f"✅ {milestone} acceptance criteria met")
             else:
@@ -463,22 +511,23 @@ def verify_milestone_acceptance_criteria(milestones):
         except Exception as e:
             print(f"Error verifying acceptance criteria: {e}")
 
+
 def main():
     """Main function to run the reconciliation process."""
     print("Starting repository reconciliation...")
-    
+
     # Check if we're in the repository root
     if not os.path.exists("pyproject.toml"):
         print("Error: This script must be run from the repository root.")
         sys.exit(1)
-    
+
     # Run reconciliation steps
     organize_documentation()
     consolidate_testing_structure()
     organize_code()
     setup_automation()
     update_readme()
-    
+
     print("\nRepository reconciliation complete!")
     print("\nNext steps:")
     print("1. Review the changes and make any necessary adjustments")
@@ -486,22 +535,48 @@ def main():
     print("3. Commit the changes")
     print("4. Update documentation as needed")
 
+
 if __name__ == "__main__":
     # Add argument parsing for release management
     import argparse
-    
-    parser = argparse.ArgumentParser(description="Repository reconciliation tool")
-    parser.add_argument("--milestone", help="Milestone to manage (Documentation, Structure, Automation, Agent)")
-    parser.add_argument("--create-bdd-scenarios", action="store_true", help="Create BDD scenarios for milestone requirements")
-    parser.add_argument("--verify-acceptance-criteria", action="store_true", help="Verify acceptance criteria compliance")
-    parser.add_argument("--execute", action="store_true", help="Execute reconciliation plan")
-    parser.add_argument("--analyze-only", action="store_true", help="Analyze without making changes")
-    parser.add_argument("--create-cli", action="store_true", help="Create unified CLI tool")
-    
+
+    parser = argparse.ArgumentParser(
+        description="Repository reconciliation tool"
+    )
+    parser.add_argument(
+        "--milestone",
+        help="Milestone to manage (Documentation, Structure, Automation, Agent)",
+    )
+    parser.add_argument(
+        "--create-bdd-scenarios",
+        action="store_true",
+        help="Create BDD scenarios for milestone requirements",
+    )
+    parser.add_argument(
+        "--verify-acceptance-criteria",
+        action="store_true",
+        help="Verify acceptance criteria compliance",
+    )
+    parser.add_argument(
+        "--execute", action="store_true", help="Execute reconciliation plan"
+    )
+    parser.add_argument(
+        "--analyze-only",
+        action="store_true",
+        help="Analyze without making changes",
+    )
+    parser.add_argument(
+        "--create-cli", action="store_true", help="Create unified CLI tool"
+    )
+
     args = parser.parse_args()
-    
+
     if args.create_bdd_scenarios or args.verify_acceptance_criteria:
-        manage_release_plan(args.milestone, args.create_bdd_scenarios, args.verify_acceptance_criteria)
+        manage_release_plan(
+            args.milestone,
+            args.create_bdd_scenarios,
+            args.verify_acceptance_criteria,
+        )
     elif args.execute:
         # Existing reconciliation logic
         main()
@@ -515,4 +590,4 @@ if __name__ == "__main__":
         pass
     else:
         # Default behavior
-        main() 
+        main()

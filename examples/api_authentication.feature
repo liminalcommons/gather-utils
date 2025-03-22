@@ -1,7 +1,7 @@
 @API
 Feature: API Authentication
   This feature describes the authentication process for the API.
-  
+
   As a API user
   I want to authenticate with the API
   So that I can access protected resources
@@ -36,10 +36,10 @@ Feature: API Authentication
     Given the authentication system is configured with <auth_type>
     When the user performs authentication with <credential>
     Then the system responds with <expected>
-    
+
     Examples:
       | auth_type    | credential        | expected            |
       | basic        | valid_basic       | valid_token         |
       | oauth        | valid_oauth       | valid_token         |
       | basic        | invalid_basic     | authentication_error |
-      | oauth        | invalid_oauth     | authentication_error | 
+      | oauth        | invalid_oauth     | authentication_error |

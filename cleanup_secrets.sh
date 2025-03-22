@@ -31,4 +31,4 @@ bfg --replace-text "$temp_file"
 rm "$temp_file"
 
 echo "Cleanup complete. Now run:"
-echo "git reflog expire --expire=now --all && git gc --prune=now --aggressive" 
+echo "git reflog expire --expire=now --all && git gc --prune=now --aggressive"

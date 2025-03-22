@@ -1,11 +1,16 @@
 #!/usr/bin/env python3
-import sys, os
 import json
+import os
+import sys
+
 import pytest
 
 # Add the project root to PYTHONPATH so that the 'gather_manager' package can be found
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src')))
+sys.path.insert(
+    0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "src"))
+)
 from dotenv import load_dotenv
+
 load_dotenv()
 
 from gather_manager.api.client import GatherClient
@@ -25,7 +30,7 @@ def summarize_data(data, max_depth=2, current_depth=0):
         if isinstance(data, (dict, list)):
             return "..."
         return data
-    if hasattr(data, '__dict__'):
+    if hasattr(data, "__dict__"):
         data = data.__dict__
     if isinstance(data, dict):
         summary = {}
@@ -52,7 +57,7 @@ def test_fetch_maps():
     assert isinstance(maps, list), "Maps should be returned as a list"
     assert len(maps) > 0, "There should be at least one map"
     for m in maps:
-        assert hasattr(m, 'id'), "Each map should have an 'id' attribute"
+        assert hasattr(m, "id"), "Each map should have an 'id' attribute"
 
 
 def test_download_maps(tmp_path, monkeypatch):
@@ -67,11 +72,34 @@ def test_download_maps(tmp_path, monkeypatch):
         map_id = m.id
         formatted_space_id = client._format_space_id(code_space_id)
         # Get raw map data
-        detailed_map = client._request("GET", f"api/v2/spaces/{formatted_space_id}/maps/{map_id}")
+        detailed_map = client._request(
+            "GET", f"api/v2/spaces/{formatted_space_id}/maps/{map_id}"
+        )
         file_name = f"map_{map_id}.json"
         file_path = os.path.join(output_dir, file_name)
         with open(file_path, "w") as f:
             json.dump(detailed_map, f, indent=2)
         assert os.path.exists(file_path), f"Map file {file_name} should exist"
     files = os.listdir(output_dir)
-    assert len(files) == len(maps), "The number of downloaded map files should match the number of maps" 
+    assert len(files) == len(
+        maps
+    ), "The number of downloaded map files should match the number of maps"
+
+
+"""Tests for Gather API client functionality.
+
+Test Metadata:
+- Created: 2024-03-21
+- Last Updated: 2024-03-21
+- Status: Archived
+- Owner: Development Team
+- Purpose: Validate Gather API client for interacting with Gather.town API
+- Lifecycle:
+  - Created: To ensure Gather API client works correctly
+  - Active: Used to validate API client behavior
+  - Obsolescence Conditions:
+    1. When the API client is significantly redesigned
+    2. When the Gather.town API changes significantly
+  - Archived Reason: Replaced by tests/unit/api/test_gather_api.py with improved structure
+- Last Validated: 2024-03-21
+"""

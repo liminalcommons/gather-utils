@@ -54,4 +54,4 @@ The task was to resolve ambiguous step definition issues between `features/steps
 1. **Step Definition Organization**: It's important to organize step definitions to avoid duplication. Importing step definitions from other files is a good practice.
 2. **Consistent Naming**: Using consistent function names for step definitions makes it easier to import and reuse them.
 3. **Assertion Flexibility**: Assertions should be flexible enough to handle slight variations in output format.
-4. **Documentation**: Keeping documentation up-to-date is crucial for tracking progress and planning next steps. 
+4. **Documentation**: Keeping documentation up-to-date is crucial for tracking progress and planning next steps.

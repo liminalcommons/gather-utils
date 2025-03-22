@@ -252,4 +252,3 @@ Feature: Testing & Quality Assurance # features/generated/generated_testing_&_qu
     When I create the component                          # None
     Then the create integration tests should be complete # None
     And it should meet all requirements                  # None
-

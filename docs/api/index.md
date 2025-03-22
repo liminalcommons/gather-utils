@@ -244,4 +244,4 @@ config = load_config()
 
 ---
 
-This API reference was generated for Portal Explorer version 1.0.0. For the latest documentation, please visit the [project repository](https://github.com/liminalcommons/gather-utils). 
+This API reference was generated for Portal Explorer version 1.0.0. For the latest documentation, please visit the [project repository](https://github.com/liminalcommons/gather-utils).

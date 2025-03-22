@@ -74,4 +74,4 @@ Portal Explorer is licensed under the MIT License. See the [LICENSE](https://git
 
 ---
 
-This documentation was generated for Portal Explorer version 1.0.0. For the latest documentation, please visit the [project repository](https://github.com/liminalcommons/gather-utils). 
+This documentation was generated for Portal Explorer version 1.0.0. For the latest documentation, please visit the [project repository](https://github.com/liminalcommons/gather-utils).

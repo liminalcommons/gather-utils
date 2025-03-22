@@ -1,3 +1,20 @@
+"""
+Tool: Bdd Validator
+Created: 2025-03-21
+Author: Development Team
+Status: Active
+Purpose: Validate BDD feature files for compliance with standards
+Dependencies: None
+Lifecycle:
+    - Created: To support BDD testing and development workflows
+    - Active: Currently used in development workflows
+    - Obsolescence Conditions:
+        1. When BDD testing approach changes significantly
+        2. When replaced by more comprehensive tooling
+Last Validated: 2025-03-21
+
+"""
+
 #!/usr/bin/env python3
 
 """
@@ -13,10 +30,13 @@ import re
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
+
 class BDDValidator:
     def __init__(self, workspace_root: Path):
         self.workspace_root = workspace_root
-        self.validation_rules_path = workspace_root / "docs/project/bdd/validation/bdd_rules.json"
+        self.validation_rules_path = (
+            workspace_root / "docs/project/bdd/validation/bdd_rules.json"
+        )
         self.feature_dir = workspace_root / "tests/bdd/features"
         self.steps_dir = workspace_root / "tests/bdd/steps"
         self.errors: List[str] = []
@@ -28,7 +48,9 @@ class BDDValidator:
             with open(self.validation_rules_path) as f:
                 return json.load(f)
         except FileNotFoundError:
-            self.errors.append(f"Validation rules file not found: {self.validation_rules_path}")
+            self.errors.append(
+                f"Validation rules file not found: {self.validation_rules_path}"
+            )
             return {}
 
     def validate_feature_structure(self, feature_file: Path) -> None:
@@ -50,15 +72,23 @@ class BDDValidator:
                 self.errors.append(f"{feature_file}: Missing {name}")
 
         # Check scenario structure
-        scenarios = re.finditer(r"Scenario:.*?(?=Scenario:|$)", content, re.DOTALL)
+        scenarios = re.finditer(
+            r"Scenario:.*?(?=Scenario:|$)", content, re.DOTALL
+        )
         for scenario in scenarios:
             scenario_text = scenario.group()
             if not re.search(r"Given .+", scenario_text):
-                self.errors.append(f"{feature_file}: Scenario missing Given step")
+                self.errors.append(
+                    f"{feature_file}: Scenario missing Given step"
+                )
             if not re.search(r"When .+", scenario_text):
-                self.errors.append(f"{feature_file}: Scenario missing When step")
+                self.errors.append(
+                    f"{feature_file}: Scenario missing When step"
+                )
             if not re.search(r"Then .+", scenario_text):
-                self.errors.append(f"{feature_file}: Scenario missing Then step")
+                self.errors.append(
+                    f"{feature_file}: Scenario missing Then step"
+                )
 
     def validate_step_definitions(self, step_file: Path) -> None:
         """Validate step definition file structure and naming."""
@@ -70,11 +100,15 @@ class BDDValidator:
             self.errors.append(f"{step_file}: Missing module docstring")
 
         # Check step function naming
-        step_funcs = re.finditer(r"@(?:given|when|then)\('.*?'\)\s*def\s+(\w+)", content)
+        step_funcs = re.finditer(
+            r"@(?:given|when|then)\('.*?'\)\s*def\s+(\w+)", content
+        )
         for match in step_funcs:
             func_name = match.group(1)
             if not re.match(r"step_(?:given|when|then)_\w+", func_name):
-                self.errors.append(f"{step_file}: Invalid step function name: {func_name}")
+                self.errors.append(
+                    f"{step_file}: Invalid step function name: {func_name}"
+                )
 
     def validate_directory_structure(self) -> None:
         """Validate BDD directory structure."""
@@ -106,6 +140,7 @@ class BDDValidator:
 
         return self.errors, self.warnings
 
+
 def main():
     """Main entry point for the validator."""
     workspace_root = Path(__file__).parent.parent
@@ -126,5 +161,6 @@ def main():
     print("✅ BDD validation passed!")
     exit(0)
 
+
 if __name__ == "__main__":
-    main() 
+    main()

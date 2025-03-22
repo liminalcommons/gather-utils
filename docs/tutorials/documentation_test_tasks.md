@@ -92,9 +92,9 @@ The following fixes have been implemented:
    @app.callback()
    def main(
        version: bool = typer.Option(
-           None, 
-           "--version", 
-           "-v", 
+           None,
+           "--version",
+           "-v",
            help="Show version and exit",
            callback=version_callback,
            is_eager=True,
@@ -113,7 +113,7 @@ The following fixes have been implemented:
    def load_config():
        config = configparser.ConfigParser()
        config_path = Path.home() / ".gather-manager" / "config.ini"
-       
+
        if config_path.exists():
            config.read(config_path)
            if "gather" in config and "api_key" in config["gather"]:
@@ -129,7 +129,7 @@ The following fixes have been implemented:
    def load_environment():
        # Load from current directory first
        load_dotenv()
-       
+
        # Then try to load from user's home directory
        home_env_path = Path.home() / ".gather-manager" / ".env"
        if home_env_path.exists():
@@ -143,4 +143,4 @@ The following fixes have been implemented:
 
 ## Conclusion
 
-All identified discrepancies between the documentation and code have been addressed. The documentation now accurately reflects the functionality of the software, and the code has been updated to implement all features mentioned in the documentation. 
+All identified discrepancies between the documentation and code have been addressed. The documentation now accurately reflects the functionality of the software, and the code has been updated to implement all features mentioned in the documentation.

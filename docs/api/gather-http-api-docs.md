@@ -147,7 +147,7 @@ URLEncoded
 - apiKey: Your API key
 - spaceId: Id of the space you want the guestlist for
 
-**Returns** 
+**Returns**
 
 JSON Encoded guestlist, which is an object keyed by email address with object values, with possible string fields name, affiliation, and role for each value
 

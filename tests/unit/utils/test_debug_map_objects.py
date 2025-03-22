@@ -25,11 +25,11 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
-# Instead of importing the script directly, we'll patch its components and functions
-# This avoids issues with direct imports
-
 from gather_manager.api.client import GatherClient
 from gather_manager.models.space import Object
+
+# Instead of importing the script directly, we'll patch its components and functions
+# This avoids issues with direct imports
 
 
 @pytest.fixture
@@ -47,7 +47,7 @@ def sample_map_data():
                 "y": 20,
                 "targetMap": "map2",
                 "targetX": 5,
-                "targetY": 15
+                "targetY": 15,
             },
             # Portal with integer type
             {
@@ -57,16 +57,11 @@ def sample_map_data():
                 "y": 40,
                 "targetMap": "map3",
                 "targetX": 25,
-                "targetY": 35
+                "targetY": 35,
             },
             # Non-portal object
-            {
-                "id": "object1",
-                "type": "other",
-                "x": 50,
-                "y": 60
-            }
-        ]
+            {"id": "object1", "type": "other", "x": 50, "y": 60},
+        ],
     }
 
 
@@ -76,10 +71,12 @@ def sample_objects(sample_map_data):
     return [Object(**obj) for obj in sample_map_data["objects"]]
 
 
-@pytest.mark.skip(reason="Needs refactoring to avoid direct import of debug_map_objects")
+@pytest.mark.skip(
+    reason="Needs refactoring to avoid direct import of debug_map_objects"
+)
 class TestDebugMapObjects:
     """Tests for the debug_map_objects script."""
-    
+
     @patch("builtins.print")  # Replacing the original debug_map_objects.GatherClient
     @patch("builtins.open", new_callable=MagicMock)
     @patch("json.dump")
@@ -89,7 +86,7 @@ class TestDebugMapObjects:
         """Test the analyze_map_objects function."""
         # This test needs to be refactored to avoid direct import
         # For now, we'll skip it and document the test cases
-        
+
         # Test case: Analyze map with portals
         # - Should create client with API key
         # - Should fetch map with correct IDs
@@ -97,39 +94,33 @@ class TestDebugMapObjects:
         # - Should save data to file with map ID in filename
         # - Should display portal details
         pass
-    
+
     @patch("builtins.print")
-    def test_analyze_map_objects_with_no_portals(
-        self, mock_print
-    ):
+    def test_analyze_map_objects_with_no_portals(self, mock_print):
         """Test the analyze_map_objects function with a map that has no portals."""
         # This test needs to be refactored to avoid direct import
         # For now, we'll skip it and document the test cases
-        
+
         # Test case: Analyze map with no portals
         # - Should show message about no portals found
         pass
-    
+
     @patch("builtins.print")
-    def test_analyze_map_objects_api_error(
-        self, mock_print
-    ):
+    def test_analyze_map_objects_api_error(self, mock_print):
         """Test the analyze_map_objects function with an API error."""
         # This test needs to be refactored to avoid direct import
         # For now, we'll skip it and document the test cases
-        
+
         # Test case: API error handling
         # - Should catch and display API errors
         pass
-    
+
     @patch("builtins.print")
-    def test_analyze_map_objects_unexpected_error(
-        self, mock_print
-    ):
+    def test_analyze_map_objects_unexpected_error(self, mock_print):
         """Test the analyze_map_objects function with an unexpected error."""
         # This test needs to be refactored to avoid direct import
         # For now, we'll skip it and document the test cases
-        
+
         # Test case: Unexpected error handling
         # - Should catch and display unexpected errors
-        pass 
+        pass

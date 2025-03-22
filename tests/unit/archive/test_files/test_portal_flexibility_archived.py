@@ -1,4 +1,20 @@
-"""Tests for the flexible Portal model."""
+"""Tests for portal flexibility and edge cases.
+
+Test Metadata:
+- Created: 2024-03-21
+- Last Updated: 2024-03-21
+- Status: Archived
+- Owner: Development Team
+- Purpose: Test portal flexibility and handling of edge cases
+- Lifecycle:
+  - Created: To ensure Portal model handles various edge cases correctly
+  - Active: Used to validate Portal model behavior with different input formats
+  - Obsolescence Conditions:
+    1. When the Portal model is significantly redesigned
+    2. When the portal system is removed or replaced
+  - Archived Reason: Replaced by tests/unit/models/test_portal_flexibility.py with improved structure
+- Last Validated: 2024-03-21
+"""
 
 import pytest
 from pydantic import ValidationError
@@ -28,9 +44,7 @@ class TestFlexiblePortalModel:
 
     def test_portal_with_integer_type(self):
         """Test creating a portal with integer type."""
-        portal = Portal(
-            type=5, x=10, y=20, targetMap="destination-map"  # Integer type
-        )
+        portal = Portal(type=5, x=10, y=20, targetMap="destination-map")  # Integer type
 
         assert portal.type == 5
         assert portal.targetMap == "destination-map"

@@ -270,4 +270,4 @@ python tools/bdd_duplication_analyzer.py --threshold 0.7
 - [Project Documentation](../README.md)
 - [Technical Requirements](../TECHNICAL_REQUIREMENTS.md)
 - [Definition of Done](../DEFINITION_OF_DONE.md)
-- [BDD Test Status](../BDD_TEST_STATUS.md) 
+- [BDD Test Status](../BDD_TEST_STATUS.md)

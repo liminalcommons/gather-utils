@@ -47,7 +47,7 @@ def complex_map_data():
                 "y": 20,
                 "targetMap": "map2",
                 "targetX": 5,
-                "targetY": 15
+                "targetY": 15,
             },
             # Case 2: Integer portal type (4)
             {
@@ -57,7 +57,7 @@ def complex_map_data():
                 "y": 40,
                 "targetMap": "map3",
                 "targetX": 25,
-                "targetY": 35
+                "targetY": 35,
             },
             # Case 3: Portal with properties object
             {
@@ -68,23 +68,18 @@ def complex_map_data():
                 "properties": {
                     "targetMap": "map4",
                     "targetX": 45,
-                    "targetY": 55
-                }
+                    "targetY": 55,
+                },
             },
             # Case 4: Non-portal object
-            {
-                "id": "not-a-portal",
-                "type": "other",
-                "x": 70,
-                "y": 80
-            }
-        ]
+            {"id": "not-a-portal", "type": "other", "x": 70, "y": 80},
+        ],
     }
 
 
 class TestPortalDetection:
     """Tests for the enhanced portal detection logic in GatherClient."""
-    
+
     @responses.activate
     def test_detect_string_portal_type(self, client, complex_map_data):
         """Test detecting portals with string 'portal' type."""
@@ -93,52 +88,46 @@ class TestPortalDetection:
             responses.GET,
             f"https://api.gather.town/api/v2/spaces/test-space/test-map",
             json=complex_map_data,
-            status=200
+            status=200,
         )
-        
+
         # Call the method to test
         portals = client.get_portals("test-space", "test-map")
-        
+
         # Find the portal with string 'portal' type
-        string_portal = next(
-            (p for p in portals if p.id == "portal1"), None
-        )
-        
+        string_portal = next((p for p in portals if p.id == "portal1"), None)
+
         # Verify it was detected and has the correct attributes
         assert string_portal is not None
         assert string_portal.type == "portal"
         assert string_portal.targetMap == "map2"
         assert string_portal.targetX == 5
         assert string_portal.targetY == 15
-    
+
     @responses.activate
-    def test_detect_integer_type_with_targetmap(
-        self, client, complex_map_data
-    ):
+    def test_detect_integer_type_with_targetmap(self, client, complex_map_data):
         """Test detecting portals with integer type and targetMap attributes."""
         # Mock the API response
         responses.add(
             responses.GET,
             f"https://api.gather.town/api/v2/spaces/test-space/test-map",
             json=complex_map_data,
-            status=200
+            status=200,
         )
-        
+
         # Call the method to test
         portals = client.get_portals("test-space", "test-map")
-        
+
         # Find the portal with integer type
-        integer_portal = next(
-            (p for p in portals if p.id == "portal2"), None
-        )
-        
+        integer_portal = next((p for p in portals if p.id == "portal2"), None)
+
         # Verify it was detected and has the correct attributes
         assert integer_portal is not None
         assert integer_portal.type == 4
         assert integer_portal.targetMap == "map3"
         assert integer_portal.targetX == 25
         assert integer_portal.targetY == 35
-    
+
     @responses.activate
     def test_detect_portal_properties(self, client, complex_map_data):
         """Test detecting portals with properties object."""
@@ -147,59 +136,57 @@ class TestPortalDetection:
             responses.GET,
             f"https://api.gather.town/api/v2/spaces/test-space/test-map",
             json=complex_map_data,
-            status=200
+            status=200,
         )
-        
+
         # Call the method to test
         portals = client.get_portals("test-space", "test-map")
-        
+
         # Find the portal with properties object
-        properties_portal = next(
-            (p for p in portals if p.id == "portal3"), None
-        )
-        
+        properties_portal = next((p for p in portals if p.id == "portal3"), None)
+
         # Verify it was detected and has the correct attributes
         assert properties_portal is not None
         assert properties_portal.type == "portal"
         assert properties_portal.properties.target_map == "map4"
         assert properties_portal.properties.target_x == 45
         assert properties_portal.properties.target_y == 55
-    
+
     @responses.activate
     def test_detect_specific_integer_types(self, client, complex_map_data):
         """Test detecting portals with specific integer types."""
         # Add an additional portal with a different integer type
-        complex_map_data["objects"].append({
-            "id": "portal4",
-            "type": 5,  # Another integer type that might be a portal
-            "x": 90,
-            "y": 100,
-            "targetMap": "map5",
-            "targetX": 85,
-            "targetY": 95
-        })
-        
+        complex_map_data["objects"].append(
+            {
+                "id": "portal4",
+                "type": 5,  # Another integer type that might be a portal
+                "x": 90,
+                "y": 100,
+                "targetMap": "map5",
+                "targetX": 85,
+                "targetY": 95,
+            }
+        )
+
         # Mock the API response
         responses.add(
             responses.GET,
             f"https://api.gather.town/api/v2/spaces/test-space/test-map",
             json=complex_map_data,
-            status=200
+            status=200,
         )
-        
+
         # Call the method to test
         portals = client.get_portals("test-space", "test-map")
-        
+
         # Find the new portal with integer type 5
-        integer_portal = next(
-            (p for p in portals if p.id == "portal4"), None
-        )
-        
+        integer_portal = next((p for p in portals if p.id == "portal4"), None)
+
         # Verify it was detected and has the correct attributes
         assert integer_portal is not None
         assert integer_portal.type == 5
         assert integer_portal.targetMap == "map5"
-    
+
     @responses.activate
     def test_non_portals_not_detected(self, client, complex_map_data):
         """Test that non-portal objects are not detected as portals."""
@@ -208,19 +195,19 @@ class TestPortalDetection:
             responses.GET,
             f"https://api.gather.town/api/v2/spaces/test-space/test-map",
             json=complex_map_data,
-            status=200
+            status=200,
         )
-        
+
         # Call the method to test
         portals = client.get_portals("test-space", "test-map")
-        
+
         # Check that the non-portal object was not included
         non_portal_ids = [p.id for p in portals]
         assert "not-a-portal" not in non_portal_ids
-        
+
         # Also check the total count of portals
         assert len(portals) == 3  # Should only detect the 3 portals
-    
+
     @responses.activate
     def test_all_portals_detected(self, client, complex_map_data):
         """Test that all portal types are correctly detected."""
@@ -229,18 +216,18 @@ class TestPortalDetection:
             responses.GET,
             f"https://api.gather.town/api/v2/spaces/test-space/test-map",
             json=complex_map_data,
-            status=200
+            status=200,
         )
-        
+
         # Call the method to test
         portals = client.get_portals("test-space", "test-map")
-        
+
         # Check that all expected portals are included
         portal_ids = [p.id for p in portals]
         expected_ids = ["portal1", "portal2", "portal3"]
-        
+
         for expected_id in expected_ids:
             assert expected_id in portal_ids
-        
+
         # Also check the total count
-        assert len(portals) == len(expected_ids) 
+        assert len(portals) == len(expected_ids)

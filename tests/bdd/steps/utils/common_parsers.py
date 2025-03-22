@@ -9,18 +9,21 @@ helping to avoid import issues when steps are consolidated.
 try:
     import parse
     from behave import register_type
-    
+
     # Create a parsers object with a parse method for compatibility
     class Parsers:
         @staticmethod
         def parse(pattern):
             """Wrapper for parse to maintain compatibility with pytest-bdd."""
+
             def decorator(func):
                 # This is the behave way of using parse
                 from behave import step
+
                 return step(pattern)(func)
+
             return decorator
-    
+
     parsers = Parsers()
 except ImportError:
     try:
@@ -32,11 +35,13 @@ except ImportError:
             @staticmethod
             def parse(pattern):
                 """Dummy implementation for parse, returns the pattern unchanged."""
+
                 def decorator(func):
                     return func
+
                 return decorator
-        
+
         parsers = DummyParser()
 
 # Export the parsers to be used in step definitions
-__all__ = ['parsers'] 
+__all__ = ["parsers"]

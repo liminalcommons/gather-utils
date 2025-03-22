@@ -194,4 +194,4 @@ optional arguments:
 3. **Test Optimization**
    - Dynamic parallelization
    - Test prioritization
-   - Resource-aware scheduling 
+   - Resource-aware scheduling

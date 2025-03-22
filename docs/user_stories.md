@@ -17,8 +17,8 @@ A person who is building tools or integrations with Gather.town and needs to und
 
 ### Discovering Portal Structure
 
-**As a Space Administrator**  
-**I want to** see all the portals in my Gather.town space  
+**As a Space Administrator**
+**I want to** see all the portals in my Gather.town space
 **So that** I can understand how my space is connected
 
 **Acceptance Criteria:**
@@ -29,8 +29,8 @@ A person who is building tools or integrations with Gather.town and needs to und
 
 ### Analyzing Portal Properties
 
-**As a Space Designer**  
-**I want to** analyze the properties of portals in my space  
+**As a Space Designer**
+**I want to** analyze the properties of portals in my space
 **So that** I can understand how they are configured and ensure consistency
 
 **Acceptance Criteria:**
@@ -41,8 +41,8 @@ A person who is building tools or integrations with Gather.town and needs to und
 
 ### Troubleshooting Portal Issues
 
-**As a Space Administrator**  
-**I want to** identify and fix issues with portals  
+**As a Space Administrator**
+**I want to** identify and fix issues with portals
 **So that** users can navigate my space without problems
 
 **Acceptance Criteria:**
@@ -53,8 +53,8 @@ A person who is building tools or integrations with Gather.town and needs to und
 
 ### Exploring API Capabilities
 
-**As a Developer**  
-**I want to** explore the Gather.town API capabilities related to portals  
+**As a Developer**
+**I want to** explore the Gather.town API capabilities related to portals
 **So that** I can build integrations or tools
 
 **Acceptance Criteria:**
@@ -65,8 +65,8 @@ A person who is building tools or integrations with Gather.town and needs to und
 
 ### Debugging Map Objects
 
-**As a Space Designer**  
-**I want to** analyze all objects in a map  
+**As a Space Designer**
+**I want to** analyze all objects in a map
 **So that** I can understand what objects exist and how they're configured
 
 **Acceptance Criteria:**
@@ -99,4 +99,4 @@ A person who is building tools or integrations with Gather.town and needs to und
 2. **Broken Portal Detection**: Identify portals with invalid or missing target information
 3. **One-way Portal Detection**: Find portal pairs where one direction is missing
 4. **Portal Consistency Checker**: Ensure portals have consistent properties across the space
-5. **Portal Creation Helper**: Assist in creating properly configured portals 
+5. **Portal Creation Helper**: Assist in creating properly configured portals

@@ -34,4 +34,4 @@ echo "\nGenerated Feature File:"
 cat examples/features/api/api_authentication.feature
 
 echo "\nGenerated Step Definitions:"
-cat examples/steps/api/api_authentication_steps.py 
+cat examples/steps/api/api_authentication_steps.py

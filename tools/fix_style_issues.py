@@ -1,3 +1,20 @@
+"""
+Tool: Fix Style Issues
+Created: 2025-03-21
+Author: Development Team
+Status: Active
+Purpose: Fix issues or clean up in the codebase
+Dependencies: subprocess
+Lifecycle:
+    - Created: To automate common development tasks
+    - Active: Currently used in development workflows
+    - Obsolescence Conditions:
+        1. When project requirements change significantly
+        2. When replaced by more comprehensive tooling
+Last Validated: 2025-03-21
+
+"""
+
 #!/usr/bin/env python
 """
 Style issues fixer script.
@@ -23,11 +40,13 @@ DIRECTORIES = [
 # File extensions to process
 EXTENSIONS = [".py"]
 
+
 def print_header(title):
     """Print a section header."""
     print(f"\n{'=' * 80}")
     print(f"  {title}")
     print(f"{'=' * 80}")
+
 
 def run_command(command, description):
     """Run a command and print its output."""
@@ -51,74 +70,113 @@ def run_command(command, description):
             print(e.stderr)
         return False
 
+
 def fix_trailing_whitespace_and_newlines():
     """Fix trailing whitespace and ensure files end with a newline."""
     print_header("Fixing Trailing Whitespace and Newlines")
-    
+
     for directory in DIRECTORIES:
         for ext in EXTENSIONS:
             run_command(
-                ["find", directory, "-name", f"*{ext}", "-exec", "sed", "-i", "", "-e", "s/[[:space:]]*$//", "{}", ";"],
-                f"Removing trailing whitespace in {directory}/*{ext}"
+                [
+                    "find",
+                    directory,
+                    "-name",
+                    f"*{ext}",
+                    "-exec",
+                    "sed",
+                    "-i",
+                    "",
+                    "-e",
+                    "s/[[:space:]]*$//",
+                    "{}",
+                    ";",
+                ],
+                f"Removing trailing whitespace in {directory}/*{ext}",
             )
             run_command(
-                ["find", directory, "-name", f"*{ext}", "-exec", "sed", "-i", "", "-e", "$a\\", "{}", ";"],
-                f"Ensuring files end with newline in {directory}/*{ext}"
+                [
+                    "find",
+                    directory,
+                    "-name",
+                    f"*{ext}",
+                    "-exec",
+                    "sed",
+                    "-i",
+                    "",
+                    "-e",
+                    "$a\\",
+                    "{}",
+                    ";",
+                ],
+                f"Ensuring files end with newline in {directory}/*{ext}",
             )
+
 
 def run_isort():
     """Sort imports using isort."""
     print_header("Sorting Imports with isort")
-    
+
     for directory in DIRECTORIES:
         run_command(
             ["isort", "--profile", "black", "--line-length", "79", directory],
-            f"Sorting imports in {directory}"
+            f"Sorting imports in {directory}",
         )
+
 
 def run_black():
     """Format code using black."""
     print_header("Formatting Code with Black")
-    
+
     for directory in DIRECTORIES:
         run_command(
             ["black", "--line-length", "79", directory],
-            f"Formatting code in {directory}"
+            f"Formatting code in {directory}",
         )
+
 
 def run_flake8():
     """Run flake8 to check for remaining issues."""
     print_header("Checking for Remaining Issues with Flake8")
-    
+
     for directory in DIRECTORIES:
         run_command(
-            ["flake8", "--max-line-length=79", "--extend-ignore=E203", directory],
-            f"Checking for issues in {directory}"
+            [
+                "flake8",
+                "--max-line-length=79",
+                "--extend-ignore=E203",
+                directory,
+            ],
+            f"Checking for issues in {directory}",
         )
+
 
 def main():
     """Run all style fixers."""
     print_header("Starting Style Issues Fixer")
-    
+
     # Check if required tools are installed
     for tool in ["isort", "black", "flake8"]:
         try:
             subprocess.run(["which", tool], check=True, capture_output=True)
         except subprocess.CalledProcessError:
-            print(f"Error: {tool} is not installed. Please install it with 'pip install {tool}'.")
+            print(
+                f"Error: {tool} is not installed. Please install it with 'pip install {tool}'."
+            )
             sys.exit(1)
-    
+
     # Fix style issues
     fix_trailing_whitespace_and_newlines()
     run_isort()
     run_black()
     run_flake8()
-    
+
     print_header("Style Issues Fixer Complete")
     print("\nNext steps:")
     print("1. Review the changes")
     print("2. Run tests to ensure everything still works")
     print("3. Commit the changes")
 
+
 if __name__ == "__main__":
-    main() 
+    main()

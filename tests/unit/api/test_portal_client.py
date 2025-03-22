@@ -16,10 +16,11 @@ Test Metadata:
 - Last Validated: 2024-03-21
 """
 
-import pytest
-import responses
 import json
 from pathlib import Path
+
+import pytest
+import responses
 
 from gather_manager.api.client import GatherClient
 from gather_manager.models.space import Object, Portal
@@ -45,7 +46,7 @@ def sample_map_data():
                 "y": 20,
                 "targetMap": "map2",
                 "targetX": 5,
-                "targetY": 15
+                "targetY": 15,
             },
             {
                 "id": "portal2",
@@ -54,21 +55,16 @@ def sample_map_data():
                 "y": 40,
                 "targetMap": "map3",
                 "targetX": 25,
-                "targetY": 35
+                "targetY": 35,
             },
-            {
-                "id": "not-a-portal",
-                "type": "other",
-                "x": 50,
-                "y": 60
-            }
-        ]
+            {"id": "not-a-portal", "type": "other", "x": 50, "y": 60},
+        ],
     }
 
 
 class TestPortalClient:
     """Tests for portal-related functionality in the GatherClient."""
-    
+
     @responses.activate
     def test_get_portals(self, client, sample_map_data):
         """Test retrieving portal objects from a map."""
@@ -77,18 +73,18 @@ class TestPortalClient:
             responses.GET,
             f"https://api.gather.town/api/v2/spaces/test-space/test-map",
             json=sample_map_data,
-            status=200
+            status=200,
         )
-        
+
         # Call the method to test
         portals = client.get_portals("test-space", "test-map")
-        
+
         # Verify the results
         assert len(portals) == 2
         assert all(isinstance(portal, Portal) for portal in portals)
         assert portals[0].id == "portal1"
         assert portals[1].id == "portal2"
-    
+
     @responses.activate
     def test_get_portal_objects(self, client, sample_map_data):
         """Test retrieving raw portal objects from a map."""
@@ -97,18 +93,18 @@ class TestPortalClient:
             responses.GET,
             f"https://api.gather.town/api/v2/spaces/test-space/test-map",
             json=sample_map_data,
-            status=200
+            status=200,
         )
-        
+
         # Call the method to test
         portal_objects = client.get_portal_objects("test-space", "test-map")
-        
+
         # Verify the results
         assert len(portal_objects) == 2
         assert all(isinstance(obj, dict) for obj in portal_objects)
         assert portal_objects[0]["id"] == "portal1"
         assert portal_objects[1]["id"] == "portal2"
-    
+
     @responses.activate
     def test_get_portals_empty(self, client):
         """Test retrieving portal objects from a map with no portals."""
@@ -116,30 +112,23 @@ class TestPortalClient:
         empty_map_data = {
             "id": "empty-map",
             "name": "Empty Map",
-            "objects": [
-                {
-                    "id": "not-a-portal",
-                    "type": "other",
-                    "x": 50,
-                    "y": 60
-                }
-            ]
+            "objects": [{"id": "not-a-portal", "type": "other", "x": 50, "y": 60}],
         }
-        
+
         # Mock the API response
         responses.add(
             responses.GET,
             f"https://api.gather.town/api/v2/spaces/test-space/empty-map",
             json=empty_map_data,
-            status=200
+            status=200,
         )
-        
+
         # Call the method to test
         portals = client.get_portals("test-space", "empty-map")
-        
+
         # Verify the results
         assert len(portals) == 0
-    
+
     @responses.activate
     def test_get_portals_real_data(self, client):
         """Test retrieving portal objects from a realistic map data structure."""
@@ -160,8 +149,8 @@ class TestPortalClient:
                         "targetMap": "destination-map",
                         "targetX": 5,
                         "targetY": 15,
-                        "normal": "right"
-                    }
+                        "normal": "right",
+                    },
                 },
                 {
                     "id": "portal2",
@@ -173,32 +162,32 @@ class TestPortalClient:
                     "properties": {
                         "targetMap": "other-map",
                         "targetX": 25,
-                        "targetY": 35
-                    }
-                }
-            ]
+                        "targetY": 35,
+                    },
+                },
+            ],
         }
-        
+
         # Mock the API response
         responses.add(
             responses.GET,
             f"https://api.gather.town/api/v2/spaces/test-space/real-map",
             json=real_map_data,
-            status=200
+            status=200,
         )
-        
+
         # Call the method to test
         portals = client.get_portals("test-space", "real-map")
-        
+
         # Verify the results
         assert len(portals) == 2
-        
+
         # Check first portal with string type and normal property
         assert portals[0].id == "portal1"
         assert portals[0].type == "portal"
         assert hasattr(portals[0], "normal")
         assert portals[0].normal == "right"
-        
+
         # Check second portal with integer type
         assert portals[1].id == "portal2"
-        assert portals[1].type == 4 
+        assert portals[1].type == 4

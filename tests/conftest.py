@@ -1,11 +1,12 @@
 """Test configuration for the gather-manager package."""
 
-import pytest
-import os
 import json
+import os
 from pathlib import Path
-from typing import Dict, Any
+from typing import Any, Dict
 from unittest.mock import MagicMock, patch
+
+import pytest
 
 # Test data directory
 TEST_DATA_DIR = Path(__file__).parent / "data"
@@ -13,14 +14,16 @@ os.makedirs(TEST_DATA_DIR, exist_ok=True)
 
 # Add fixtures that will be available to all tests
 
+
 @pytest.fixture
 def mock_env_vars():
     """Fixture to mock environment variables for testing."""
-    with patch.dict(os.environ, {
-        "GATHER_API_KEY": "test_api_key",
-        "GATHER_SPACE_ID": "test_space_id"
-    }):
+    with patch.dict(
+        os.environ,
+        {"GATHER_API_KEY": "test_api_key", "GATHER_SPACE_ID": "test_space_id"},
+    ):
         yield
+
 
 @pytest.fixture
 def mock_api_client():
@@ -28,7 +31,7 @@ def mock_api_client():
     mock_client = MagicMock()
     mock_client.get_maps.return_value = [
         {"id": "map1", "name": "Test Map 1"},
-        {"id": "map2", "name": "Test Map 2"}
+        {"id": "map2", "name": "Test Map 2"},
     ]
     mock_client.get_map_objects.return_value = {
         "objects": [
@@ -38,12 +41,13 @@ def mock_api_client():
                 "properties": {
                     "targetMap": "map2",
                     "targetX": 10,
-                    "targetY": 20
-                }
+                    "targetY": 20,
+                },
             }
         ]
     }
     return mock_client
+
 
 @pytest.fixture
 def sample_portal_data():
@@ -57,9 +61,10 @@ def sample_portal_data():
             "targetMap": "map2",
             "targetX": 10,
             "targetY": 20,
-            "normal": True
-        }
+            "normal": True,
+        },
     }
+
 
 @pytest.fixture
 def sample_map_data():
@@ -78,11 +83,12 @@ def sample_map_data():
                     "targetMap": "map2",
                     "targetX": 10,
                     "targetY": 20,
-                    "normal": True
-                }
+                    "normal": True,
+                },
             }
-        ]
+        ],
     }
+
 
 @pytest.fixture
 def mock_api_key():

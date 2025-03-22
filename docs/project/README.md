@@ -2,13 +2,17 @@
 
 Welcome to the Portal Explorer development team! This document provides an overview of our project system, development processes, and key resources to help you onboard smoothly and become productive quickly.
 
+Last Updated: 2024-03-21
+
 ## Development Initiatives
 
 Our project currently has two major initiatives:
 
 1. **Portal Explorer Product Development** - Building and enhancing our core product for exploring Gather.town spaces.
+   See [plan-dev-system-improvement.md](./plan-dev-system-improvement.md) for the comprehensive development system improvement plan.
 
 2. **BDD Refactoring Initiative** - A comprehensive effort to improve our testing framework through standardization, consolidation, and improved traceability.
+   See [plan-bdd-refactoring.md](./plan-bdd-refactoring.md) for the detailed BDD refactoring plan.
 
 ## Repository Structure
 
@@ -249,12 +253,24 @@ python tools/feature_file_consolidation.py
 
 ## Next Steps
 
-After completing initial onboarding:
+1. **Complete Release 2 of BDD Refactoring**
+   - Finish feature consolidation (35% remaining)
+   - Complete directory structure reorganization
+   - Update all documentation references
 
-1. Familiarize yourself with the BDD Refactoring Initiative
-2. Review the Portal Explorer code structure
-3. Set up your local environment for both development and testing
-4. Work on small tasks to understand the workflow
-5. Join initiative discussions to provide fresh perspective
+2. **Begin Release 3 Planning**
+   - Detail traceability enhancement approach
+   - Create coverage visualization prototype
+   - Update release documentation
 
-Welcome aboard! We're excited to have you join the team. 
+3. **Continuous Improvement**
+   - Monitor and update documentation
+   - Gather feedback on development system
+   - Evolve processes based on team needs
+
+For detailed status and next steps, see:
+- [PROJECT_STATUS.md](./PROJECT_STATUS.md) for current priorities
+- [plan-bdd-refactoring.md](./plan-bdd-refactoring.md) for BDD initiative details
+- [plan-dev-system-improvement.md](./plan-dev-system-improvement.md) for development system improvements
+
+Welcome aboard! We're excited to have you join the team.

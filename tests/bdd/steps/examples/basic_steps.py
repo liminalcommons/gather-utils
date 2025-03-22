@@ -7,15 +7,18 @@ This module demonstrates basic step definition patterns and best practices.
 import os
 import subprocess
 from typing import Dict, Optional
-from behave import given, when, then
+
+from behave import given, then, when
 from behave.runner import Context
 
 # Constants
 CLI_DIR = "src/cli"
 DEFAULT_TIMEOUT = 30
 
+
 class CLIContext:
     """Context manager for CLI operations."""
+
     def __init__(self, context: Context):
         self.original_dir = os.getcwd()
         self.context = context
@@ -32,7 +35,8 @@ class CLIContext:
         """Clean up CLI context."""
         os.chdir(self.original_dir)
 
-@given('I have a valid API key')
+
+@given("I have a valid API key")
 def step_given_valid_api_key(context: Context) -> None:
     """
     Set up a valid API key in the context.
@@ -49,7 +53,8 @@ def step_given_valid_api_key(context: Context) -> None:
     except Exception as e:
         raise AssertionError(f"Failed to set up API key: {str(e)}")
 
-@given('I have a valid space ID')
+
+@given("I have a valid space ID")
 def step_given_valid_space_id(context: Context) -> None:
     """
     Set up a valid space ID in the context.
@@ -66,7 +71,8 @@ def step_given_valid_space_id(context: Context) -> None:
     except Exception as e:
         raise AssertionError(f"Failed to set up space ID: {str(e)}")
 
-@given('I am in the CLI directory')
+
+@given("I am in the CLI directory")
 def step_given_in_cli_directory(context: Context) -> None:
     """
     Ensure we're in the CLI directory.
@@ -83,7 +89,8 @@ def step_given_in_cli_directory(context: Context) -> None:
     except Exception as e:
         raise AssertionError(f"Failed to access CLI directory: {str(e)}")
 
-@given('the network connection is down')
+
+@given("the network connection is down")
 def step_given_network_down(context: Context) -> None:
     """
     Simulate network connection being down.
@@ -99,6 +106,7 @@ def step_given_network_down(context: Context) -> None:
         os.environ["GATHER_API_ENDPOINT"] = "http://invalid-endpoint"
     except Exception as e:
         raise AssertionError(f"Failed to simulate network down: {str(e)}")
+
 
 @when('I run the command "{command}"')
 def step_when_run_command(context: Context, command: str) -> None:
@@ -116,7 +124,7 @@ def step_when_run_command(context: Context, command: str) -> None:
         # Format command with context variables
         formatted_command = command.format(
             space_id=getattr(context, "space_id", ""),
-            api_key=getattr(context, "api_key", "")
+            api_key=getattr(context, "api_key", ""),
         )
 
         # Execute command
@@ -124,7 +132,7 @@ def step_when_run_command(context: Context, command: str) -> None:
             formatted_command.split(),
             capture_output=True,
             text=True,
-            timeout=DEFAULT_TIMEOUT
+            timeout=DEFAULT_TIMEOUT,
         )
 
         # Store results in context
@@ -133,11 +141,14 @@ def step_when_run_command(context: Context, command: str) -> None:
         context.exit_code = result.returncode
 
     except subprocess.TimeoutExpired:
-        raise RuntimeError(f"Command timed out after {DEFAULT_TIMEOUT} seconds")
+        raise RuntimeError(
+            f"Command timed out after {DEFAULT_TIMEOUT} seconds"
+        )
     except Exception as e:
         raise RuntimeError(f"Command execution failed: {str(e)}")
 
-@then('the command should succeed')
+
+@then("the command should succeed")
 def step_then_command_succeeds(context: Context) -> None:
     """
     Verify command succeeded.
@@ -148,10 +159,12 @@ def step_then_command_succeeds(context: Context) -> None:
     Raises:
         AssertionError: If command did not succeed
     """
-    assert context.exit_code == 0, \
-        f"Command failed with exit code {context.exit_code}\nError: {context.cli_error}"
+    assert (
+        context.exit_code == 0
+    ), f"Command failed with exit code {context.exit_code}\nError: {context.cli_error}"
 
-@then('the command should fail')
+
+@then("the command should fail")
 def step_then_command_fails(context: Context) -> None:
     """
     Verify command failed.
@@ -162,8 +175,10 @@ def step_then_command_fails(context: Context) -> None:
     Raises:
         AssertionError: If command did not fail
     """
-    assert context.exit_code != 0, \
-        "Command succeeded when it should have failed"
+    assert (
+        context.exit_code != 0
+    ), "Command succeeded when it should have failed"
+
 
 @then('the output should contain "{text}"')
 def step_then_output_contains(context: Context, text: str) -> None:
@@ -177,8 +192,10 @@ def step_then_output_contains(context: Context, text: str) -> None:
     Raises:
         AssertionError: If text is not found in output
     """
-    assert text in context.cli_output, \
-        f"Expected text '{text}' not found in output:\n{context.cli_output}"
+    assert (
+        text in context.cli_output
+    ), f"Expected text '{text}' not found in output:\n{context.cli_output}"
+
 
 @then('the error message should mention "{text}"')
 def step_then_error_mentions(context: Context, text: str) -> None:
@@ -192,10 +209,12 @@ def step_then_error_mentions(context: Context, text: str) -> None:
     Raises:
         AssertionError: If text is not found in error message
     """
-    assert text in context.cli_error, \
-        f"Expected text '{text}' not found in error:\n{context.cli_error}"
+    assert (
+        text in context.cli_error
+    ), f"Expected text '{text}' not found in error:\n{context.cli_error}"
 
-@then('a detailed error log should be created')
+
+@then("a detailed error log should be created")
 def step_then_error_log_created(context: Context) -> None:
     """
     Verify error log was created.
@@ -215,7 +234,8 @@ def step_then_error_log_created(context: Context) -> None:
     except Exception as e:
         raise AssertionError(f"Error log verification failed: {str(e)}")
 
-@then('the space name should be displayed')
+
+@then("the space name should be displayed")
 def step_then_space_name_displayed(context: Context) -> None:
     """
     Verify space name is displayed in output.
@@ -226,5 +246,6 @@ def step_then_space_name_displayed(context: Context) -> None:
     Raises:
         AssertionError: If space name is not found in output
     """
-    assert "name" in context.cli_output.lower(), \
-        "Space name not found in output" 
+    assert (
+        "name" in context.cli_output.lower()
+    ), "Space name not found in output"

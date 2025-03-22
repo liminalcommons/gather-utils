@@ -79,4 +79,4 @@ Feature: Portal Analysis and Management
       | consolidate      | portal1,portal2  | high          |
       | redistribute     | portal4,portal5  | medium        |
     And a detailed analysis report should be generated
-    And the report should include network topology diagrams 
+    And the report should include network topology diagrams

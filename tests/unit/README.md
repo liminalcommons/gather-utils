@@ -1,75 +1,70 @@
-# Unit Testing Guide
+# Unit Tests Directory
 
-This directory contains unit tests for the project, following the Test-Driven Development (TDD) approach.
-
-## Overview
-
-Our unit tests are written using pytest and follow the TDD lifecycle management standards. All tests must include proper metadata to track their lifecycle status.
+This directory contains test files organized in a TDD (Test-Driven Development) fashion. Tests are structured by component type.
 
 ## Directory Structure
 
 ```
-tests/unit/
-├── api/            # Tests for API components
-├── cli/            # Tests for CLI components
-├── models/         # Tests for data models
-├── services/       # Tests for service components
-├── utils/          # Tests for utility functions
-└── archive/        # Archived tests
-    ├── test_files/ # Archived test files
-    └── fixtures/   # Archived fixtures
+unit/
+├── api/          # Tests for API components
+├── cli/          # Tests for CLI components
+├── models/       # Tests for data models
+├── services/     # Tests for service components
+├── utils/        # Tests for utility components
+└── archive/      # Archived test files
+    └── test_files/ # Legacy test files preserved for reference
 ```
 
-## TDD Workflow
+## Test Organization
 
-We follow the Red-Green-Refactor cycle:
+Tests are organized by component type:
 
-1. **Red**: Write a failing test that defines the expected behavior
-2. **Green**: Implement the minimum code to make the test pass
-3. **Refactor**: Clean up the code while keeping tests passing
+- `api/`: Tests for API-related functionality including client interactions with the Gather API
+- `cli/`: Tests for command-line interface functionality
+- `models/`: Tests for data models and domain entities
+- `services/`: Tests for service layer business logic
+- `utils/`: Tests for utility functions and helpers
 
-## Metadata Requirements
+## Naming Conventions
 
-All test files must include metadata in the following format:
+- Test files follow the pattern: `test_<module_name>.py`
+- Test classes follow the pattern: `Test<ClassName>`
+- Test methods follow the pattern: `test_<functionality_being_tested>`
+
+## TDD Metadata
+
+All test files include standardized metadata for lifecycle management:
 
 ```python
 """
-Tests for the module_name module.
+Unit tests for [component].
 
 Test Metadata:
-- Created: YYYY-MM-DD
-- Last Updated: YYYY-MM-DD
-- Status: Draft|Active|Deprecated|Archived
-- Owner: Team/Individual
-- Purpose: Brief description of what this test is validating
+- Created: [Date]
+- Last Updated: [Date]
+- Status: [Active/Deprecated/Archived]
+- Owner: [Owner]
+- Purpose: [Purpose]
 - Lifecycle:
-  - Created: Why this test was created
-  - Active: Current usage status
-  - Obsolescence Conditions:
-    1. When this test would be considered obsolete
-    2. Additional condition if applicable
-- Last Validated: YYYY-MM-DD
+  - Created: [Creation reason]
+  - Active: [Current usage]
+  - Obsolescence Conditions: [When the test will become obsolete]
+- Last Validated: [Date]
 """
 ```
 
 ## Running Tests
 
-To run all unit tests:
+Tests can be run using pytest:
 
 ```bash
 pytest tests/unit
 ```
 
-To run a specific test file:
+Or for a specific component:
 
 ```bash
-pytest tests/unit/test_file.py
-```
-
-To run with coverage:
-
-```bash
-pytest tests/unit --cov=src --cov-report=term --cov-report=html
+pytest tests/unit/models
 ```
 
 ## Test Validation
@@ -103,4 +98,4 @@ When adding new tests:
 2. Follow the naming convention: `test_<module_name>.py`
 3. Include all required metadata
 4. Follow the best practices in the TDD documentation
-5. Ensure tests are isolated and don't depend on external state 
+5. Ensure tests are isolated and don't depend on external state

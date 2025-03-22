@@ -1,6 +1,19 @@
 # Template for BDD feature files
 # Replace placeholders in [BRACKETS] with actual values
 
+# Feature Metadata:
+# Created: YYYY-MM-DD
+# Last Updated: YYYY-MM-DD
+# Status: Draft|Active|Deprecated|Archived
+# Owner: Team/Individual
+# Lifecycle:
+#   - Created: Why this feature was created
+#   - Active: Current usage status
+#   - Obsolescence Conditions:
+#     1. When this feature would be considered obsolete
+#     2. Additional condition if applicable
+# Last Validated: YYYY-MM-DD
+
 @[DOMAIN]-[MODULE]-[NUMBER]
 Feature: [Feature Name]
   As a [role/persona]
@@ -29,4 +42,7 @@ Feature: [Feature Name]
     Examples:
       | parameter | expected_result |
       | value1    | result1        |
-      | value2    | result2        | 
+      | value2    | result2        |
+
+# Changelog:
+# YYYY-MM-DD | Author | Description of change

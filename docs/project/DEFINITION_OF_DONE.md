@@ -11,6 +11,10 @@ A feature is considered "Done" when:
 - [ ] Technical design decisions are documented
 - [ ] User documentation is updated (if applicable)
 - [ ] API documentation is updated (if applicable)
+- [ ] All new documentation includes proper metadata headers following DOCUMENTATION_STANDARDS.md
+- [ ] Documentation lifecycle and obsolescence conditions are defined
+- [ ] Existing documentation has been updated to reflect changes
+- [ ] Documentation formats follow project standards
 
 ### Test-Driven Development (TDD)
 - [ ] Unit tests are written for all new components/functions
@@ -31,6 +35,27 @@ A feature is considered "Done" when:
 - [ ] No new technical debt is introduced (or it's documented)
 - [ ] Code is refactored for clarity and maintainability
 - [ ] No code smells (duplicate code, overly complex methods, etc.)
+
+### Tool Development
+- [ ] All new tools include complete metadata headers following standards in TOOL_DEVELOPMENT_STANDARDS.md
+- [ ] Tool purpose and lifecycle are clearly documented
+- [ ] Obsolescence conditions are defined
+- [ ] Tools developed for one-off tasks have a documented cleanup plan
+- [ ] Tool dependencies are explicitly listed
+
+### Lifecycle Management
+- [ ] All artifacts include appropriate lifecycle metadata following relevant standards:
+  - Code components: Creation date, status, last validated date
+  - Documentation: Title, creation date, status, purpose, audience, lifecycle stages
+  - Tools: Complete metadata header with status and obsolescence conditions
+  - BDD artifacts: Status, creation date, last validated date
+  - Project artifacts: Status, completion criteria, timeline
+- [ ] Status is accurately reflected (Draft, Active, Deprecated, or Archived)
+- [ ] Obsolescence conditions are clearly defined
+- [ ] Dependencies on other artifacts are documented
+- [ ] Changes to lifecycle status are documented in commit messages
+- [ ] Related artifacts are updated to reflect new or changed artifacts
+- [ ] Obsolete artifacts are properly deprecated or archived
 
 ### Review & Integration
 - [ ] Code has been peer-reviewed
@@ -140,4 +165,4 @@ The implementation of this Definition of Done is currently in progress. The foll
 - [ ] Set up code coverage reporting
 - [ ] Define minimum code coverage thresholds
 - [ ] Create templates for unit tests
-- [ ] Update CI/CD pipeline to include unit tests and coverage reports 
+- [ ] Update CI/CD pipeline to include unit tests and coverage reports

@@ -2,6 +2,14 @@
 
 This directory contains automatically generated documentation for our BDD implementation.
 
+Last Updated: 2024-03-21
+
+## Related Documentation
+
+- [BDD Testing Guide](../../tests/bdd/README.md): Guide for writing and running BDD tests
+- [BDD Tools](../../tools/README.md#bdd-tools): Documentation for BDD-specific tools
+- [BDD Conventions](../project/bdd/conventions.md): Standards for BDD features
+
 ## Structure
 
 ```
@@ -89,10 +97,15 @@ The documentation system integrates with:
 3. Development workflow
 4. Code review process
 
+For more information about the BDD refactoring initiative, see:
+- [BDD Refactoring Plan](../project/plan-bdd-refactoring.md)
+- [BDD Refactoring Status](../project/bdd_refactoring_release2_status.md)
+- [Project Status](../project/PROJECT_STATUS.md)
+
 ## Contributing
 
 When contributing:
 1. Ensure features are well-documented
 2. Follow the established formats
 3. Update templates if needed
-4. Review generated docs before commit 
+4. Review generated docs before commit

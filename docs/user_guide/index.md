@@ -259,4 +259,4 @@ For detailed API documentation, please refer to the [API Reference](../api/index
 
 ---
 
-This user guide was generated for Portal Explorer version 1.0.0. For the latest documentation, please visit the [project repository](https://github.com/liminalcommons/gather-utils). 
+This user guide was generated for Portal Explorer version 1.0.0. For the latest documentation, please visit the [project repository](https://github.com/liminalcommons/gather-utils).

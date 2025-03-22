@@ -87,17 +87,13 @@ class TestDebugMapObjects:
         ]
 
         # Call the function
-        result = debug_map_objects.analyze_map_objects(
-            "test-space", "test-map"
-        )
+        result = debug_map_objects.analyze_map_objects("test-space", "test-map")
 
         # Verify the function returned True (success)
         assert result is True
 
         # Verify client was called correctly
-        mock_client.get_map_objects.assert_called_once_with(
-            "test-space", "test-map"
-        )
+        mock_client.get_map_objects.assert_called_once_with("test-space", "test-map")
 
         # Verify file was opened for writing
         mock_open.assert_called_once()
@@ -116,9 +112,7 @@ class TestDebugMapObjects:
 
     @patch("debug_map_objects.GatherClient")
     @patch("debug_map_objects.console.print")
-    def test_analyze_map_objects_with_no_portals(
-        self, mock_print, mock_client_class
-    ):
+    def test_analyze_map_objects_with_no_portals(self, mock_print, mock_client_class):
         """Test the analyze_map_objects function with no portals."""
         # Setup mock client
         mock_client = mock_client_class.return_value
@@ -132,9 +126,7 @@ class TestDebugMapObjects:
             patch("builtins.open", new_callable=MagicMock) as mock_open,
             patch("json.dump") as mock_json_dump,
         ):
-            result = debug_map_objects.analyze_map_objects(
-                "test-space", "test-map"
-            )
+            result = debug_map_objects.analyze_map_objects("test-space", "test-map")
 
             # Verify the function returned True (success)
             assert result is True
@@ -145,22 +137,16 @@ class TestDebugMapObjects:
 
     @patch("debug_map_objects.GatherClient")
     @patch("debug_map_objects.console.print")
-    def test_analyze_map_objects_api_error(
-        self, mock_print, mock_client_class
-    ):
+    def test_analyze_map_objects_api_error(self, mock_print, mock_client_class):
         """Test the analyze_map_objects function with API error."""
         # Setup mock client to raise an error
         from gather_manager.utils.exceptions import GatherManagerError
 
         mock_client = mock_client_class.return_value
-        mock_client.get_map_objects.side_effect = GatherManagerError(
-            "API Error"
-        )
+        mock_client.get_map_objects.side_effect = GatherManagerError("API Error")
 
         # Call the function
-        result = debug_map_objects.analyze_map_objects(
-            "test-space", "test-map"
-        )
+        result = debug_map_objects.analyze_map_objects("test-space", "test-map")
 
         # Verify the function returned False (failure)
         assert result is False
@@ -170,23 +156,17 @@ class TestDebugMapObjects:
 
     @patch("debug_map_objects.GatherClient")
     @patch("debug_map_objects.console.print")
-    def test_analyze_map_objects_unexpected_error(
-        self, mock_print, mock_client_class
-    ):
+    def test_analyze_map_objects_unexpected_error(self, mock_print, mock_client_class):
         """Test the analyze_map_objects function with unexpected error."""
         # Setup mock client to raise an error
         mock_client = mock_client_class.return_value
         mock_client.get_map_objects.side_effect = Exception("Unexpected Error")
 
         # Call the function
-        result = debug_map_objects.analyze_map_objects(
-            "test-space", "test-map"
-        )
+        result = debug_map_objects.analyze_map_objects("test-space", "test-map")
 
         # Verify the function returned False (failure)
         assert result is False
 
         # Verify error was printed
-        mock_print.assert_any_call(
-            "[bold red]Unexpected Error:[/] Unexpected Error"
-        )
+        mock_print.assert_any_call("[bold red]Unexpected Error:[/] Unexpected Error")

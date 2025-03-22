@@ -33,12 +33,12 @@ jobs:
 
       - name: Run BDD validator
         run: python tools/bdd_validator.py
-        
+
       - name: Run BDD tests
         run: |
           # Run all BDD tests
           behave tests/bdd/features/
-          
+
           # Run specific example features
           behave tests/bdd/features/examples/
 
@@ -46,7 +46,7 @@ jobs:
         if: always()  # Run even if tests fail
         run: |
           python tools/bdd_comprehensive_analyzer.py
-          
+
       - name: Upload test results
         if: always()
         uses: actions/upload-artifact@v3
@@ -94,7 +94,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: bdd-test-results
-          
+
       - name: Download coverage results
         uses: actions/download-artifact@v3
         with:
@@ -105,31 +105,31 @@ jobs:
         with:
           script: |
             const fs = require('fs');
-            
+
             // Read test results
             const testResults = JSON.parse(fs.readFileSync('reports/bdd_analysis/test_results.json', 'utf8'));
             const coverageResults = JSON.parse(fs.readFileSync('reports/bdd_analysis/coverage/coverage.json', 'utf8'));
-            
+
             // Create status report
             const statusReport = `## BDD Validation Results
-            
+
             ### Test Results
             - Total Scenarios: ${testResults.total}
             - Passed: ${testResults.passed}
             - Failed: ${testResults.failed}
-            
+
             ### Coverage
             - Feature Coverage: ${coverageResults.feature_coverage}%
             - Step Coverage: ${coverageResults.step_coverage}%
-            
+
             ### Recommendations
             ${coverageResults.recommendations.join('\n')}
             `;
-            
+
             // Update PR with results
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: statusReport
-            }); 
+            });

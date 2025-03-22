@@ -37,9 +37,9 @@ This document summarizes the findings from testing the "Getting Started with Gat
    @app.callback()
    def main(
        version: bool = typer.Option(
-           None, 
-           "--version", 
-           "-v", 
+           None,
+           "--version",
+           "-v",
            help="Show version and exit",
            callback=version_callback,
            is_eager=True,
@@ -58,18 +58,18 @@ This document summarizes the findings from testing the "Getting Started with Gat
    import os
    import configparser
    from pathlib import Path
-   
+
    def load_config():
        config = configparser.ConfigParser()
        config_path = Path.home() / ".gather-manager" / "config.ini"
-       
+
        if config_path.exists():
            config.read(config_path)
            if "gather" in config and "api_key" in config["gather"]:
                os.environ.setdefault("GATHER_API_KEY", config["gather"]["api_key"])
            if "gather" in config and "space_id" in config["gather"]:
                os.environ.setdefault("GATHER_SPACE_ID", config["gather"]["space_id"])
-   
+
    # Call this function before initializing the app
    load_config()
    ```
@@ -81,7 +81,7 @@ This document summarizes the findings from testing the "Getting Started with Gat
    def load_environment():
        # Load from current directory first
        load_dotenv()
-       
+
        # Then try to load from user's home directory
        home_env_path = Path.home() / ".gather-manager" / ".env"
        if home_env_path.exists():
@@ -95,7 +95,7 @@ This document summarizes the findings from testing the "Getting Started with Gat
    - Example addition:
    ```markdown
    You can also specify the space ID directly as a parameter:
-   
+
    ```bash
    gather-manager list-maps --space-id your_space_id
    gather-manager explore --space-id your_space_id
@@ -114,11 +114,11 @@ All recommended fixes have been implemented:
 1. **Version Command**: Implemented using Typer's callback with is_eager=True to ensure it runs before any command
 2. **Configuration File Support**: Implemented to read from `~/.gather-manager/config.ini`
 3. **Enhanced .env File Support**: Implemented to load from both current directory and user's home directory
-4. **Documentation Updates**: 
+4. **Documentation Updates**:
    - Updated to mention direct parameter options for all commands
    - Added information about using .env files for configuration
    - Explained the order of precedence for configuration sources
 
 ## Conclusion
 
-The documentation is now accurate and provides a good guide for users. All identified discrepancies have been addressed with the recommended fixes. The documentation now accurately reflects the functionality of the software, and the code has been updated to implement all features mentioned in the documentation. 
+The documentation is now accurate and provides a good guide for users. All identified discrepancies have been addressed with the recommended fixes. The documentation now accurately reflects the functionality of the software, and the code has been updated to implement all features mentioned in the documentation.

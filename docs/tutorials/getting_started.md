@@ -306,4 +306,4 @@ If you're still experiencing problems:
 
 ---
 
-This tutorial was created for Gather Manager version 0.1.0. For the latest documentation, please visit the [project repository](https://github.com/liminalcommons/gather-utils). 
+This tutorial was created for Gather Manager version 0.1.0. For the latest documentation, please visit the [project repository](https://github.com/liminalcommons/gather-utils).

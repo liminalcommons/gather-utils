@@ -23,4 +23,3 @@ Feature: Agent Requirements
     When we complete the implementation
     Then the repository structure validation should meet acceptance criteria
     And it should comply with the general Definition of Done
-

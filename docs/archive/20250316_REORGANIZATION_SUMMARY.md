@@ -49,4 +49,4 @@ Some files mentioned in the original plan were not found in the root directory. 
    behave features/command_line_interface.feature --format pretty
    ```
 
-3. Continue with the original task of resolving ambiguous step definitions in the command_line_interface_steps.py file. 
+3. Continue with the original task of resolving ambiguous step definitions in the command_line_interface_steps.py file.

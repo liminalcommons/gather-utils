@@ -68,6 +68,7 @@ python tools/bdd_coverage_report.py
 - [Best Practices](best_practices.md): Comprehensive guide to our BDD practices
 - [Templates](templates/): Feature and step definition templates
 - [Validation Rules](validation/bdd_rules.json): Machine-readable validation rules
+- [Lifecycle Management](lifecycle_management.md): Guidelines for managing BDD artifacts throughout their lifecycle
 
 ## Getting Started
 
@@ -142,4 +143,4 @@ For questions or issues:
 1. Check existing documentation
 2. Review example implementations
 3. Run validation tools
-4. Contact the development team 
+4. Contact the development team

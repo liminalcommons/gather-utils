@@ -53,4 +53,4 @@ extra:
     - icon: fontawesome/brands/github
       link: https://github.com/liminalcommons/gather-utils
   version:
-    provider: mike 
+    provider: mike

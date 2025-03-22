@@ -39,4 +39,4 @@
 1. Ensure all documentation is accessible in its new location
 2. Verify that Cursor agent can still find all necessary context
 3. Run BDD tests to ensure functionality is not affected
-4. Update any documentation that references the moved files 
+4. Update any documentation that references the moved files

@@ -25,7 +25,10 @@ import pytest
 from dotenv import load_dotenv
 
 # Add the project root to PYTHONPATH so that the 'gather_manager' package can be found
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..', 'src')))
+sys.path.insert(
+    0,
+    os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "..", "src")),
+)
 load_dotenv()
 
 from gather_manager.api.client import GatherClient
@@ -43,7 +46,7 @@ def summarize_data(data, max_depth=2, current_depth=0):
         if isinstance(data, (dict, list)):
             return "..."
         return data
-    if hasattr(data, '__dict__'):
+    if hasattr(data, "__dict__"):
         data = data.__dict__
     if isinstance(data, dict):
         summary = {}
@@ -88,27 +91,29 @@ def test_download_maps(tmp_path, monkeypatch):
     """Test downloading map data."""
     # Temporarily change to the test directory
     monkeypatch.chdir(tmp_path)
-    
+
     client = GatherClient(api_key=API_KEY)
     space_id = SPACE_ID
-    map_ids = [map_data["id"] for map_data in client.get_maps(space_id)][:2]  # Just get first 2 maps
-    
+    map_ids = [map_data["id"] for map_data in client.get_maps(space_id)][
+        :2
+    ]  # Just get first 2 maps
+
     # Download maps
     for map_id in map_ids:
         map_data = client.get_map(space_id, map_id)
         assert map_data is not None
-        
+
         # Save to file
         output_file = f"{map_id}.json"
         with open(output_file, "w") as f:
             json.dump(map_data, f, indent=2)
-        
+
         # Verify file exists
         assert os.path.exists(output_file)
-        
+
         # Load and verify content
         with open(output_file, "r") as f:
             loaded_data = json.load(f)
-        
+
         assert loaded_data["id"] == map_id
-        assert "objects" in loaded_data 
+        assert "objects" in loaded_data

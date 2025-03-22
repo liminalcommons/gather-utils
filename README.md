@@ -2,6 +2,8 @@
 
 A tool for exploring and analyzing Gather.town spaces, with a focus on understanding portal structures and connections between maps.
 
+For development-focused documentation, see [DEVELOPER_README.md](DEVELOPER_README.md).
+
 ## Features
 
 - List all maps in a Gather.town space
@@ -29,8 +31,11 @@ A tool for exploring and analyzing Gather.town spaces, with a focus on understan
   - `user_guide/` - User guide
   - `archive/` - Archived documentation
 - `tools/` - Utility scripts and tools
+  - `metadata_update/` - Tools for managing metadata compliance
 - `examples/` - Example code and usage
 - `data/` - Data files and analysis results
+- `reports/` - Generated reports
+  - `tool_metadata_compliance/` - Tool metadata compliance reports
 
 ## Documentation
 
@@ -139,36 +144,48 @@ portal-explorer/
 │       ├── cli.py            # Command-line interface
 │       └── utils.py          # Utility functions
 ├── tests/                    # Test suite
-├── docs/                     # Documentation
-│   ├── user_guide/           # User guide
-│   ├── api/                  # API reference
-│   ├── cli/                  # CLI reference
-│   └── tutorials/            # Tutorials
-├── examples/                 # Example scripts
-├── features/                 # BDD tests
-│   ├── steps/                # Step definitions
-│   └── README.md             # BDD documentation
-├── tools/                    # Development tools
-│   ├── bdd_coverage_report.py  # Generate BDD coverage reports
-│   ├── run_bdd_tests.py        # Run BDD tests
-│   └── bdd_scenario_generator.py  # Generate BDD scenarios
-└── pyproject.toml           # Project dependencies and metadata
+│   ├── unit/                # Unit tests (TDD)
+│   ├── integration/         # Integration tests
+│   └── bdd/                 # BDD tests
+│       ├── features/        # Feature files (organized by domain)
+│       ├── steps/          # Step definitions
+│       └── environment.py   # BDD test environment
+├── docs/                    # Documentation
+│   ├── project/            # Project documentation
+│   ├── api/                # API reference
+│   ├── cli/                # CLI reference
+│   ├── tutorials/          # Tutorials
+│   └── bdd/               # BDD documentation
+├── examples/               # Example scripts
+├── tools/                 # Development tools
+│   ├── bdd/              # BDD-specific tools
+│   ├── style/            # Style enforcement tools
+│   └── docs/             # Documentation tools
+└── pyproject.toml        # Project dependencies and metadata
 ```
+
+For more information about:
+- Development tools, see [tools/README.md](tools/README.md)
+- BDD testing, see [docs/bdd/README.md](docs/bdd/README.md)
+- TDD practices, see [docs/project/tdd/README.md](docs/project/tdd/README.md)
+- Project system, see [docs/project/README.md](docs/project/README.md)
 
 ## Testing
 
-### Unit Tests
+### Unit Tests (TDD)
 
 Run the unit tests with pytest:
 ```bash
 pytest
 ```
 
+For more information about TDD practices and lifecycle management, see the [TDD documentation](docs/project/tdd/README.md) and [Unit Testing Guide](tests/unit/README.md).
+
 ### BDD Tests
 
-BDD tests are now consolidated in the `tests/bdd` directory:
+BDD tests are organized in the `tests/bdd` directory:
 
-- `tests/bdd/features/`: Contains all feature files
+- `tests/bdd/features/`: Contains all feature files (organized by domain)
 - `tests/bdd/steps/`: Contains all step definitions
 - `tests/bdd/environment.py`: Environment setup for BDD tests
 
@@ -183,8 +200,9 @@ behave tests/bdd/features
 ```
 
 For more information on running and writing BDD tests, see:
-- [BDD Testing documentation](tests/bdd/README.md)
-- [BDD Tools documentation](docs/project/BDD_TOOLS.md)
+- [BDD Testing Guide](docs/project/bdd/README.md)
+- [BDD Tools Guide](docs/project/bdd/tools_guide.md)
+- [BDD Conventions](docs/project/bdd/conventions.md)
 
 ## Development
 
@@ -212,4 +230,25 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## License
 
-[MIT License](LICENSE) 
+[MIT License](LICENSE)
+
+# Gather-Utils Project
+
+Gather-Utils is a collection of utilities for managing and interacting with Gather.town spaces.
+
+## Current Projects
+
+### Tool Metadata Compliance Project
+
+We're currently updating all tools in the repository to comply with standardized metadata requirements. See `tools/metadata_update/README.md` for details on this initiative.
+
+Current status:
+- Progress: 8/38 tools updated (21.1%)
+- Next steps: Continue batch processing remaining tools
+
+Tools for this project:
+- `tools/metadata_update/metadata_injector.py` - Inject standardized metadata into tool files
+- `tools/metadata_update/update_tracker.py` - Track and report on the progress of the project
+- `tools/metadata_update/batch_processor.py` - Process multiple tools at once
+
+Check the latest status report in `reports/tool_metadata_compliance/` for more details.

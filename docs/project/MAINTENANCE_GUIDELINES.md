@@ -8,7 +8,8 @@ This document outlines guidelines for maintaining the repository in a clean and 
    - README.md - Project overview, getting started, and current status
    - docs/project/PROJECT_STATUS.md - Detailed project status
    - docs/project/DEFINITION_OF_DONE.md - Definition of Done criteria
-   - docs/project/AGENT_GUIDELINES.md - Guidelines for AI agents
+   - .cursor/rules/agent_guidelines.mdc - Guidelines for AI agents
+   - .cursor/rules/bdd_agent_guidelines.mdc - BDD-specific guidelines for AI agents
 
 2. **Archived Documentation**
    - docs/archive/ - Completed project documents
@@ -35,6 +36,15 @@ This document outlines guidelines for maintaining the repository in a clean and 
 3. **Code Review**
    - All changes must be reviewed
    - Automated checks must pass before merge
+
+4. **Tool Management**
+   - One-off tools should be documented with a clear purpose and expected lifecycle
+   - After successful use, one-off tools should be:
+     a. Archived if they might be needed for reference
+     b. Deleted if they serve no future purpose
+   - Document the decision to keep or remove tools in the commit message
+   - Update relevant documentation to reflect tool removal
+   - Consider generalizing useful one-off tools for broader use cases
 
 ## Testing Guidelines
 
@@ -81,7 +91,7 @@ This document outlines guidelines for maintaining the repository in a clean and 
    - Documentation: `UPPERCASE_WITH_UNDERSCORES.md`
 
 3. **Documentation for Agents**
-   - Keep AGENT_GUIDELINES.md up-to-date
+   - Keep agent guidelines in `.cursor/rules/` up-to-date
    - Document navigation patterns
    - Include examples of common tasks
 

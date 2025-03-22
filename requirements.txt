@@ -45,4 +45,4 @@ pydantic>=2.0.3
 # Pre-download NLTK data and spaCy models
 # Run the following commands after installation:
 # python -m nltk.downloader punkt wordnet stopwords
-# python -m spacy download en_core_web_sm 
+# python -m spacy download en_core_web_sm

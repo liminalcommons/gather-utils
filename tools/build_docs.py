@@ -1,3 +1,20 @@
+"""
+Tool: Build Docs
+Created: 2025-03-21
+Author: Development Team
+Status: Active
+Purpose: Build project artifacts or documentation
+Dependencies: subprocess
+Lifecycle:
+    - Created: To automate common development tasks
+    - Active: Currently used in development workflows
+    - Obsolescence Conditions:
+        1. When project requirements change significantly
+        2. When replaced by more comprehensive tooling
+Last Validated: 2025-03-21
+
+"""
+
 #!/usr/bin/env python3
 """
 Build the documentation using MkDocs.
@@ -13,10 +30,14 @@ from pathlib import Path
 def check_dependencies():
     """Check if the required dependencies are installed."""
     try:
-        subprocess.run(["mkdocs", "--version"], check=True, capture_output=True)
+        subprocess.run(
+            ["mkdocs", "--version"], check=True, capture_output=True
+        )
     except (subprocess.CalledProcessError, FileNotFoundError):
         print("Error: mkdocs is not installed. Please install it with:")
-        print("pip install mkdocs mkdocs-material mkdocstrings pymdown-extensions")
+        print(
+            "pip install mkdocs mkdocs-material mkdocstrings pymdown-extensions"
+        )
         sys.exit(1)
 
 
@@ -29,11 +50,11 @@ def build_docs():
     # Build the documentation
     print("Building documentation...")
     result = subprocess.run(["mkdocs", "build"], check=False)
-    
+
     if result.returncode != 0:
         print("Error: Failed to build documentation.")
         sys.exit(1)
-    
+
     print("Documentation built successfully.")
     print(f"Output directory: {docs_dir}/site")
 
@@ -47,11 +68,11 @@ def deploy_docs():
     # Deploy the documentation
     print("Deploying documentation to GitHub Pages...")
     result = subprocess.run(["mkdocs", "gh-deploy", "--force"], check=False)
-    
+
     if result.returncode != 0:
         print("Error: Failed to deploy documentation.")
         sys.exit(1)
-    
+
     print("Documentation deployed successfully to GitHub Pages.")
 
 
@@ -68,4 +89,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main() 
+    main()

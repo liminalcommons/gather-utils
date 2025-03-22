@@ -74,4 +74,4 @@
 ### Usability
 - **Intuitive Interface**: Easy-to-use command-line interface.
 - **Helpful Error Messages**: Clear and helpful error messages.
-- **Progress Indicators**: Progress indicators for long-running operations. 
+- **Progress Indicators**: Progress indicators for long-running operations.

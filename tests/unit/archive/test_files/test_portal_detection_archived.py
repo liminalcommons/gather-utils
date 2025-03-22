@@ -1,4 +1,20 @@
-"""Tests for the enhanced portal detection logic in GatherClient."""
+"""Tests for portal detection functionality.
+
+Test Metadata:
+- Created: 2024-03-21
+- Last Updated: 2024-03-21
+- Status: Archived
+- Owner: Development Team
+- Purpose: Validate portal detection functionality in Gather maps
+- Lifecycle:
+  - Created: To ensure portal detection works correctly
+  - Active: Used to validate portal detection logic
+  - Obsolescence Conditions:
+    1. When the portal detection logic is significantly redesigned
+    2. When the portal system is removed or replaced
+  - Archived Reason: Replaced by tests/unit/api/test_portal_detection.py with improved structure
+- Last Validated: 2024-03-21
+"""
 
 import json
 from pathlib import Path
@@ -89,9 +105,7 @@ class TestPortalDetection:
         assert portal1.targetMap == "map2"
 
     @responses.activate
-    def test_detect_integer_type_with_targetmap(
-        self, client, complex_map_data
-    ):
+    def test_detect_integer_type_with_targetmap(self, client, complex_map_data):
         """Test detection of portals with integer type and targetMap property."""
         # Setup mock response
         space_id = "test-space"

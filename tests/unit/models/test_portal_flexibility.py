@@ -50,7 +50,7 @@ class TestFlexiblePortalModel:
             y=20,
             targetMap="destination-map",
             targetX=5,
-            targetY=15
+            targetY=15,
         )
 
         assert portal.type == 4
@@ -70,7 +70,7 @@ class TestFlexiblePortalModel:
                 y=20,
                 # Missing targetMap, but has targetX and targetY
                 targetX=5,
-                targetY=15
+                targetY=15,
             )
 
     def test_portal_from_object_with_targetmap_only(self):
@@ -103,7 +103,7 @@ class TestFlexiblePortalModel:
             y=20,
             targetMap="destination-map",
             targetX=5,
-            targetY=15
+            targetY=15,
         )
 
         portal = Portal.from_object(obj)
@@ -126,7 +126,7 @@ class TestFlexiblePortalModel:
             y=20,
             # Missing targetMap
             targetX=5,
-            targetY=15
+            targetY=15,
         )
 
         # Should raise ValueError when converting to Portal
@@ -156,9 +156,9 @@ class TestFlexiblePortalModel:
             y=20,
             targetMap="destination-map",
             # No targetX
-            targetY=15
+            targetY=15,
         )
 
         assert portal2.targetMap == "destination-map"
         assert portal2.targetX == 0  # Should default to 0
-        assert portal2.targetY == 15 
+        assert portal2.targetY == 15

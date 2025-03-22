@@ -65,4 +65,4 @@ These examples demonstrate several key conventions:
 
 Use these examples as templates when creating new BDD features or refactoring existing ones. The standardized format ensures consistency across the project and improves maintainability.
 
-For more details, refer to the full BDD conventions document at `docs/project/bdd_conventions.md`. 
+For more details, refer to the full BDD conventions document at `docs/project/bdd_conventions.md`.
