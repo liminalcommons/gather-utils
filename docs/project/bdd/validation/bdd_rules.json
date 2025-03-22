@@ -1,0 +1,55 @@
+{
+    "feature_file_rules": {
+        "required_sections": [
+            "Feature tag",
+            "Feature name",
+            "As a",
+            "I want",
+            "So that"
+        ],
+        "tag_patterns": {
+            "requirement": "^@REQ-[A-Z]+-\\d+$",
+            "release": "^@REL-\\d+$",
+            "component": "^@[A-Z][a-zA-Z]+$"
+        },
+        "scenario_structure": {
+            "required_steps": ["Given", "When", "Then"],
+            "optional_steps": ["And", "But"]
+        }
+    },
+    "step_definition_rules": {
+        "naming_convention": {
+            "pattern": "^step_(?:given|when|then)_[a-z_]+$",
+            "examples": [
+                "step_given_valid_api_key",
+                "step_when_run_command",
+                "step_then_verify_output"
+            ]
+        },
+        "required_elements": [
+            "docstring",
+            "type_hints",
+            "error_handling"
+        ]
+    },
+    "directory_structure": {
+        "required_directories": [
+            "tests/bdd/features",
+            "tests/bdd/steps",
+            "docs/project/bdd",
+            "docs/project/bdd/templates",
+            "docs/project/bdd/validation"
+        ],
+        "feature_organization": {
+            "domains": [
+                "portal",
+                "cli",
+                "documentation",
+                "testing",
+                "system",
+                "bdd",
+                "agent"
+            ]
+        }
+    }
+} 

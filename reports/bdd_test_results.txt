@@ -1,374 +1,255 @@
-Feature: BDD Integration # features/bdd_integration.feature:1
-  As a development team
-  I want to integrate BDD into our development workflow
-  So that we can ensure requirements are met and maintain high-quality code
-  Background:   # features/bdd_integration.feature:6
-
-  @BDD-1
-  Scenario: Set Up BDD Framework                           # features/bdd_integration.feature:11
-    Given I have a project with BDD features and scenarios # features/steps/bdd_integration_steps.py:11
-    And I have the necessary BDD tools installed           # features/steps/bdd_integration_steps.py:23
-    Given I need to implement BDD testing                  # features/steps/bdd_integration_steps.py:37
-    When I set up the BDD framework                        # features/steps/bdd_integration_steps.py:45
-    Then it should have the correct directory structure    # features/steps/bdd_integration_steps.py:57
-    And it should include necessary configuration files    # features/steps/bdd_integration_steps.py:66
-    And it should support both behave and pytest-bdd       # features/steps/bdd_integration_steps.py:74
-
-  @BDD-2
-  Scenario: Implement Step Definitions                           # features/bdd_integration.feature:19
-    Given I have a project with BDD features and scenarios       # features/steps/bdd_integration_steps.py:11
-    And I have the necessary BDD tools installed                 # features/steps/bdd_integration_steps.py:23
-    Given I have BDD scenarios                                   # features/steps/bdd_integration_steps.py:86
-    When I implement step definitions for all scenarios          # features/steps/bdd_integration_steps.py:104
-    Then each step should be mapped to a Python function         # features/steps/bdd_integration_steps.py:116
-    And the step definitions should be organized by feature      # features/steps/bdd_integration_steps.py:131
-    And the step definitions should be reusable across scenarios # features/steps/bdd_integration_steps.py:142
-
-  @BDD-3
-  Scenario: Integrate BDD with CI Pipeline                  # features/bdd_integration.feature:27
-    Given I have a project with BDD features and scenarios  # features/steps/bdd_integration_steps.py:11
-    And I have the necessary BDD tools installed            # features/steps/bdd_integration_steps.py:23
-    Given I have a CI pipeline                              # features/steps/bdd_integration_steps.py:150
-    When I integrate BDD tests into the pipeline            # features/steps/bdd_integration_steps.py:159
-    Then BDD tests should run automatically on each commit  # features/steps/bdd_integration_steps.py:168
-    And test results should be reported in the CI dashboard # features/steps/bdd_integration_steps.py:176
-    And failed BDD tests should block merges                # features/steps/bdd_integration_steps.py:184
-
-  @BDD-4
-  Scenario: Generate Documentation from BDD                            # features/bdd_integration.feature:35
-    Given I have a project with BDD features and scenarios             # features/steps/bdd_integration_steps.py:11
-    And I have the necessary BDD tools installed                       # features/steps/bdd_integration_steps.py:23
-    Given I have BDD scenarios with step definitions                   # features/steps/bdd_integration_steps.py:192
-    When I generate documentation from BDD scenarios                   # features/steps/bdd_integration_steps.py:200
-    Then it should create human-readable documentation                 # features/steps/bdd_integration_steps.py:299
-    And it should show the relationship between requirements and tests # features/steps/bdd_integration_steps.py:307
-    And it should include test status for each scenario                # features/steps/bdd_integration_steps.py:315
-
-  @BDD-5
-  Scenario: Track BDD Test Coverage                              # features/bdd_integration.feature:43
-    Given I have a project with BDD features and scenarios       # features/steps/bdd_integration_steps.py:11
-    And I have the necessary BDD tools installed                 # features/steps/bdd_integration_steps.py:23
-    Given I have BDD scenarios mapped to requirements            # features/steps/bdd_integration_steps.py:323
-    When I run the BDD test coverage report                      # features/steps/bdd_integration_steps.py:341
-    Then it should show which requirements are covered by tests  # features/steps/bdd_integration_steps.py:354
-    And it should identify requirements without test coverage    # features/steps/bdd_integration_steps.py:362
-    And it should calculate the overall test coverage percentage # features/steps/bdd_integration_steps.py:370
-
-  @BDD-6
-  Scenario: Automate BDD Test Generation                              # features/bdd_integration.feature:51
-    Given I have a project with BDD features and scenarios            # features/steps/bdd_integration_steps.py:11
-    And I have the necessary BDD tools installed                      # features/steps/bdd_integration_steps.py:23
-    Given I have new requirements in the project plan                 # features/steps/bdd_integration_steps.py:378
-    When I use the BDD generator tool                                 # features/steps/bdd_integration_steps.py:387
-    Then it should create skeleton BDD scenarios for new requirements # features/steps/bdd_integration_steps.py:396
-    And it should suggest step definitions based on existing ones     # features/steps/bdd_integration_steps.py:404
-    And it should integrate with the existing BDD framework           # features/steps/bdd_integration_steps.py:412
-
-Feature: Portal Functionality # features/milestone1_portal_functionality.feature:1
+Feature: Command Line Interface # features/generated/generated_command_line_interface.feature:1
   As a developer
-  I want to extract and analyze portal data from Gather.town spaces
-  So that I can understand the connections between maps
-  Background:   # features/milestone1_portal_functionality.feature:6
-
-  @REQ-1.1
-  Scenario: Enhanced Object Model for Portals                     # features/milestone1_portal_functionality.feature:11
-    Given I have a valid Gather.town API key                      # features/steps/common_steps.py:8
-    And I have access to a Gather.town space with portals         # features/steps/common_steps.py:15
-    Given I have the space data model                             # features/steps/portal_functionality_steps.py:8
-    When I update the model to include portal-specific properties # features/steps/portal_functionality_steps.py:17
-    Then the model should validate portal objects correctly       # features/steps/portal_functionality_steps.py:30
-    And the model should handle all required portal properties    # features/steps/portal_functionality_steps.py:42
-
-  @REQ-1.2
-  Scenario: Extract Portals from a Map                     # features/milestone1_portal_functionality.feature:18
-    Given I have a valid Gather.town API key               # features/steps/common_steps.py:8
-    And I have access to a Gather.town space with portals  # features/steps/common_steps.py:15
-    Given I have a GatherClient instance                   # features/steps/common_steps.py:102
-    When I call the get_portals method for a specific map  # features/steps/portal_functionality_steps.py:52
-    Then it should return a list of portal objects         # features/steps/portal_functionality_steps.py:62
-    And each portal should have the correct properties     # features/steps/portal_functionality_steps.py:70
-    And portals should be filtered from other object types # features/steps/portal_functionality_steps.py:86
-
-  @REQ-1.3
-  Scenario: Test Portal Extraction with Real Map Data     # features/milestone1_portal_functionality.feature:26
-    Given I have a valid Gather.town API key              # features/steps/common_steps.py:8
-    And I have access to a Gather.town space with portals # features/steps/common_steps.py:15
-    Given I have a test script for portal extraction      # features/steps/portal_functionality_steps.py:94
-    When I run the script against real map data           # features/steps/portal_functionality_steps.py:103
-    Then it should correctly identify all portals         # features/steps/portal_functionality_steps.py:115
-    And it should parse portal properties accurately      # features/steps/portal_functionality_steps.py:122
-    And it should handle different portal configurations  # features/steps/portal_functionality_steps.py:132
-
-  @REQ-1.4
-  Scenario: Unit Tests for Portal Functionality            # features/milestone1_portal_functionality.feature:34
-    Given I have a valid Gather.town API key               # features/steps/common_steps.py:8
-    And I have access to a Gather.town space with portals  # features/steps/common_steps.py:15
-    Given I have unit tests for the portal object model    # features/steps/portal_functionality_steps.py:140
-    And I have unit tests for portal extraction            # features/steps/portal_functionality_steps.py:147
-    When I run the test suite                              # features/steps/portal_functionality_steps.py:154
-    Then all tests should pass                             # features/steps/portal_functionality_steps.py:170
-    And the tests should cover edge cases                  # features/steps/portal_functionality_steps.py:177
-    And the tests should verify portal property validation # features/steps/portal_functionality_steps.py:185
-
-Feature: Portal Explorer Service # features/milestone2_portal_explorer_service.feature:1
-  As a developer
-  I want to analyze portal structures across multiple maps
-  So that I can understand the connections and navigation paths in a Gather.town space
-  Background:   # features/milestone2_portal_explorer_service.feature:6
-
-  @REQ-2.1
-  Scenario: Create PortalExplorer Class                                     # features/milestone2_portal_explorer_service.feature:11
-    Given I have a valid Gather.town API key                                # features/steps/common_steps.py:8
-    And I have access to a Gather.town space with multiple maps and portals # features/steps/common_steps.py:47
-    Given I need to analyze portal structures                               # features/steps/portal_explorer_service_steps.py:11
-    When I create a PortalExplorer class                                    # features/steps/portal_explorer_service_steps.py:19
-    Then it should initialize with a client and output directory            # features/steps/portal_explorer_service_steps.py:42
-    And it should have the basic structure for portal analysis              # features/steps/portal_explorer_service_steps.py:57
-
-  @REQ-2.2
-  Scenario: Analyze Portals in a Single Map                                 # features/milestone2_portal_explorer_service.feature:18
-    Given I have a valid Gather.town API key                                # features/steps/common_steps.py:8
-    And I have access to a Gather.town space with multiple maps and portals # features/steps/common_steps.py:47
-    Given I have a PortalExplorer instance                                  # features/steps/portal_explorer_service_steps.py:65
-    When I call the analyze_map_portals method for a specific map           # features/steps/portal_explorer_service_steps.py:89
-    Then it should extract all portals from the map                         # features/steps/portal_explorer_service_steps.py:107
-    And it should analyze the portal data                                   # features/steps/portal_explorer_service_steps.py:114
-    And it should return structured portal information                      # features/steps/portal_explorer_service_steps.py:123
-
-  @REQ-2.3
-  Scenario: Analyze Portals Across Multiple Maps                               # features/milestone2_portal_explorer_service.feature:26
-    Given I have a valid Gather.town API key                                   # features/steps/common_steps.py:8
-    And I have access to a Gather.town space with multiple maps and portals    # features/steps/common_steps.py:47
-    Given I have a PortalExplorer instance                                     # features/steps/portal_explorer_service_steps.py:65
-    When I call the analyze_all_maps method                                    # features/steps/portal_explorer_service_steps.py:140
-    Then it should process all maps in the space                               # features/steps/portal_explorer_service_steps.py:156
-    And it should aggregate portal data across maps                            # features/steps/portal_explorer_service_steps.py:167
-    And it should return comprehensive portal information for the entire space # features/steps/portal_explorer_service_steps.py:176
-
-  @REQ-2.4
-  Scenario: Analyze Portal Connections Between Maps                         # features/milestone2_portal_explorer_service.feature:34
-    Given I have a valid Gather.town API key                                # features/steps/common_steps.py:8
-    And I have access to a Gather.town space with multiple maps and portals # features/steps/common_steps.py:47
-    Given I have portal data from multiple maps                             # features/steps/portal_explorer_service_steps.py:194
-    When I analyze the portal connections                                   # features/steps/portal_explorer_service_steps.py:235
-    Then it should identify bidirectional portals                           # features/steps/portal_explorer_service_steps.py:263
-    And it should create a connection graph between maps                    # features/steps/portal_explorer_service_steps.py:270
-    And it should detect orphaned or one-way portals                        # features/steps/portal_explorer_service_steps.py:279
-
-  @REQ-2.5
-  Scenario: Generate Structured Output for Analysis Results                 # features/milestone2_portal_explorer_service.feature:42
-    Given I have a valid Gather.town API key                                # features/steps/common_steps.py:8
-    And I have access to a Gather.town space with multiple maps and portals # features/steps/common_steps.py:47
-    Given I have completed portal analysis                                  # features/steps/portal_explorer_service_steps.py:286
-    When I save the results to JSON                                         # features/steps/portal_explorer_service_steps.py:325
-    Then the output should have a structured format                         # features/steps/portal_explorer_service_steps.py:348
-    And it should include all portal information                            # features/steps/portal_explorer_service_steps.py:357
-    And it should be saved to the specified output directory                # features/steps/portal_explorer_service_steps.py:366
-
-Feature: Command Line Interface # features/milestone3_command_line_interface.feature:1
-  As a user
-  I want to interact with the Portal Explorer through a command-line interface
-  So that I can easily analyze and visualize portal structures
-  Background:   # features/milestone3_command_line_interface.feature:6
+  I want to implement the command line interface functionality
+  So that the Portal Explorer meets all requirements
+  Background:   # features/generated/generated_command_line_interface.feature:6
 
   @REQ-3.1
-  Scenario: Set Up CLI Framework                                  # features/milestone3_command_line_interface.feature:11
-    Given I have the Portal Explorer CLI installed                # features/steps/command_line_interface_steps.py:11
-    And I have configured my API key and space ID                 # features/steps/command_line_interface_steps.py:20
-    Given I need a command-line interface for the Portal Explorer # features/steps/command_line_interface_steps.py:33
-    When I set up the CLI framework with typer                    # features/steps/command_line_interface_steps.py:41
-    Then it should have a basic structure                         # features/steps/command_line_interface_steps.py:63
-    And it should be ready for implementing commands              # features/steps/command_line_interface_steps.py:71
+  Scenario: Set Up CLI Framework                     # features/generated/generated_command_line_interface.feature:11
+    Given I have the Portal Explorer codebase        # None
+    And I have the necessary dependencies installed  # None
+    Given I have the necessary components            # None
+    When I perform the task                          # None
+    Then the set up cli framework should be complete # None
+    And it should meet all requirements              # None
 
   @REQ-3.2
-  Scenario: List Maps in a Space                           # features/milestone3_command_line_interface.feature:18
-    Given I have the Portal Explorer CLI installed         # features/steps/command_line_interface_steps.py:11
-    And I have configured my API key and space ID          # features/steps/command_line_interface_steps.py:20
-    Given I have access to a Gather.town space             # features/steps/command_line_interface_steps.py:80
-    When I run the command "gather-explorer list-maps"     # features/steps/command_line_interface_steps.py:109
-    Then it should display a list of all maps in the space # features/steps/command_line_interface_steps.py:129
-    And the output should be formatted with rich tables    # features/steps/command_line_interface_steps.py:139
-    And it should include map IDs and names                # features/steps/command_line_interface_steps.py:148
+  Scenario: Implement Map Listing Command                     # features/generated/generated_command_line_interface.feature:18
+    Given I have the Portal Explorer codebase                 # None
+    And I have the necessary dependencies installed           # None
+    Given I need to implement map listing command             # None
+    When I implement the functionality                        # None
+    Then the implement map listing command should be complete # None
+    And it should meet all requirements                       # None
 
   @REQ-3.3
-  Scenario: Explore Portals in a Single Map                            # features/milestone3_command_line_interface.feature:26
-    Given I have the Portal Explorer CLI installed                     # features/steps/command_line_interface_steps.py:11
-    And I have configured my API key and space ID                      # features/steps/command_line_interface_steps.py:20
-    Given I have access to a Gather.town space with portals            # features/steps/common_steps.py:15
-    When I run the command "gather-explorer explore --map-id <map_id>" # features/steps/command_line_interface_steps.py:158
-    Then it should analyze portals in the specified map                # features/steps/command_line_interface_steps.py:180
-    And it should display the portal information                       # features/steps/command_line_interface_steps.py:188
-    And it should show connections to other maps                       # features/steps/command_line_interface_steps.py:198
-
-  @REQ-3.3.1
-  Scenario: Explore Portals Across All Maps                       # features/milestone3_command_line_interface.feature:34
-    Given I have the Portal Explorer CLI installed                # features/steps/command_line_interface_steps.py:11
-    And I have configured my API key and space ID                 # features/steps/command_line_interface_steps.py:20
-    Given I have access to a Gather.town space with multiple maps # features/steps/command_line_interface_steps.py:205
-    When I run the command "gather-explorer explore --all-maps"   # features/steps/command_line_interface_steps.py:212
-    Then it should analyze portals across all maps                # features/steps/command_line_interface_steps.py:244
-    And it should display comprehensive portal information        # features/steps/command_line_interface_steps.py:252
-    And it should show the connection graph between maps          # features/steps/command_line_interface_steps.py:262
+  Scenario: Implement Portal Exploration Command                     # features/generated/generated_command_line_interface.feature:25
+    Given I have the Portal Explorer codebase                        # None
+    And I have the necessary dependencies installed                  # None
+    Given I need to implement portal exploration command             # None
+    When I implement the functionality                               # None
+    Then the implement portal exploration command should be complete # None
+    And it should meet all requirements                              # None
 
   @REQ-3.4
-  Scenario: Rich Output Formatting                                   # features/milestone3_command_line_interface.feature:42
-    Given I have the Portal Explorer CLI installed                   # features/steps/command_line_interface_steps.py:11
-    And I have configured my API key and space ID                    # features/steps/command_line_interface_steps.py:20
-    Given I am using the Portal Explorer CLI                         # features/steps/command_line_interface_steps.py:270
-    When I run any command                                           # features/steps/command_line_interface_steps.py:278
-    Then the output should be formatted with rich tables and styling # features/steps/command_line_interface_steps.py:286
-    And long-running operations should show progress indicators      # features/steps/command_line_interface_steps.py:293
-    And the information should be presented in a user-friendly way   # features/steps/command_line_interface_steps.py:302
+  Scenario: Add Rich Output Formatting                     # features/generated/generated_command_line_interface.feature:32
+    Given I have the Portal Explorer codebase              # None
+    And I have the necessary dependencies installed        # None
+    Given I have the necessary components                  # None
+    When I perform the task                                # None
+    Then the add rich output formatting should be complete # None
+    And it should meet all requirements                    # None
 
   @REQ-3.5
-  Scenario: Handle API Errors Gracefully                   # features/milestone3_command_line_interface.feature:50
-    Given I have the Portal Explorer CLI installed         # features/steps/command_line_interface_steps.py:11
-    And I have configured my API key and space ID          # features/steps/command_line_interface_steps.py:20
-    Given I have incorrect API credentials                 # features/steps/command_line_interface_steps.py:311
-    When I run any command that requires API access        # features/steps/command_line_interface_steps.py:328
-    Then it should display a user-friendly error message   # features/steps/command_line_interface_steps.py:348
-    And it should provide guidance on how to fix the issue # features/steps/command_line_interface_steps.py:356
-    And it should exit with an appropriate error code      # features/steps/command_line_interface_steps.py:364
+  Scenario: Implement Error Handling                     # features/generated/generated_command_line_interface.feature:39
+    Given I have the Portal Explorer codebase            # None
+    And I have the necessary dependencies installed      # None
+    Given I need to implement error handling             # None
+    When I implement the functionality                   # None
+    Then the implement error handling should be complete # None
+    And it should meet all requirements                  # None
 
   @REQ-3.6
-  Scenario: CLI Entry Point Registration                       # features/milestone3_command_line_interface.feature:58
-    Given I have the Portal Explorer CLI installed             # features/steps/command_line_interface_steps.py:11
-    And I have configured my API key and space ID              # features/steps/command_line_interface_steps.py:20
-    Given I have installed the package                         # features/steps/command_line_interface_steps.py:371
-    When I run the command "gather-explorer" without arguments # features/steps/command_line_interface_steps.py:378
-    Then it should display help information                    # features/steps/command_line_interface_steps.py:405
-    And all available commands should be listed                # features/steps/command_line_interface_steps.py:414
-    And the CLI should be accessible as a system command       # features/steps/command_line_interface_steps.py:422
+  Scenario: Register CLI Entry Point                     # features/generated/generated_command_line_interface.feature:46
+    Given I have the Portal Explorer codebase            # None
+    And I have the necessary dependencies installed      # None
+    Given I have the necessary components                # None
+    When I perform the task                              # None
+    Then the register cli entry point should be complete # None
+    And it should meet all requirements                  # None
 
-Feature: Testing & Quality Assurance # features/milestone4_testing_quality_assurance.feature:1
+Feature: Documentation & Examples # features/generated/generated_documentation_&_examples.feature:1
   As a developer
-  I want comprehensive test coverage and high code quality
-  So that the Portal Explorer is reliable and maintainable
-  Background:   # features/milestone4_testing_quality_assurance.feature:6
-
-  @REQ-4.1
-  Scenario: Create Model Tests                              # features/milestone4_testing_quality_assurance.feature:11
-    Given I have the Portal Explorer codebase               # features/steps/common_steps.py:86
-    And I have set up the testing framework                 # features/steps/common_steps.py:94
-    Given I have data models for the Portal Explorer        # features/steps/testing_quality_assurance_steps.py:10
-    When I implement tests for all data models              # features/steps/testing_quality_assurance_steps.py:30
-    Then the tests should verify model validation           # features/steps/testing_quality_assurance_steps.py:50
-    And the tests should cover portal object validation     # features/steps/testing_quality_assurance_steps.py:59
-    And the test coverage for models should be at least 90% # features/steps/testing_quality_assurance_steps.py:68
-
-  @REQ-4.2
-  Scenario: Enhance API Client Tests                                # features/milestone4_testing_quality_assurance.feature:19
-    Given I have the Portal Explorer codebase                       # features/steps/common_steps.py:86
-    And I have set up the testing framework                         # features/steps/common_steps.py:94
-    Given I have the GatherClient implementation                    # features/steps/testing_quality_assurance_steps.py:77
-    When I add tests for portal functionality                       # features/steps/testing_quality_assurance_steps.py:93
-    Then the tests should use mock API responses                    # features/steps/testing_quality_assurance_steps.py:112
-    And the tests should verify correct portal extraction           # features/steps/testing_quality_assurance_steps.py:121
-    And the test coverage for the API client should be at least 90% # features/steps/testing_quality_assurance_steps.py:130
-
-  @REQ-4.3
-  Scenario: Create Explorer Service Tests                        # features/milestone4_testing_quality_assurance.feature:27
-    Given I have the Portal Explorer codebase                    # features/steps/common_steps.py:86
-    And I have set up the testing framework                      # features/steps/common_steps.py:94
-    Given I have the PortalExplorer service                      # features/steps/testing_quality_assurance_steps.py:139
-    When I implement tests for the service                       # features/steps/testing_quality_assurance_steps.py:156
-    Then the tests should verify portal analysis functionality   # features/steps/testing_quality_assurance_steps.py:177
-    And the tests should cover connection analysis               # features/steps/testing_quality_assurance_steps.py:187
-    And the test coverage for the service should be at least 90% # features/steps/testing_quality_assurance_steps.py:196
-
-  @REQ-4.4
-  Scenario: Implement CLI Tests                              # features/milestone4_testing_quality_assurance.feature:35
-    Given I have the Portal Explorer codebase                # features/steps/common_steps.py:86
-    And I have set up the testing framework                  # features/steps/common_steps.py:94
-    Given I have the CLI implementation                      # features/steps/testing_quality_assurance_steps.py:205
-    When I add tests for CLI commands                        # features/steps/testing_quality_assurance_steps.py:221
-    Then the tests should verify command functionality       # features/steps/testing_quality_assurance_steps.py:242
-    And the tests should cover error handling                # features/steps/testing_quality_assurance_steps.py:252
-    And the test coverage for the CLI should be at least 90% # features/steps/testing_quality_assurance_steps.py:261
-
-  @REQ-4.5
-  Scenario: Create Integration Tests                          # features/milestone4_testing_quality_assurance.feature:43
-    Given I have the Portal Explorer codebase                 # features/steps/common_steps.py:86
-    And I have set up the testing framework                   # features/steps/common_steps.py:94
-    Given I have all components of the Portal Explorer        # features/steps/testing_quality_assurance_steps.py:270
-    When I implement integration tests                        # features/steps/testing_quality_assurance_steps.py:285
-    Then the tests should verify the full workflow            # features/steps/testing_quality_assurance_steps.py:305
-    And the tests should use both mock data and real data     # features/steps/testing_quality_assurance_steps.py:314
-    And the integration tests should cover all main use cases # features/steps/testing_quality_assurance_steps.py:324
-
-  @REQ-4.6
-  Scenario: BDD Test Integration                                # features/milestone4_testing_quality_assurance.feature:51
-    Given I have the Portal Explorer codebase                   # features/steps/common_steps.py:86
-    And I have set up the testing framework                     # features/steps/common_steps.py:94
-    Given I have BDD scenarios for all features                 # features/steps/documentation_examples_steps.py:550
-    When I implement step definitions for all scenarios         # features/steps/bdd_integration_steps.py:104
-    Then all BDD tests should pass                              # features/steps/testing_quality_assurance_steps.py:340
-    And the BDD tests should cover all requirements             # features/steps/testing_quality_assurance_steps.py:355
-    And the BDD tests should be integrated with the CI pipeline # features/steps/testing_quality_assurance_steps.py:369
-
-Feature: Documentation & Examples # features/milestone5_documentation_examples.feature:1
-  As a user or developer
-  I want comprehensive documentation and examples
-  So that I can effectively use and contribute to the Portal Explorer
-  Background:   # features/milestone5_documentation_examples.feature:6
+  I want to implement the documentation & examples functionality
+  So that the Portal Explorer meets all requirements
+  Background:   # features/generated/generated_documentation_&_examples.feature:6
 
   @REQ-5.1
-  Scenario: Update README                                          # features/milestone5_documentation_examples.feature:11
-    Given I have the Portal Explorer codebase                      # features/steps/common_steps.py:86
-    And all features are implemented and tested                    # features/steps/documentation_examples_steps.py:11
-    Given I need to document the Portal Explorer                   # features/steps/documentation_examples_steps.py:22
-    When I update the README.md file                               # features/steps/documentation_examples_steps.py:30
-    Then it should include comprehensive installation instructions # features/steps/documentation_examples_steps.py:74
-    And it should provide basic usage examples                     # features/steps/documentation_examples_steps.py:82
-    And it should explain the purpose and features of the tool     # features/steps/documentation_examples_steps.py:91
+  Scenario: Update README                           # features/generated/generated_documentation_&_examples.feature:11
+    Given I have the Portal Explorer codebase       # None
+    And I have the necessary dependencies installed # None
+    Given I have the existing implementation        # None
+    When I enhance the implementation               # None
+    Then the update readme should be complete       # None
+    And it should meet all requirements             # None
 
   @REQ-5.2
-  Scenario: Create Example Scripts                                         # features/milestone5_documentation_examples.feature:19
-    Given I have the Portal Explorer codebase                              # features/steps/common_steps.py:86
-    And all features are implemented and tested                            # features/steps/documentation_examples_steps.py:11
-    Given I need to demonstrate the Portal Explorer functionality          # features/steps/documentation_examples_steps.py:101
-    When I implement example scripts                                       # features/steps/documentation_examples_steps.py:109
-    Then they should demonstrate portal analysis                           # features/steps/documentation_examples_steps.py:153
-    And they should include detailed comments explaining the functionality # features/steps/documentation_examples_steps.py:161
-    And they should be runnable with minimal setup                         # features/steps/documentation_examples_steps.py:170
+  Scenario: Create Example Scripts                     # features/generated/generated_documentation_&_examples.feature:18
+    Given I have the Portal Explorer codebase          # None
+    And I have the necessary dependencies installed    # None
+    Given I need to create example scripts             # None
+    When I create the component                        # None
+    Then the create example scripts should be complete # None
+    And it should meet all requirements                # None
 
   @REQ-5.3
-  Scenario: Document CLI Usage                       # features/milestone5_documentation_examples.feature:27
-    Given I have the Portal Explorer codebase        # features/steps/common_steps.py:86
-    And all features are implemented and tested      # features/steps/documentation_examples_steps.py:11
-    Given I have implemented the CLI                 # features/steps/documentation_examples_steps.py:179
-    When I create CLI usage documentation            # features/steps/documentation_examples_steps.py:195
-    Then it should include examples for all commands # features/steps/documentation_examples_steps.py:256
-    And it should explain all available options      # features/steps/documentation_examples_steps.py:265
-    And it should provide real-world usage scenarios # features/steps/documentation_examples_steps.py:276
+  Scenario: Document CLI Usage                      # features/generated/generated_documentation_&_examples.feature:25
+    Given I have the Portal Explorer codebase       # None
+    And I have the necessary dependencies installed # None
+    Given I have the necessary components           # None
+    When I perform the task                         # None
+    Then the document cli usage should be complete  # None
+    And it should meet all requirements             # None
 
   @REQ-5.4
-  Scenario: Add Code Documentation                         # features/milestone5_documentation_examples.feature:35
-    Given I have the Portal Explorer codebase              # features/steps/common_steps.py:86
-    And all features are implemented and tested            # features/steps/documentation_examples_steps.py:11
-    Given I have implemented all components                # features/steps/documentation_examples_steps.py:285
-    When I add code documentation                          # features/steps/documentation_examples_steps.py:311
-    Then all classes and methods should have docstrings    # features/steps/documentation_examples_steps.py:379
-    And the codebase should have type hints throughout     # features/steps/documentation_examples_steps.py:390
-    And the documentation should follow a consistent style # features/steps/documentation_examples_steps.py:400
+  Scenario: Add Code Documentation                     # features/generated/generated_documentation_&_examples.feature:32
+    Given I have the Portal Explorer codebase          # None
+    And I have the necessary dependencies installed    # None
+    Given I have the necessary components              # None
+    When I perform the task                            # None
+    Then the add code documentation should be complete # None
+    And it should meet all requirements                # None
 
   @REQ-5.5
-  Scenario: Create User Guide                               # features/milestone5_documentation_examples.feature:43
-    Given I have the Portal Explorer codebase               # features/steps/common_steps.py:86
-    And all features are implemented and tested             # features/steps/documentation_examples_steps.py:11
-    Given I need comprehensive user documentation           # features/steps/documentation_examples_steps.py:409
-    When I create a user guide                              # features/steps/documentation_examples_steps.py:417
-    Then it should include detailed usage instructions      # features/steps/documentation_examples_steps.py:522
-    And it should have a troubleshooting section            # features/steps/documentation_examples_steps.py:532
-    And it should cover all features of the Portal Explorer # features/steps/documentation_examples_steps.py:541
+  Scenario: Create User Guide                       # features/generated/generated_documentation_&_examples.feature:39
+    Given I have the Portal Explorer codebase       # None
+    And I have the necessary dependencies installed # None
+    Given I need to create user guide               # None
+    When I create the component                     # None
+    Then the create user guide should be complete   # None
+    And it should meet all requirements             # None
 
-  @REQ-5.6
-  Scenario: BDD Documentation Integration                    # features/milestone5_documentation_examples.feature:51
-    Given I have the Portal Explorer codebase                # features/steps/common_steps.py:86
-    And all features are implemented and tested              # features/steps/documentation_examples_steps.py:11
-    Given I have BDD scenarios for all features              # features/steps/documentation_examples_steps.py:550
-    When I generate documentation from BDD scenarios         # features/steps/bdd_integration_steps.py:200
-    Then the documentation should be comprehensive           # features/steps/documentation_examples_steps.py:569
-    And it should show test coverage for each requirement    # features/steps/documentation_examples_steps.py:581
-    And it should be accessible to both users and developers # features/steps/documentation_examples_steps.py:593
+Feature: Portal Explorer Service # features/generated/generated_portal_explorer_service.feature:1
+  As a developer
+  I want to implement the portal explorer service functionality
+  So that the Portal Explorer meets all requirements
+  Background:   # features/generated/generated_portal_explorer_service.feature:6
+
+  @REQ-2.1
+  Scenario: Create PortalExplorer Class                     # features/generated/generated_portal_explorer_service.feature:11
+    Given I have the Portal Explorer codebase               # None
+    And I have the necessary dependencies installed         # None
+    Given I need to create portalexplorer class             # None
+    When I create the component                             # None
+    Then the create portalexplorer class should be complete # None
+    And it should meet all requirements                     # None
+
+  @REQ-2.2
+  Scenario: Implement Map Portal Analysis                     # features/generated/generated_portal_explorer_service.feature:18
+    Given I have the Portal Explorer codebase                 # None
+    And I have the necessary dependencies installed           # None
+    Given I need to implement map portal analysis             # None
+    When I implement the functionality                        # None
+    Then the implement map portal analysis should be complete # None
+    And it should meet all requirements                       # None
+
+  @REQ-2.3
+  Scenario: Implement Multi-Map Analysis                     # features/generated/generated_portal_explorer_service.feature:25
+    Given I have the Portal Explorer codebase                # None
+    And I have the necessary dependencies installed          # None
+    Given I need to implement multi-map analysis             # None
+    When I implement the functionality                       # None
+    Then the implement multi-map analysis should be complete # None
+    And it should meet all requirements                      # None
+
+  @REQ-2.4
+  Scenario: Implement Connection Analysis                     # features/generated/generated_portal_explorer_service.feature:32
+    Given I have the Portal Explorer codebase                 # None
+    And I have the necessary dependencies installed           # None
+    Given I need to implement connection analysis             # None
+    When I implement the functionality                        # None
+    Then the implement connection analysis should be complete # None
+    And it should meet all requirements                       # None
+
+  @REQ-2.5
+  Scenario: Add Result Output Generation                     # features/generated/generated_portal_explorer_service.feature:39
+    Given I have the Portal Explorer codebase                # None
+    And I have the necessary dependencies installed          # None
+    Given I have the necessary components                    # None
+    When I perform the task                                  # None
+    Then the add result output generation should be complete # None
+    And it should meet all requirements                      # None
+
+Feature: Portal Functionality # features/generated/generated_portal_functionality.feature:1
+  As a developer
+  I want to implement the portal functionality functionality
+  So that the Portal Explorer meets all requirements
+  Background:   # features/generated/generated_portal_functionality.feature:6
+
+  @REQ-1.1
+  Scenario: Enhance Object Model                     # features/generated/generated_portal_functionality.feature:11
+    Given I have the Portal Explorer codebase        # None
+    And I have the necessary dependencies installed  # None
+    Given I have the existing implementation         # None
+    When I enhance the implementation                # None
+    Then the enhance object model should be complete # None
+    And it should meet all requirements              # None
+
+  @REQ-1.2
+  Scenario: Implement Portal Extraction                     # features/generated/generated_portal_functionality.feature:18
+    Given I have the Portal Explorer codebase               # None
+    And I have the necessary dependencies installed         # None
+    Given I need to implement portal extraction             # None
+    When I implement the functionality                      # None
+    Then the implement portal extraction should be complete # None
+    And it should meet all requirements                     # None
+
+  @REQ-1.3
+  Scenario: Create Portal Testing Script                     # features/generated/generated_portal_functionality.feature:25
+    Given I have the Portal Explorer codebase                # None
+    And I have the necessary dependencies installed          # None
+    Given I need to create portal testing script             # None
+    When I create the component                              # None
+    Then the create portal testing script should be complete # None
+    And it should meet all requirements                      # None
+
+  @REQ-1.4
+  Scenario: Unit Tests for Portal Functionality                     # features/generated/generated_portal_functionality.feature:32
+    Given I have the Portal Explorer codebase                       # None
+    And I have the necessary dependencies installed                 # None
+    Given I have the necessary components                           # None
+    When I run the tests                                            # None
+    Then the unit tests for portal functionality should be complete # None
+    And it should meet all requirements                             # None
+
+Feature: Testing & Quality Assurance # features/generated/generated_testing_&_quality_assurance.feature:1
+  As a developer
+  I want to implement the testing & quality assurance functionality
+  So that the Portal Explorer meets all requirements
+  Background:   # features/generated/generated_testing_&_quality_assurance.feature:6
+
+  @REQ-4.1
+  Scenario: Create Model Tests                      # features/generated/generated_testing_&_quality_assurance.feature:11
+    Given I have the Portal Explorer codebase       # None
+    And I have the necessary dependencies installed # None
+    Given I need to create model tests              # None
+    When I create the component                     # None
+    Then the create model tests should be complete  # None
+    And it should meet all requirements             # None
+
+  @REQ-4.2
+  Scenario: Enhance API Client Tests                     # features/generated/generated_testing_&_quality_assurance.feature:18
+    Given I have the Portal Explorer codebase            # None
+    And I have the necessary dependencies installed      # None
+    Given I have the existing implementation             # None
+    When I enhance the implementation                    # None
+    Then the enhance api client tests should be complete # None
+    And it should meet all requirements                  # None
+
+  @REQ-4.3
+  Scenario: Create Explorer Service Tests                     # features/generated/generated_testing_&_quality_assurance.feature:25
+    Given I have the Portal Explorer codebase                 # None
+    And I have the necessary dependencies installed           # None
+    Given I need to create explorer service tests             # None
+    When I create the component                               # None
+    Then the create explorer service tests should be complete # None
+    And it should meet all requirements                       # None
+
+  @REQ-4.4
+  Scenario: Implement CLI Tests                     # features/generated/generated_testing_&_quality_assurance.feature:32
+    Given I have the Portal Explorer codebase       # None
+    And I have the necessary dependencies installed # None
+    Given I need to implement cli tests             # None
+    When I implement the functionality              # None
+    Then the implement cli tests should be complete # None
+    And it should meet all requirements             # None
+
+  @REQ-4.5
+  Scenario: Create Integration Tests                     # features/generated/generated_testing_&_quality_assurance.feature:39
+    Given I have the Portal Explorer codebase            # None
+    And I have the necessary dependencies installed      # None
+    Given I need to create integration tests             # None
+    When I create the component                          # None
+    Then the create integration tests should be complete # None
+    And it should meet all requirements                  # None
 

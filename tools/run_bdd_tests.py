@@ -17,16 +17,13 @@ import sys
 from pathlib import Path
 
 
-def run_behave(feature_dir, tags=None):
+def run_behave(tags=None):
     """Run behave tests with optional tags filter."""
-    cmd = ['behave', str(feature_dir)]
+    # Use the behave.ini configuration file (Behave automatically looks for this file)
+    cmd = ['behave']
     
     if tags:
         cmd.extend(['--tags', tags])
-    
-    # Add formatting options
-    cmd.extend(['--format', 'pretty', '--outfile', 'reports/bdd_test_results.txt'])
-    cmd.extend(['--junit', '--junit-directory', 'reports/junit'])
     
     # Run the tests
     print(f"Running BDD tests: {' '.join(cmd)}")
@@ -65,12 +62,8 @@ def main():
     os.makedirs('reports', exist_ok=True)
     os.makedirs('reports/junit', exist_ok=True)
     
-    # Get the feature directory
-    project_root = Path(__file__).parent.parent
-    feature_dir = project_root / 'features'
-    
     # Run the tests
-    tests_passed = run_behave(feature_dir, args.tags)
+    tests_passed = run_behave(args.tags)
     
     # Generate the coverage report
     report_generated = generate_coverage_report()

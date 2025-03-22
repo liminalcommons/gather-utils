@@ -1,0 +1,53 @@
+# BDD Documentation
+
+## Overview
+
+This documentation is automatically generated from the BDD features and step definitions in the project.
+
+### Statistics
+- Total Features: {{ features|length }}
+- Total Step Definitions: {{ step_count }}
+- Requirements Covered: {{ req_count }}
+
+## Features
+
+{% for feature in features.values()|sort(attribute='name') %}
+### [{{ feature.name }}](features/{{ feature.name|lower|replace(' ', '_') }}.md)
+
+{% if feature.description %}
+{{ feature.description|join('\n') }}
+{% endif %}
+
+**Tags:** {{ feature.tags|join(', ') }}
+
+Scenarios:
+{% for scenario in feature.scenarios %}
+- {{ scenario.name }}
+{% endfor %}
+
+{% endfor %}
+
+## Quick Links
+
+- [Step Catalog](steps/catalog.md)
+- [Requirements Coverage](requirements/coverage.md)
+
+## Documentation Sections
+
+1. **Features**
+   - Detailed feature specifications
+   - Scenario descriptions
+   - Example tables
+   - Background steps
+
+2. **Step Catalog**
+   - Searchable step patterns
+   - Implementation details
+   - Usage examples
+   - Type information
+
+3. **Requirements Coverage**
+   - Requirement to feature mapping
+   - Coverage analysis
+   - Implementation status
+   - Traceability matrix 

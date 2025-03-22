@@ -1,0 +1,48 @@
+# Core requirements
+behave==1.2.6
+pytest==7.3.1
+gherkin-official==24.0.0
+
+# BDD Analysis Tools
+nltk==3.8.1
+scikit-learn==1.2.2
+numpy==1.24.3
+difflib-sequence-matcher==1.0.3
+jellyfish==0.11.2
+python-Levenshtein==0.21.1
+
+# Visualization and Reporting
+matplotlib==3.7.1
+pandas==2.0.2
+tabulate==0.9.0
+plotly==5.15.0
+pydot==1.4.2
+graphviz==0.20.1
+
+# Utility Libraries
+PyYAML==6.0
+Jinja2==3.1.2
+tqdm==4.65.0
+
+# For analysis tools
+pytest-bdd>=6.1.1
+spacy>=3.5.3
+difflib>=3.8.0
+levenshtein>=0.21.0
+rapidfuzz>=3.0.0
+
+# Visualization and reporting
+seaborn>=0.12.2
+markdown>=3.4.3
+
+# Utilities
+python-dateutil>=2.8.2
+colorlog>=6.7.0
+typer>=0.9.0
+rich>=13.3.5
+pydantic>=2.0.3
+
+# Pre-download NLTK data and spaCy models
+# Run the following commands after installation:
+# python -m nltk.downloader punkt wordnet stopwords
+# python -m spacy download en_core_web_sm 

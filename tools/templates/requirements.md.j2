@@ -1,0 +1,79 @@
+# Requirements Coverage
+
+This document provides traceability between requirements and their BDD implementation.
+
+## Overview
+
+Total Requirements: {{ requirements|length }}
+
+## Coverage Matrix
+
+{% for req_id, req in requirements|dictsort %}
+### <a name="{{ req_id|lower }}"></a>{{ req_id }}
+
+**Implementation Coverage:**
+- Features: {{ req.features|length }}
+- Scenarios: {{ req.scenarios|length }}
+- Step Coverage: {{ req.step_coverage|length }}
+
+#### Features
+
+{% for feature in req.features %}
+- [{{ feature }}](../features/{{ feature|lower|replace(' ', '_') }}.md)
+{% endfor %}
+
+#### Scenarios
+
+{% for scenario in req.scenarios %}
+- {{ scenario }}
+{% endfor %}
+
+#### Step Coverage
+
+{% for step in req.step_coverage %}
+- {{ step }}
+{% endfor %}
+
+{% endfor %}
+
+## Coverage Analysis
+
+### By Domain
+
+{% set domains = requirements.keys()|map('split', '-')|map('first')|unique|list %}
+{% for domain in domains %}
+#### {{ domain }}
+
+Requirements:
+{% for req_id in requirements.keys() if req_id.startswith(domain) %}
+- {{ req_id }}: {{ requirements[req_id].scenarios|length }} scenarios
+{% endfor %}
+
+{% endfor %}
+
+### Implementation Status
+
+{% set total_reqs = requirements|length %}
+{% set implemented_reqs = requirements.values()|selectattr('scenarios', 'length_is_not', 0)|list|length %}
+{% set coverage_percent = (implemented_reqs / total_reqs * 100)|round(2) %}
+
+- Total Requirements: {{ total_reqs }}
+- Implemented Requirements: {{ implemented_reqs }}
+- Coverage: {{ coverage_percent }}%
+
+## Best Practices
+
+1. **Requirement Tagging**
+   - Use `@REQ-{DOMAIN}-{NUMBER}` format
+   - Tag both features and scenarios
+   - Keep tags consistent
+
+2. **Coverage**
+   - Each requirement should have at least one scenario
+   - Critical requirements should have multiple scenarios
+   - Edge cases should be covered
+
+3. **Traceability**
+   - Maintain bidirectional links
+   - Document requirement changes
+   - Update scenarios when requirements change 

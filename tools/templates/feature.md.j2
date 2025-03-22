@@ -1,0 +1,81 @@
+# {{ feature.name }}
+
+{% if feature.description %}
+{{ feature.description|join('\n') }}
+{% endif %}
+
+**Source:** [{{ feature.path.name }}]({{ feature.path }})
+
+## Metadata
+
+**Tags:** {{ feature.tags|join(', ') }}
+
+{% if feature.background %}
+## Background
+
+{% for step in feature.background %}
+- {{ step }}
+{% endfor %}
+{% endif %}
+
+## Scenarios
+
+{% for scenario in feature.scenarios %}
+### {{ scenario.name }}
+
+{% if scenario.tags %}
+**Tags:** {{ scenario.tags|join(', ') }}
+{% endif %}
+
+Steps:
+{% for step in scenario.steps %}
+- {{ step }}
+{% endfor %}
+
+{% if scenario.examples %}
+Examples:
+
+| {% for header in scenario.examples[0].keys() %} {{ header }} |{% endfor %}
+|{% for header in scenario.examples[0].keys() %}---|{% endfor %}
+{% for example in scenario.examples %}
+| {% for value in example.values() %} {{ value }} |{% endfor %}
+{% endfor %}
+{% endif %}
+
+{% endfor %}
+
+## Implementation Details
+
+### Step Definitions
+
+{% for step in feature.scenarios|map(attribute='steps')|sum(start=[]) %}
+#### `{{ step }}`
+
+{% if step in step_defs %}
+- **Function:** `{{ step_defs[step].function }}`
+- **File:** `{{ step_defs[step].file_path }}:{{ step_defs[step].line_number }}`
+- **Arguments:** {{ step_defs[step].args|join(', ') }}
+{% if step_defs[step].raises %}
+- **Raises:** {{ step_defs[step].raises|join(', ') }}
+{% endif %}
+
+Documentation:
+```
+{{ step_defs[step].docstring }}
+```
+{% else %}
+⚠️ Step definition not found
+{% endif %}
+
+{% endfor %}
+
+## Related Requirements
+
+{% for tag in feature.tags if tag.startswith('REQ-') %}
+- [{{ tag }}](../requirements/coverage.md#{{ tag|lower }})
+{% endfor %}
+{% for scenario in feature.scenarios %}
+{% for tag in scenario.tags if tag.startswith('REQ-') %}
+- [{{ tag }}](../requirements/coverage.md#{{ tag|lower }})
+{% endfor %}
+{% endfor %} 

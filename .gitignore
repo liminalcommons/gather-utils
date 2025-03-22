@@ -1,12 +1,8 @@
-# Byte-compiled / optimized / DLL files
+# Python
 __pycache__/
 *.py[cod]
 *$py.class
-
-# C extensions
 *.so
-
-# Distribution / packaging
 .Python
 build/
 develop-eggs/
@@ -20,6 +16,60 @@ parts/
 sdist/
 var/
 wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environment
+.env
+.venv
+env/
+venv/
+ENV/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Testing
+.coverage
+.pytest_cache/
+htmlcov/
+.tox/
+
+# Logs
+*.log
+logs/
+log/
+
+# Local development
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Project specific
+backup_bdd_*/
+*.code-workspace
+.cursor/
+
+# Reports and temporary files
+reports/
+reports/junit/
+reports/bdd_analysis/
+reports/release_plans/
+reports/release_reports/
+reports/bdd_coverage_data.json
+reports/bdd_coverage_report.md
+reports/bdd_test_results.txt
+reports/bdd_merge_plan.json
+reports/*_complete.txt
+
+# Distribution / packaging
 share/python-wheels/
 *.egg-info/
 .installed.cfg
@@ -37,26 +87,15 @@ pip-log.txt
 pip-delete-this-directory.txt
 
 # Unit test / coverage reports
-htmlcov/
-.tox/
-.nox/
-.coverage
-.coverage.*
-.cache
-nosetests.xml
-coverage.xml
 *.cover
 *.py,cover
 .hypothesis/
-.pytest_cache/
-cover/
 
 # Translations
 *.mo
 *.pot
 
 # Django stuff:
-*.log
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
@@ -127,15 +166,6 @@ celerybeat.pid
 # SageMath parsed files
 *.sage.py
 
-# Environments
-.env
-.venv
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
-
 # Spyder project settings
 .spyderproject
 .spyproject
@@ -170,21 +200,11 @@ cython_debug/
 # PyPI configuration file
 .pypirc
 
-# Virtual environments
-venv/
-env/
-ENV/
-.env
-
 # IDE files
-.idea/
-.vscode/
 *.swp
 *.swo
 
 # OS specific files
-.DS_Store
-.DS_Store?
 ._*
 .Spotlight-V100
 .Trashes

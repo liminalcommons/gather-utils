@@ -10,6 +10,28 @@ A tool for exploring and analyzing Gather.town spaces, with a focus on understan
 - Generate connection graphs between maps
 - Export data in various formats (JSON, CSV, tables)
 
+## Repository Structure
+
+- `src/` - Source code
+  - `gather_manager/` - Main package
+    - `api/` - API client
+    - `cli/` - Command-line interface
+    - `models/` - Data models
+    - `services/` - Business logic
+    - `utils/` - Utility functions
+- `tests/` - Tests
+  - `unit/` - Unit tests (TDD)
+  - `integration/` - Integration tests
+  - `bdd/` - BDD tests
+- `docs/` - Documentation
+  - `project/` - Project documentation
+  - `api/` - API documentation
+  - `user_guide/` - User guide
+  - `archive/` - Archived documentation
+- `tools/` - Utility scripts and tools
+- `examples/` - Example code and usage
+- `data/` - Data files and analysis results
+
 ## Documentation
 
 Comprehensive documentation is available in the `docs` directory:
@@ -18,6 +40,7 @@ Comprehensive documentation is available in the `docs` directory:
 - [API Reference](docs/api/index.md): Technical documentation for developers
 - [CLI Reference](docs/cli/index.md): Detailed command-line interface documentation
 - [Tutorials](docs/tutorials/getting_started.md): Step-by-step guides for common tasks
+- [Maintenance Guidelines](docs/project/MAINTENANCE_GUIDELINES.md): Guidelines for maintaining the repository
 
 ## Installation
 
@@ -143,19 +166,45 @@ pytest
 
 ### BDD Tests
 
-This project uses Behavior-Driven Development (BDD) for testing. The BDD tests are written using the [Behave](https://behave.readthedocs.io/) framework and follow the Gherkin syntax.
+BDD tests are now consolidated in the `tests/bdd` directory:
 
-Run the BDD tests:
+- `tests/bdd/features/`: Contains all feature files
+- `tests/bdd/steps/`: Contains all step definitions
+- `tests/bdd/environment.py`: Environment setup for BDD tests
+
+Run the BDD tests using pytest:
 ```bash
-python tools/run_bdd_tests.py
+pytest tests/bdd
 ```
 
-Generate a BDD coverage report:
+Or using behave:
 ```bash
-python tools/bdd_coverage_report.py
+behave tests/bdd/features
 ```
 
-For more information about the BDD framework, see the [BDD README](features/README.md).
+For more information on running and writing BDD tests, see:
+- [BDD Testing documentation](tests/bdd/README.md)
+- [BDD Tools documentation](docs/project/BDD_TOOLS.md)
+
+## Development
+
+### Code Style
+
+This project follows PEP 8 style guidelines and uses pre-commit hooks to enforce them. To set up the pre-commit hooks:
+
+1. Install the required tools:
+   ```bash
+   python tools/setup_style_tools.py
+   ```
+
+2. Fix existing style issues:
+   ```bash
+   python tools/fix_style_issues.py
+   ```
+
+3. The pre-commit hooks will automatically check your code before each commit. If there are style issues, the commit will be rejected and the issues will be fixed automatically. You can then stage the changes and commit again.
+
+For more information about the code style guidelines, see the [Maintenance Guidelines](docs/project/MAINTENANCE_GUIDELINES.md).
 
 ## Contributing
 

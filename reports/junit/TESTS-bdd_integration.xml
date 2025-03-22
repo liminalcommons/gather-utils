@@ -1,4 +1,4 @@
-<testsuite name="bdd_integration.BDD Integration" tests="6" errors="0" failures="0" skipped="0" time="0.002628" timestamp="2025-03-12T21:43:53.200638" hostname="Victors-MBP.attlocal.net"><testcase classname="bdd_integration.BDD Integration" name="Set Up BDD Framework" status="passed" time="0.000943"><system-out>
+<testsuite name="bdd_integration.BDD Integration" tests="6" errors="0" failures="1" skipped="0" time="0.001928" timestamp="2025-03-15T10:52:53.388133" hostname="Victors-MBP.attlocal.net"><testcase classname="bdd_integration.BDD Integration" name="Set Up BDD Framework" status="passed" time="0.000418"><system-out>
 <![CDATA[
 @scenario.begin
 
@@ -15,7 +15,7 @@
 @scenario.end
 --------------------------------------------------------------------------------
 ]]>
-</system-out></testcase><testcase classname="bdd_integration.BDD Integration" name="Implement Step Definitions" status="passed" time="0.000621"><system-out>
+</system-out></testcase><testcase classname="bdd_integration.BDD Integration" name="Implement Step Definitions" status="passed" time="0.000557"><system-out>
 <![CDATA[
 @scenario.begin
 
@@ -32,7 +32,7 @@
 @scenario.end
 --------------------------------------------------------------------------------
 ]]>
-</system-out></testcase><testcase classname="bdd_integration.BDD Integration" name="Integrate BDD with CI Pipeline" status="passed" time="0.00022"><system-out>
+</system-out></testcase><testcase classname="bdd_integration.BDD Integration" name="Integrate BDD with CI Pipeline" status="passed" time="0.000237"><system-out>
 <![CDATA[
 @scenario.begin
 
@@ -49,7 +49,7 @@
 @scenario.end
 --------------------------------------------------------------------------------
 ]]>
-</system-out></testcase><testcase classname="bdd_integration.BDD Integration" name="Generate Documentation from BDD" status="passed" time="0.000314"><system-out>
+</system-out></testcase><testcase classname="bdd_integration.BDD Integration" name="Generate Documentation from BDD" status="passed" time="0.000343"><system-out>
 <![CDATA[
 @scenario.begin
 
@@ -66,7 +66,12 @@
 @scenario.end
 --------------------------------------------------------------------------------
 ]]>
-</system-out></testcase><testcase classname="bdd_integration.BDD Integration" name="Track BDD Test Coverage" status="passed" time="0.0003"><system-out>
+</system-out></testcase><testcase classname="bdd_integration.BDD Integration" name="Track BDD Test Coverage" status="failed" time="0.000163"><failure type="AssertionError" message="Feature file should contain requirement tags">
+<![CDATA[
+Failing step: Given I have BDD scenarios mapped to requirements ... failed in 0.000s
+Location: features/bdd_integration.feature:44
+Assertion Failed: Feature file should contain requirement tags]]>
+</failure><system-out>
 <![CDATA[
 @scenario.begin
 
@@ -74,16 +79,16 @@
   Scenario: Track BDD Test Coverage
     Given I have a project with BDD features and scenarios ... passed in 0.000s
     And I have the necessary BDD tools installed ... passed in 0.000s
-    Given I have BDD scenarios mapped to requirements ... passed in 0.000s
-    When I run the BDD test coverage report ... passed in 0.000s
-    Then it should show which requirements are covered by tests ... passed in 0.000s
-    And it should identify requirements without test coverage ... passed in 0.000s
-    And it should calculate the overall test coverage percentage ... passed in 0.000s
+    Given I have BDD scenarios mapped to requirements ... failed in 0.000s
+    When I run the BDD test coverage report ... skipped in 0.000s
+    Then it should show which requirements are covered by tests ... skipped in 0.000s
+    And it should identify requirements without test coverage ... skipped in 0.000s
+    And it should calculate the overall test coverage percentage ... skipped in 0.000s
 
 @scenario.end
 --------------------------------------------------------------------------------
 ]]>
-</system-out></testcase><testcase classname="bdd_integration.BDD Integration" name="Automate BDD Test Generation" status="passed" time="0.00023"><system-out>
+</system-out></testcase><testcase classname="bdd_integration.BDD Integration" name="Automate BDD Test Generation" status="passed" time="0.00021"><system-out>
 <![CDATA[
 @scenario.begin
 

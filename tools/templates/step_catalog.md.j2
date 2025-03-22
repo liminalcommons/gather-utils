@@ -1,0 +1,111 @@
+# Step Catalog
+
+This catalog contains all step definitions available in the project, organized by type and usage.
+
+## Quick Stats
+
+- Given steps: {{ steps.values()|selectattr('step_type', 'equalto', 'given')|list|length }}
+- When steps: {{ steps.values()|selectattr('step_type', 'equalto', 'when')|list|length }}
+- Then steps: {{ steps.values()|selectattr('step_type', 'equalto', 'then')|list|length }}
+
+## Given Steps
+
+{% for step in steps.values()|selectattr('step_type', 'equalto', 'given')|sort(attribute='pattern') %}
+### `{{ step.pattern }}`
+
+- **Function:** `{{ step.function }}`
+- **File:** `{{ step.file_path }}:{{ step.line_number }}`
+- **Arguments:** {{ step.args|join(', ') }}
+{% if step.raises %}
+- **Raises:** {{ step.raises|join(', ') }}
+{% endif %}
+
+Documentation:
+```
+{{ step.docstring }}
+```
+
+{% endfor %}
+
+## When Steps
+
+{% for step in steps.values()|selectattr('step_type', 'equalto', 'when')|sort(attribute='pattern') %}
+### `{{ step.pattern }}`
+
+- **Function:** `{{ step.function }}`
+- **File:** `{{ step.file_path }}:{{ step.line_number }}`
+- **Arguments:** {{ step.args|join(', ') }}
+{% if step.raises %}
+- **Raises:** {{ step.raises|join(', ') }}
+{% endif %}
+
+Documentation:
+```
+{{ step.docstring }}
+```
+
+{% endfor %}
+
+## Then Steps
+
+{% for step in steps.values()|selectattr('step_type', 'equalto', 'then')|sort(attribute='pattern') %}
+### `{{ step.pattern }}`
+
+- **Function:** `{{ step.function }}`
+- **File:** `{{ step.file_path }}:{{ step.line_number }}`
+- **Arguments:** {{ step.args|join(', ') }}
+{% if step.raises %}
+- **Raises:** {{ step.raises|join(', ') }}
+{% endif %}
+
+Documentation:
+```
+{{ step.docstring }}
+```
+
+{% endfor %}
+
+## Usage Guide
+
+### Pattern Matching
+
+Step patterns can include:
+- Plain text: `I have a valid API key`
+- Parameters in quotes: `I have a file named "{filename}"`
+- Numeric parameters: `I wait for {seconds:d} seconds`
+- Table parameters (following the step)
+- Multi-line text (following the step)
+
+### Common Patterns
+
+1. **Setup Steps**
+   - Setting up test data
+   - Configuring the environment
+   - Creating resources
+
+2. **Action Steps**
+   - Performing operations
+   - Triggering events
+   - Making API calls
+
+3. **Verification Steps**
+   - Checking results
+   - Validating state
+   - Asserting conditions
+
+### Best Practices
+
+1. **Step Selection**
+   - Use the most specific step that fits your needs
+   - Prefer existing steps over creating new ones
+   - Follow the pattern conventions
+
+2. **Parameters**
+   - Use meaningful parameter names
+   - Follow type conventions
+   - Document parameter requirements
+
+3. **Tables and Multi-line Text**
+   - Use tables for structured data
+   - Use multi-line text for complex content
+   - Follow the established formats 

@@ -1,3 +1,4 @@
-"""Tools for exploring and managing Gather.town spaces and containers."""
+# gather_manager/__init__.py
+"""Gather.town API Explorer and Portal Analyzer."""
 
-__version__ = "0.1.0" 
+__version__ = "1.0.0"

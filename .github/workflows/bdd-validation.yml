@@ -1,0 +1,135 @@
+name: BDD Validation
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - 'tests/bdd/**'
+      - 'src/**'
+      - '.github/workflows/bdd-validation.yml'
+  pull_request:
+    branches: [ main, develop ]
+    paths:
+      - 'tests/bdd/**'
+      - 'src/**'
+      - '.github/workflows/bdd-validation.yml'
+
+jobs:
+  validate-bdd:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run BDD validator
+        run: python tools/bdd_validator.py
+        
+      - name: Run BDD tests
+        run: |
+          # Run all BDD tests
+          behave tests/bdd/features/
+          
+          # Run specific example features
+          behave tests/bdd/features/examples/
+
+      - name: Generate BDD report
+        if: always()  # Run even if tests fail
+        run: |
+          python tools/bdd_comprehensive_analyzer.py
+          
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: bdd-test-results
+          path: |
+            reports/bdd_analysis/
+            reports/portal/
+
+  analyze-bdd-coverage:
+    needs: validate-bdd
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Analyze BDD coverage
+        run: python tools/bdd_coverage_report.py
+
+      - name: Check for duplicates
+        run: python tools/bdd_duplication_analyzer.py --threshold 0.7
+
+      - name: Upload coverage results
+        uses: actions/upload-artifact@v3
+        with:
+          name: bdd-coverage-results
+          path: reports/bdd_analysis/coverage/
+
+  update-status:
+    needs: [validate-bdd, analyze-bdd-coverage]
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - name: Download test results
+        uses: actions/download-artifact@v3
+        with:
+          name: bdd-test-results
+          
+      - name: Download coverage results
+        uses: actions/download-artifact@v3
+        with:
+          name: bdd-coverage-results
+
+      - name: Update PR
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const fs = require('fs');
+            
+            // Read test results
+            const testResults = JSON.parse(fs.readFileSync('reports/bdd_analysis/test_results.json', 'utf8'));
+            const coverageResults = JSON.parse(fs.readFileSync('reports/bdd_analysis/coverage/coverage.json', 'utf8'));
+            
+            // Create status report
+            const statusReport = `## BDD Validation Results
+            
+            ### Test Results
+            - Total Scenarios: ${testResults.total}
+            - Passed: ${testResults.passed}
+            - Failed: ${testResults.failed}
+            
+            ### Coverage
+            - Feature Coverage: ${coverageResults.feature_coverage}%
+            - Step Coverage: ${coverageResults.step_coverage}%
+            
+            ### Recommendations
+            ${coverageResults.recommendations.join('\n')}
+            `;
+            
+            // Update PR with results
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: statusReport
+            }); 

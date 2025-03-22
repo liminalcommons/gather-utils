@@ -13,46 +13,59 @@ class Position(BaseModel):
 class Object(BaseModel):
     """Base model for map objects."""
     id: Optional[str] = None
-    type: str
+    type: Union[str, int]  # Accept both string and integer
     x: int
     y: int
     width: Optional[int] = 1
     height: Optional[int] = 1
     properties: Optional[Dict[str, Any]] = None
-    # We'll add more fields as we discover them from the API
-    
     # Additional fields that might be present in portal objects
     targetMap: Optional[str] = None
     targetX: Optional[int] = None
     targetY: Optional[int] = None
     normal: Optional[str] = None  # Possible directional property
-    orientation: Optional[str] = None  # Possible directional property
+    orientation: Optional[Union[str, int]] = None  # Accept both string and integer
+    direction: Optional[Union[str, int]] = None  # Additional directional property
     
-    # Allow additional properties to be captured
     class Config:
-        extra = "allow"
+        extra = "allow"  # Allow additional properties to be captured
 
 
 class Portal(Object):
     """Portal object that connects different maps."""
-    type: str = "portal"
-    targetMap: str  # Required for portals
-    targetX: int    # Required for portals
-    targetY: int    # Required for portals
+    type: Union[str, int] = "portal"  # Accept both string and integer
+    targetMap: Optional[str] = None  # Make optional for detection, but will be required for valid portals
+    targetX: Optional[int] = None    # Make optional for detection
+    targetY: Optional[int] = None    # Make optional for detection
     
     @field_validator('type')
     @classmethod
     def validate_type(cls, v):
-        """Validate that the type is 'portal'."""
-        if v != "portal":
-            raise ValueError("Portal type must be 'portal'")
+        """Validate that the type is acceptable for a portal."""
+        # Allow any type value for portals - we'll validate based on other properties
         return v
+    
+    @model_validator(mode='after')
+    def validate_portal(self):
+        """Validate that this is a valid portal with required fields."""
+        # For a portal to be valid, it must have a targetMap
+        if not self.targetMap:
+            raise ValueError("Portal must have a targetMap")
+        
+        # If targetX or targetY is missing, set default values
+        if self.targetX is None:
+            self.targetX = 0
+        if self.targetY is None:
+            self.targetY = 0
+            
+        return self
     
     @classmethod
     def from_object(cls, obj: Object) -> 'Portal':
         """Convert a generic Object to a Portal if it has the required fields."""
-        if obj.type != "portal":
-            raise ValueError("Cannot convert non-portal object to Portal")
+        # Check if it's a portal by having targetMap (most reliable indicator)
+        if obj.targetMap is None:
+            raise ValueError("Cannot convert object to Portal: missing targetMap")
         
         # Convert to dict and create a Portal instance
         obj_dict = obj.model_dump()
@@ -74,7 +87,9 @@ class MapData(BaseModel):
     id: str
     name: Optional[str] = None
     objects: List[Object] = Field(default_factory=list)
-    # Add other map properties as discovered
+    background: Optional[str] = None
+    dimensions: Optional[List[int]] = None
+    # Add other map properties as needed
     
     @model_validator(mode='before')
     @classmethod
@@ -106,7 +121,9 @@ class Space(BaseModel):
     """Gather.town space information."""
     id: str
     name: Optional[str] = None
-    # Add other space properties as discovered
+    description: Optional[str] = None
+    moderatorAccess: Optional[bool] = None
+    builderAccess: Optional[bool] = None
     
     class Config:
-        extra = "allow" 
+        extra = "allow"

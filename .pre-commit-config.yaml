@@ -1,25 +1,102 @@
 # .pre-commit-config.yaml
 repos:
 -   repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.4.0
+    rev: v4.5.0
     hooks:
     -   id: trailing-whitespace
+        description: Removes trailing whitespace
     -   id: end-of-file-fixer
+        description: Ensures files end with a newline
     -   id: check-yaml
+        description: Checks yaml files for syntax errors
     -   id: check-added-large-files
-
--   repo: https://github.com/psf/black
-    rev: 23.3.0
-    hooks:
-    -   id: black
+        description: Prevents giant files from being committed
+    -   id: check-ast
+        description: Checks Python syntax
+    -   id: check-merge-conflict
+        description: Checks for merge conflict strings
+    -   id: debug-statements
+        description: Checks for debugger imports and py37+ breakpoint() calls
 
 -   repo: https://github.com/pycqa/isort
-    rev: 5.12.0
+    rev: 5.13.2
     hooks:
     -   id: isort
+        description: Sorts Python imports
+        args: ["--profile", "black", "--line-length", "79"]
 
 -   repo: https://github.com/pycqa/flake8
-    rev: 6.0.0
+    rev: 7.0.0
     hooks:
     -   id: flake8
-        additional_dependencies: [flake8-docstrings] 
+        description: Enforces PEP8 style guide
+        additional_dependencies: [flake8-docstrings]
+        args: ["--max-line-length=79", "--extend-ignore=E203"]
+
+-   repo: https://github.com/psf/black
+    rev: 24.3.0
+    hooks:
+    -   id: black
+        description: The uncompromising Python code formatter
+        args: ["--line-length=79"]
+
+# Custom hooks for repository and BDD validation
+-   repo: local
+    hooks:
+    -   id: repo-health-check
+        name: Repository Health Check
+        entry: python tools/repo_health_check.py
+        language: system
+        pass_filenames: false
+        always_run: true
+        stages: [push]
+
+    -   id: bdd-validator
+        name: BDD Validator
+        entry: python tools/bdd_validator.py
+        language: system
+        files: ^(tests/bdd/.*\.feature|tests/bdd/steps/.*\.py)$
+        pass_filenames: false
+        stages: [commit]
+
+    -   id: bdd-coverage
+        name: BDD Coverage Check
+        entry: python tools/bdd_coverage_report.py
+        language: system
+        files: ^(tests/bdd/.*\.feature|tests/bdd/steps/.*\.py)$
+        pass_filenames: false
+        stages: [push]
+
+    -   id: bdd-duplication
+        name: BDD Duplication Check
+        entry: python tools/bdd_duplication_analyzer.py --threshold 0.7
+        language: system
+        files: ^tests/bdd/.*\.feature$
+        pass_filenames: false
+        stages: [push]
+
+    -   id: bdd-docs
+        name: BDD Documentation Generator
+        entry: python tools/bdd_docs_generator.py
+        language: python
+        files: ^(tests/bdd/.*\.feature|tests/bdd/steps/.*\.py)$
+        pass_filenames: false
+        stages: [commit]
+
+    -   id: bdd-tests
+        name: BDD Tests
+        entry: python tools/bdd_test_runner.py
+        language: python
+        files: ^(tests/bdd/.*\.feature|tests/bdd/steps/.*\.py)$
+        pass_filenames: false
+        stages: [push]
+        args: ["--no-parallel"]  # Run sequentially in pre-commit
+
+    -   id: bdd-performance
+        name: BDD Performance Check
+        entry: python tools/bdd_test_runner.py
+        language: python
+        files: ^(tests/bdd/.*\.feature|tests/bdd/steps/.*\.py)$
+        pass_filenames: false
+        stages: [push]
+        args: ["--tags", "performance"]  # Only run performance-tagged tests
