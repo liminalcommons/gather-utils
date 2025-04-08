@@ -100,10 +100,10 @@ def test_add_numbers():
     # Arrange
     a, b = 2, 3
     expected = 5
-    
+
     # Act
     result = add_numbers(a, b)
-    
+
     # Assert
     assert result == expected
 ```
@@ -145,7 +145,7 @@ def test_get_user_data(mocker):
     # Mock the API call
     mock_response = {"id": 1, "name": "Test User"}
     mocker.patch("app.services.api.get_user", return_value=mock_response)
-    
+
     # Test the function that uses the API
     result = get_user_info(1)
     assert result.name == "Test User"
@@ -213,7 +213,7 @@ Example:
 def test_divide_by_zero():
     """
     Test that divide() raises a ValueError when dividing by zero.
-    
+
     This test verifies the error handling behavior of the divide function
     when the divisor is zero.
     """
@@ -268,4 +268,4 @@ def create_test_user(name="Test User", role="user"):
 - [TDD Lifecycle Management](./lifecycle_management.md)
 - [pytest Documentation](https://docs.pytest.org/)
 - [Factory Pattern](../patterns/factory_pattern.md)
-- [Mocking Best Practices](../testing/mocking_best_practices.md) 
+- [Mocking Best Practices](../testing/mocking_best_practices.md)

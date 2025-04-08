@@ -77,7 +77,9 @@ def sample_objects(sample_map_data):
 class TestDebugMapObjects:
     """Tests for the debug_map_objects script."""
 
-    @patch("builtins.print")  # Replacing the original debug_map_objects.GatherClient
+    @patch(
+        "builtins.print"
+    )  # Replacing the original debug_map_objects.GatherClient
     @patch("builtins.open", new_callable=MagicMock)
     @patch("json.dump")
     def test_analyze_map_objects(

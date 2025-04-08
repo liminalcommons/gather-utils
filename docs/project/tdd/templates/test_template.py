@@ -30,56 +30,56 @@ TEST_DATA = {
 def sample_fixture():
     """
     Fixture documentation.
-    
+
     Returns:
         A sample object for testing.
     """
     # Setup code
     sample_object = [ModuleName](param1="test", param2=123)
-    
+
     # Provide the fixture
     yield sample_object
-    
+
     # Teardown code (if needed)
     # sample_object.cleanup()
 
 
 class Test[ModuleName]:
     """Test suite for [ModuleName] class."""
-    
+
     def test_initialization(self, sample_fixture):
         """Test that [ModuleName] initializes with correct default values."""
         assert sample_fixture.param1 == "test"
         assert sample_fixture.param2 == 123
-    
+
     def test_method_name(self, sample_fixture):
         """
         Test [method_name] functionality.
-        
+
         This test verifies that [method_name] correctly performs its intended
         function under normal conditions.
         """
         # Arrange
         input_data = "test input"
         expected_result = "expected output"
-        
+
         # Act
         result = sample_fixture.method_name(input_data)
-        
+
         # Assert
         assert result == expected_result
-    
+
     def test_method_name_edge_case(self, sample_fixture):
         """Test [method_name] with edge case inputs."""
         # Arrange
         edge_case_input = None
-        
+
         # Act/Assert
         with pytest.raises(ValueError) as excinfo:
             sample_fixture.method_name(edge_case_input)
-        
+
         assert "Invalid input" in str(excinfo.value)
-    
+
     @pytest.mark.parametrize("input_value,expected_output", [
         (1, 1),
         (2, 4),
@@ -97,10 +97,10 @@ def test_standalone_function():
     """Test [function_name] standalone function."""
     # Arrange
     input_data = "test"
-    
+
     # Act
     result = [module_name].function_name(input_data)
-    
+
     # Assert
     assert result == "expected"
 
@@ -111,10 +111,10 @@ def test_with_mocking(mocker):
     # Setup mock
     mock_dependency = mocker.patch("[module_path].external_dependency")
     mock_dependency.return_value = "mocked result"
-    
+
     # Test code that uses the mocked dependency
     result = [module_name].function_using_dependency()
-    
+
     # Assertions
     assert result == "expected with mocked result"
-    mock_dependency.assert_called_once() 
+    mock_dependency.assert_called_once()

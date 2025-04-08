@@ -199,7 +199,9 @@ class TestPortalService:
         service = PortalService(api_client=mock_api_client)
 
         # Call the method
-        result = service.export_portals(format="json", output_dir="test_output")
+        result = service.export_portals(
+            format="json", output_dir="test_output"
+        )
 
         # Verify the API client was called correctly
         mock_api_client.get_maps.assert_called_once()

@@ -177,7 +177,9 @@ class TestPortalCommands:
         assert result.exit_code == 0
 
         # Verify the service was called with the correct parameters
-        mock_portal_service.get_portal_details.assert_called_once_with(map_id="map1")
+        mock_portal_service.get_portal_details.assert_called_once_with(
+            map_id="map1"
+        )
 
         # Verify the output contains the expected information
         assert "Portal Details for map1" in result.stdout

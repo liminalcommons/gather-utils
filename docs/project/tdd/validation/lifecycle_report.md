@@ -43,4 +43,3 @@ Purpose: Report on the lifecycle status of TDD tests
 ### Missing Tests (1)
 
 - `tests/unit/services/test_portal_service.py`
-

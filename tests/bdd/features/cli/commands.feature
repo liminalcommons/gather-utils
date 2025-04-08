@@ -37,4 +37,4 @@ Feature: CLI Commands
     When I run "gather-manager list --help"
     Then I should see the command usage
     And I should see available options
-    And I should see example commands 
+    And I should see example commands

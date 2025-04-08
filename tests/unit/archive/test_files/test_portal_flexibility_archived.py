@@ -44,7 +44,9 @@ class TestFlexiblePortalModel:
 
     def test_portal_with_integer_type(self):
         """Test creating a portal with integer type."""
-        portal = Portal(type=5, x=10, y=20, targetMap="destination-map")  # Integer type
+        portal = Portal(
+            type=5, x=10, y=20, targetMap="destination-map"
+        )  # Integer type
 
         assert portal.type == 5
         assert portal.targetMap == "destination-map"

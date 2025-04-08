@@ -155,7 +155,7 @@ When a feature or step definition is no longer needed:
 3. **Communication**: Inform team of deprecated features
 4. **Grace Period**: Allow time for transition (typically 1-2 sprints)
 5. **Archival**: Move to archive with Archived status
-   
+
 ### Archive Location
 
 ```
@@ -179,7 +179,7 @@ BDD-specific tools in our repository include:
 
 1. **Creation**: Document purpose and expected lifecycle
 2. **Validation**: Regular review for continued relevance
-3. **Archival/Removal**: 
+3. **Archival/Removal**:
    - Archive tools with reference value
    - Remove tools that serve no future purpose
 
@@ -208,4 +208,4 @@ All BDD tools must include metadata as specified in [TOOL_DEVELOPMENT_STANDARDS.
 
 | Date | Author | Description of Change |
 |------|--------|------------------------|
-| 2024-03-21 | Development Team | Initial version | 
+| 2024-03-21 | Development Team | Initial version |

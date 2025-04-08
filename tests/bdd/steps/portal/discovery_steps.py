@@ -2,17 +2,14 @@
 Step definitions for the Portal Discovery and Structure feature.
 """
 
-from unittest.mock import MagicMock, patch
-
-from behave import given, then, when
-from pytest_bdd import given, parsers, then, when
-
-from gather_manager.api import GatherAPI
-from gather_manager.models import Portal, PortalConnection
-from tests.bdd.steps.common.assertion_steps import *
-from tests.bdd.steps.common.cli_steps import *
+# Import common utilities and BDD step modules
+from tests.bdd.utils.imports import *
+from tests.bdd.utils.step_utils import setup_test_environment, assert_with_context
+from tests.bdd.utils.registry import given_step, when_step, then_step
 
 # Import common steps
+from tests.bdd.steps.common.assertion_steps import *
+from tests.bdd.steps.common.cli_steps import *
 from tests.bdd.steps.common.setup_steps import *
 
 

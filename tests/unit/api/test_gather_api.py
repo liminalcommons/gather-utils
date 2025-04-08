@@ -27,7 +27,9 @@ from dotenv import load_dotenv
 # Add the project root to PYTHONPATH so that the 'gather_manager' package can be found
 sys.path.insert(
     0,
-    os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "..", "src")),
+    os.path.abspath(
+        os.path.join(os.path.dirname(__file__), "..", "..", "..", "src")
+    ),
 )
 load_dotenv()
 
@@ -60,7 +62,9 @@ def summarize_data(data, max_depth=2, current_depth=0):
                 "...",
                 summarize_data(data[-1], max_depth, current_depth + 1),
             ]
-        return [summarize_data(item, max_depth, current_depth + 1) for item in data]
+        return [
+            summarize_data(item, max_depth, current_depth + 1) for item in data
+        ]
     return data
 
 

@@ -105,7 +105,9 @@ class TestPortalDetection:
         assert string_portal.targetY == 15
 
     @responses.activate
-    def test_detect_integer_type_with_targetmap(self, client, complex_map_data):
+    def test_detect_integer_type_with_targetmap(
+        self, client, complex_map_data
+    ):
         """Test detecting portals with integer type and targetMap attributes."""
         # Mock the API response
         responses.add(
@@ -143,7 +145,9 @@ class TestPortalDetection:
         portals = client.get_portals("test-space", "test-map")
 
         # Find the portal with properties object
-        properties_portal = next((p for p in portals if p.id == "portal3"), None)
+        properties_portal = next(
+            (p for p in portals if p.id == "portal3"), None
+        )
 
         # Verify it was detected and has the correct attributes
         assert properties_portal is not None

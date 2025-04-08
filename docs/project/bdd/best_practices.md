@@ -82,6 +82,31 @@ def step_given_precondition(context) -> None:
         raise AssertionError(f"Setup failed: {str(e)}")
 ```
 
+### Standard Import Template
+```python
+"""
+Step definitions for [feature description].
+"""
+
+# Standard library imports
+import os
+import json
+# etc.
+
+# BDD framework imports
+from behave import given, then, when
+
+# Application imports
+from gather_manager.[module] import [Class]
+
+# Step utility imports
+from tests.bdd.steps.utils.common_parsers import parsers
+
+# Common step imports (explicit imports, not wildcards)
+from tests.bdd.steps.common.setup_steps import step_given_have_valid_api_credentials
+# etc.
+```
+
 ### Best Practices
 1. **Naming Convention**
    - Format: `step_<type>_<description>`

@@ -2,8 +2,6 @@
 
 A tool for exploring and analyzing Gather.town spaces, with a focus on understanding portal structures and connections between maps.
 
-For development-focused documentation, see [DEVELOPER_README.md](DEVELOPER_README.md).
-
 ## Features
 
 - List all maps in a Gather.town space
@@ -12,221 +10,106 @@ For development-focused documentation, see [DEVELOPER_README.md](DEVELOPER_READM
 - Generate connection graphs between maps
 - Export data in various formats (JSON, CSV, tables)
 
-## Repository Structure
-
-- `src/` - Source code
-  - `gather_manager/` - Main package
-    - `api/` - API client
-    - `cli/` - Command-line interface
-    - `models/` - Data models
-    - `services/` - Business logic
-    - `utils/` - Utility functions
-- `tests/` - Tests
-  - `unit/` - Unit tests (TDD)
-  - `integration/` - Integration tests
-  - `bdd/` - BDD tests
-- `docs/` - Documentation
-  - `project/` - Project documentation
-  - `api/` - API documentation
-  - `user_guide/` - User guide
-  - `archive/` - Archived documentation
-- `tools/` - Utility scripts and tools
-  - `metadata_update/` - Tools for managing metadata compliance
-- `examples/` - Example code and usage
-- `data/` - Data files and analysis results
-- `reports/` - Generated reports
-  - `tool_metadata_compliance/` - Tool metadata compliance reports
-
-## Documentation
-
-Comprehensive documentation is available in the `docs` directory:
-
-- [User Guide](docs/user_guide/index.md): Comprehensive guide for end users
-- [API Reference](docs/api/index.md): Technical documentation for developers
-- [CLI Reference](docs/cli/index.md): Detailed command-line interface documentation
-- [Tutorials](docs/tutorials/getting_started.md): Step-by-step guides for common tasks
-- [Maintenance Guidelines](docs/project/MAINTENANCE_GUIDELINES.md): Guidelines for maintaining the repository
-
-## Installation
-
-### Prerequisites
-
-- Python 3.8+
-- pip (for package installation)
-
-### Setup
-
-1. Install the package using pip:
-   ```bash
-   pip install portal-explorer
-   ```
-
-2. Configure your Gather.town API credentials:
-
-   **Option 1: Environment Variables**
-   ```bash
-   export GATHER_API_KEY=your_api_key_here
-   export GATHER_SPACE_ID=your_space_id_here
-   ```
-
-   **Option 2: Configuration File**
-   Create a file at `~/.portal-explorer/config.ini`:
-   ```ini
-   [gather]
-   api_key = your_api_key
-   space_id = your_space_id
-   ```
-
-## Usage
-
-### Command Line Interface
-
-List all maps in a space:
-```bash
-gather-explorer list-maps
-```
-
-Explore portals in a specific map:
-```bash
-gather-explorer explore --map-id <map_id>
-```
-
-Explore portals across all maps:
-```bash
-gather-explorer explore --all-maps
-```
-
-Analyze connections between maps:
-```bash
-gather-explorer connections
-```
-
-Save results to a file:
-```bash
-gather-explorer explore --all-maps --format json --output portals.json
-```
-
-### Python API
-
-```python
-from portal_explorer.client import GatherClient
-from portal_explorer.service import PortalExplorer
-
-# Initialize client
-client = GatherClient(api_key="your_api_key", space_id="your_space_id")
-
-# List maps
-maps = client.get_maps()
-
-# Analyze portals in a specific map
-explorer = PortalExplorer(client=client)
-portals = explorer.analyze_map_portals("your_map_id")
-
-# Analyze portals across all maps
-all_portals = explorer.analyze_all_maps()
-
-# Analyze connections between maps
-connections = explorer.analyze_connections()
-
-# Save results to a file
-explorer.save_results(all_portals, "portals.json", format="json")
-```
-
 ## Project Structure
 
 ```
 portal-explorer/
-├── src/
-│   └── portal_explorer/      # Main package
-│       ├── client.py         # API client
-│       ├── models.py         # Data models
-│       ├── service.py        # Portal explorer service
-│       ├── cli.py            # Command-line interface
-│       └── utils.py          # Utility functions
-├── tests/                    # Test suite
-│   ├── unit/                # Unit tests (TDD)
-│   ├── integration/         # Integration tests
-│   └── bdd/                 # BDD tests
-│       ├── features/        # Feature files (organized by domain)
-│       ├── steps/          # Step definitions
-│       └── environment.py   # BDD test environment
-├── docs/                    # Documentation
-│   ├── project/            # Project documentation
-│   ├── api/                # API reference
-│   ├── cli/                # CLI reference
-│   ├── tutorials/          # Tutorials
-│   └── bdd/               # BDD documentation
-├── examples/               # Example scripts
-├── tools/                 # Development tools
-│   ├── bdd/              # BDD-specific tools
-│   ├── style/            # Style enforcement tools
-│   └── docs/             # Documentation tools
-└── pyproject.toml        # Project dependencies and metadata
+├── src/                    # Source code
+│   └── portal_explorer/    # Main package
+├── tests/                  # Test suite
+│   ├── unit/              # Unit tests
+│   └── bdd/               # BDD tests
+├── docs/                   # Documentation
+└── examples/              # Example scripts
 ```
 
-For more information about:
-- Development tools, see [tools/README.md](tools/README.md)
-- BDD testing, see [docs/bdd/README.md](docs/bdd/README.md)
-- TDD practices, see [docs/project/tdd/README.md](docs/project/tdd/README.md)
-- Project system, see [docs/project/README.md](docs/project/README.md)
+## Development Setup
+
+### Prerequisites
+
+- Python 3.9+
+- [Poetry](https://python-poetry.org/) for dependency management
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/portal-explorer.git
+   cd portal-explorer
+   ```
+
+2. Install dependencies using Poetry:
+   ```bash
+   poetry install
+   ```
+
+3. Configure your Gather.town API credentials:
+   ```bash
+   cp .env.example .env
+   # Edit .env with your credentials
+   ```
 
 ## Testing
 
-### Unit Tests (TDD)
+### Unit Tests
 
-Run the unit tests with pytest:
+Run unit tests with pytest:
 ```bash
-pytest
+poetry run pytest tests/unit
 ```
-
-For more information about TDD practices and lifecycle management, see the [TDD documentation](docs/project/tdd/README.md) and [Unit Testing Guide](tests/unit/README.md).
 
 ### BDD Tests
 
-BDD tests are organized in the `tests/bdd` directory:
-
-- `tests/bdd/features/`: Contains all feature files (organized by domain)
-- `tests/bdd/steps/`: Contains all step definitions
-- `tests/bdd/environment.py`: Environment setup for BDD tests
-
-Run the BDD tests using pytest:
+Run BDD tests with behave:
 ```bash
-pytest tests/bdd
+poetry run behave tests/bdd/features
 ```
 
-Or using behave:
-```bash
-behave tests/bdd/features
-```
-
-For more information on running and writing BDD tests, see:
-- [BDD Testing Guide](docs/project/bdd/README.md)
-- [BDD Tools Guide](docs/project/bdd/tools_guide.md)
-- [BDD Conventions](docs/project/bdd/conventions.md)
-
-## Development
+## Development Practices
 
 ### Code Style
 
-This project follows PEP 8 style guidelines and uses pre-commit hooks to enforce them. To set up the pre-commit hooks:
+This project follows standard Python practices:
 
-1. Install the required tools:
-   ```bash
-   python tools/setup_style_tools.py
-   ```
+- [PEP 8](https://peps.python.org/pep-0008/) for code style
+- [Black](https://black.readthedocs.io/) for code formatting
+- [isort](https://pycqa.github.io/isort/) for import sorting
+- [mypy](https://mypy.readthedocs.io/) for type checking
+- [flake8](https://flake8.pycqa.org/) for linting
 
-2. Fix existing style issues:
-   ```bash
-   python tools/fix_style_issues.py
-   ```
+Pre-commit hooks are configured to ensure code quality:
 
-3. The pre-commit hooks will automatically check your code before each commit. If there are style issues, the commit will be rejected and the issues will be fixed automatically. You can then stage the changes and commit again.
+```bash
+poetry run pre-commit install
+```
 
-For more information about the code style guidelines, see the [Maintenance Guidelines](docs/project/MAINTENANCE_GUIDELINES.md).
+### Test-Driven Development (TDD)
+
+We follow standard TDD practices:
+1. Write a failing test
+2. Write the minimum code to make it pass
+3. Refactor while keeping tests green
+
+### Behavior-Driven Development (BDD)
+
+BDD tests are written in Gherkin syntax using behave:
+
+```gherkin
+# tests/bdd/features/map_listing.feature
+Feature: List Maps
+  Scenario: List all maps in a space
+    Given I have valid API credentials
+    When I request all maps
+    Then I should receive a list of maps
+```
 
 ## Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+1. Fork the repository
+2. Create a feature branch
+3. Write tests first (TDD/BDD)
+4. Implement your changes
+5. Submit a pull request
 
 ## License
 
@@ -238,17 +121,4 @@ Gather-Utils is a collection of utilities for managing and interacting with Gath
 
 ## Current Projects
 
-### Tool Metadata Compliance Project
-
-We're currently updating all tools in the repository to comply with standardized metadata requirements. See `tools/metadata_update/README.md` for details on this initiative.
-
-Current status:
-- Progress: 8/38 tools updated (21.1%)
-- Next steps: Continue batch processing remaining tools
-
-Tools for this project:
-- `tools/metadata_update/metadata_injector.py` - Inject standardized metadata into tool files
-- `tools/metadata_update/update_tracker.py` - Track and report on the progress of the project
-- `tools/metadata_update/batch_processor.py` - Process multiple tools at once
-
-Check the latest status report in `reports/tool_metadata_compliance/` for more details.
+###TBD

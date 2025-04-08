@@ -105,7 +105,9 @@ class TestPortalDetection:
         assert portal1.targetMap == "map2"
 
     @responses.activate
-    def test_detect_integer_type_with_targetmap(self, client, complex_map_data):
+    def test_detect_integer_type_with_targetmap(
+        self, client, complex_map_data
+    ):
         """Test detection of portals with integer type and targetMap property."""
         # Setup mock response
         space_id = "test-space"

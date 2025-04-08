@@ -112,7 +112,9 @@ class TestPortalClient:
         empty_map_data = {
             "id": "empty-map",
             "name": "Empty Map",
-            "objects": [{"id": "not-a-portal", "type": "other", "x": 50, "y": 60}],
+            "objects": [
+                {"id": "not-a-portal", "type": "other", "x": 50, "y": 60}
+            ],
         }
 
         # Mock the API response

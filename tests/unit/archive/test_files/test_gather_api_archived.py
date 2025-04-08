@@ -38,7 +38,9 @@ def summarize_data(data, max_depth=2, current_depth=0):
             summary[key] = summarize_data(value, max_depth, current_depth + 1)
         return summary
     elif isinstance(data, list):
-        return [summarize_data(item, max_depth, current_depth + 1) for item in data]
+        return [
+            summarize_data(item, max_depth, current_depth + 1) for item in data
+        ]
     else:
         return data
 
@@ -48,7 +50,9 @@ def test_fetch_space_info():
     space = client.get_space(code_space_id)
     summarized_space = summarize_data(space)
     assert "id" in summarized_space, "Space info should contain an 'id' field"
-    assert summarized_space.get("name") == SPACE_NAME, "Space name should match"
+    assert (
+        summarized_space.get("name") == SPACE_NAME
+    ), "Space name should match"
 
 
 def test_fetch_maps():

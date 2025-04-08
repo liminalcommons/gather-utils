@@ -102,4 +102,4 @@ By maintaining this traceability matrix, we ensure that:
 - All requirements are covered by BDD scenarios
 - The relationship between requirements and tests is clear
 - Coverage gaps are identified and addressed
-- Quality and completeness can be measured and reported 
+- Quality and completeness can be measured and reported

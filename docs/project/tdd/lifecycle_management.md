@@ -157,7 +157,7 @@ When a test or fixture is no longer needed:
 3. **Communication**: Inform team of deprecated tests
 4. **Grace Period**: Allow time for transition (typically 1-2 sprints)
 5. **Archival**: Move to archive with Archived status
-   
+
 ### Archive Location
 
 ```
@@ -181,7 +181,7 @@ TDD-specific tools in our repository include:
 
 1. **Creation**: Document purpose and expected lifecycle
 2. **Validation**: Regular review for continued relevance
-3. **Archival/Removal**: 
+3. **Archival/Removal**:
    - Archive tools with reference value
    - Remove tools that serve no future purpose
 
@@ -225,4 +225,4 @@ See [TDD-BDD Integration](../tdd-bdd-integration.md) for more details.
 - [TDD Best Practices](./best_practices.md)
 - [BDD Lifecycle Management](../bdd/lifecycle_management.md)
 - [Project Testing Standards](../TESTING_STANDARDS.md)
-- [Tool Development Standards](../TOOL_DEVELOPMENT_STANDARDS.md) 
+- [Tool Development Standards](../TOOL_DEVELOPMENT_STANDARDS.md)
